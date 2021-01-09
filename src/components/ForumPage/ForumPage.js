@@ -32,9 +32,7 @@ class ForumPage extends Component {
         [inputValue]: event.target.value, 
         sent_from_user_id: `${this.props.store.user.id}`
       }
-    })//end setState
-
-    console.log('Message is:', this.state.messageObj);
+    })
   }//end handleModalChange
 
   addMessage = (event) => {
