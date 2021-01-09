@@ -33,7 +33,7 @@ function* getMessage() {
 function* addMessage(action) {
     try {
         yield axios.post('/api/message', action.payload)
-        // yield put({ type: 'GET_FORUM' })
+        yield put({ type: 'GET_MESSAGES' })
     } catch (error) {
         console.log('error with add listing request in message.saga.js', error);
     }

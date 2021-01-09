@@ -11,10 +11,14 @@ class UserProfile extends Component {
         this.props.dispatch({ type: 'GET_USER_LISTING' })
     }
 
+    deleteListing(id) {
+        this.props.dispatch({ type: 'DELETE_LISTING', payload: id })
+        // this.props.dispatch({ type: 'GET_FORUM', payload: this.state.direction})
+    }
+
     render() {
         return (
             <div>
-                {JSON.stringify(this.props.store.forum)}
                 <h2>Profile</h2>
                 <h4>Your Listings</h4>
                 <table>

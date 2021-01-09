@@ -53,7 +53,6 @@ class Messages extends Component {
 
     deleteMessage(id) {
         this.props.dispatch({ type: 'DELETE_MESSAGE', payload: id })
-        // this.props.dispatch({ type: 'GET_FORUM', payload: this.state.direction})
     }
 
     //gets input values on pop-up modal and sets local state
