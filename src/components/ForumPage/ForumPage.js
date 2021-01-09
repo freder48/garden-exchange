@@ -66,11 +66,11 @@ class ForumPage extends Component {
           </tbody>
         </table>
 
-        {/* <Modal show={this.state.show} handleClose={this.hideModal}>
+        <Modal show={this.state.show} handleClose={this.hideModal}>
               <h3>Send Message: </h3>
               <label type="text">Message:</label>
               <input onChange={(event) => this.handleModalChange('message', event)} type="text" />
-          </Modal> */}
+          </Modal>
       </>
     )
   }
