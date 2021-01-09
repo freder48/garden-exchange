@@ -19,6 +19,8 @@ import InfoPage from '../InfoPage/InfoPage';
 import LandingPage from '../LandingPage/LandingPage';
 import LoginPage from '../LoginPage/LoginPage';
 import RegisterPage from '../RegisterPage/RegisterPage';
+import ForumPage from '../ForumPage/ForumPage';
+import AddListing from '../AddListing/AddListing';
 
 import './App.css';
 
@@ -61,6 +63,21 @@ class App extends Component {
               path="/info"
               component={InfoPage}
             />
+
+            <ProtectedRoute
+              // with authRedirect:
+              // - if logged in, redirects to "/user"
+              // - else shows LandingPage at "/home"
+              exact
+              path="/forum"
+              component={ForumPage}
+            />
+
+          <ProtectedRoute
+              exact
+              path="/form"
+              component={AddListing}
+            /> 
 
             {/* When a value is supplied for the authRedirect prop the user will
             be redirected to the path supplied when logged in, otherwise they will
