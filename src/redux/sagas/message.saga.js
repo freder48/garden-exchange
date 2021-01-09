@@ -3,7 +3,7 @@ import axios from 'axios';
 
 function* messageSaga() {
     yield takeLatest('ADD_MESSAGE', addMessage);
-
+    yield takeLatest('GET_MESSAGES', getMessage);
 }
 
 
@@ -18,6 +18,17 @@ function* addMessage(action) {
         console.log('error with add listing request in message.saga.js', error);
     }
 }//end messageSaga
+
+//GET all of the messages for specific user
+function* getMessage() {
+    try {
+        const response = yield axios.get(`api/message` )
+        yield put({ type: 'SET_MESSAGE', payload: response.data });
+        console.log(response.data);
+    } catch (error) {
+        console.log('error with message get request in message.saga.js', error);
+    }
+}//end getMessage
 
 
 

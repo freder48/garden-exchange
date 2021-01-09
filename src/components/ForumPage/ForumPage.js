@@ -2,23 +2,29 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import mapStoreToProps from '../../redux/mapStoreToProps';
 import Modal from '../Modal/Modal';
-import {Card} from '@material-ui/core';
+import {Card, Typography,} from '@material-ui/core';
 import { withStyles } from '@material-ui/core/styles';
 import MailOutlineIcon from '@material-ui/icons/MailOutline';
 import Moment from 'react-moment';
 import './ForumPage.css'
 
 const styles = {
+  card: {
+    backgroundColor: '#7e9a9a',
+  },
   header: {
     backgroundColor: "#c78b50",
-    margin: " auto",
-    width: "90%",
+    margin: "auto",
+    width: "80%",
     textAlign: "center",
     padding: "3rem",
     border: '3px solid #fff9e6',
     letterSpacing: '5px',
     fontFamily: 'Copperplate'
   },
+  form: {
+    height: '52vh'
+  }
 }
 
 class ForumPage extends Component {
@@ -117,10 +123,13 @@ class ForumPage extends Component {
         </table>
 
         <Modal show={this.state.show} handleClose={this.hideModal}>
-          <Card>
-          <h3 className={classes.header}>Send Message: </h3>
+          <Card className={classes.card}>
+          <Typography gutterBottom variant="h5" component="h2" className={classes.header}>
+           Send Message:
+           </Typography>
+
           <label type="text">Message:</label>
-          <form onSubmit={this.addMessage}>
+          <form onSubmit={this.addMessage} className={classes.form}>
             <textarea onChange={(event) => this.handleModalChange('message', event)} type="text" />
             <button>Save</button>
           </form>

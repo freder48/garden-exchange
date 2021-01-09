@@ -21,7 +21,6 @@ function* addListing(action) {
 function* getForum() {
     try {
         const response = yield axios.get(`api/forum` )
-        // {params: {direction: action.payload}}
         yield put({ type: 'SET_FORUM', payload: response.data });
         console.log(response.data);
     } catch (error) {

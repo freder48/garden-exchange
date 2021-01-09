@@ -1,6 +1,6 @@
 import './Modal.css';
 import React from 'react';
-
+import {Card} from '@material-ui/core';
 
 
 const Modal = ({ handleClose, show, children }) => {
@@ -11,13 +11,14 @@ const Modal = ({ handleClose, show, children }) => {
   return (
     <div className={showHideClassName}>
       
-      <section className="modal-main">
+      <Card className="modal-main">
+        
         {children}
-       
+        
         <button type="button" onClick={handleClose}>
           Close
         </button>
-      </section>
+      </Card>
      
     </div>
   );
