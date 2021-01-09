@@ -1,3 +1,15 @@
+/* .header {
+  background-color: #c78b50;
+  margin: auto;
+  width: 80%;
+  text-align: center;
+  padding: 3rem;
+  border: 3px solid #fff9e6;
+  letter-spacing: 5px;
+  font-family: 'Copperplate';
+
+} */
+
 .modal {
     display: none; /* Hidden by default */
     position: fixed; /* Stay in place */
@@ -15,12 +27,15 @@
   .modal-main {
     position:fixed;
     background: white;
-    width: 40%;
-    height: 40%;
+    width: 60%;
     top:50%;
     left:50%;
+    height: 70vh;
+    justify-content: center;
     transform: translate(-50%,-50%);
     padding: 2em;
+    background-color: #7e9a9a;
+    border: 10px solid white;
   }
   
   .display-block {

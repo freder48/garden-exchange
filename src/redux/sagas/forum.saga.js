@@ -18,11 +18,9 @@ function* addListing(action) {
 }//end addSupport
 
 //GETting all of the postings for ForumPage and Admin
-function* getForum(action) {
+function* getForum() {
     try {
-        console.log(action.payload)
         const response = yield axios.get(`api/forum` )
-        // {params: {direction: action.payload}}
         yield put({ type: 'SET_FORUM', payload: response.data });
         console.log(response.data);
     } catch (error) {
