@@ -3,7 +3,7 @@ import axios from 'axios';
 
 function* forumSaga() {
   yield takeLatest('GET_FORUM', getForum);
-  yield takeLatest('ADD_FORUM', addListing);
+  yield takeLatest('ADD_LISTING', addListing);
 }
 
 //POST saga for new listing
