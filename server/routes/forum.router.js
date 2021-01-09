@@ -15,7 +15,7 @@ pool.query('SELECT * FROM "forum" ORDER BY date;').then((result) => {
 
 //POST forum
 router.post('/', (req, res) => {
-  // POST route code here
+ 
 });
 
 module.exports = router;
