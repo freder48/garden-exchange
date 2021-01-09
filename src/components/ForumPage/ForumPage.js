@@ -30,13 +30,13 @@ class ForumPage extends Component {
 
         <table>
           <thead>
-
+          <tr>
             <th>Have</th>
-            <th align="left">Want</th>
-            <th align="left">Location</th>
-            <th align="left">Date Posted</th>
-            <th align="left">Message</th>
-
+            <th>Want</th>
+            <th>Location</th>
+            <th>Date Posted</th>
+            <th>Message</th>
+           </tr>
           </thead>
 
           <tbody>

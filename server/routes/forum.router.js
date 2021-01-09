@@ -15,7 +15,16 @@ pool.query('SELECT * FROM "forum" ORDER BY date;').then((result) => {
 
 //POST forum
 router.post('/', (req, res) => {
-  // POST route code here
+  const listing = req.body;
+  const queryText = `INSERT INTO "forum" ("have", "want", "location", "user_id")
+                     VALUES ($1, $2, $3, $4);`;
+  pool.query(queryText, [listing.have, listing.want, listing.location, listing.user_id])
+    .then(() => { res.sendStatus(201); })
+    .catch((err) => {
+      console.log('Error completing POST in forum server', err);
+      res.sendStatus(500);
+    });
+
 });
 
 module.exports = router;
