@@ -37,7 +37,8 @@ class ForumPage extends Component {
     console.log('Message is:', this.state.messageObj);
   }//end handleModalChange
 
-  addMessage = () => {
+  addMessage = (event) => {
+    event.preventDefault();
     this.props.dispatch({ type: 'ADD_MESSAGE', payload: this.state.messageObj })
   }
 
@@ -53,7 +54,6 @@ class ForumPage extends Component {
   render() {
     return (
       <>
-      {JSON.stringify(this.props.store.user.id)}
         <section>
           <label>Search: </label>
           <input type="text" onChange={(e) => this.searchSpace(e)} />
@@ -101,8 +101,10 @@ class ForumPage extends Component {
         <Modal show={this.state.show} handleClose={this.hideModal}>
           <h3>Send Message: </h3>
           <label type="text">Message:</label>
+          <form onSubmit={this.addMessage}>
           <input onChange={(event) => this.handleModalChange('message', event)} type="text" />
-          <button onClick={this.addMessage}>Save</button>
+          <button>Save</button>
+          </form>
         </Modal>
       </>
     )
