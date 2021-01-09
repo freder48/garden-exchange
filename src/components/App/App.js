@@ -21,6 +21,7 @@ import LoginPage from '../LoginPage/LoginPage';
 import RegisterPage from '../RegisterPage/RegisterPage';
 import ForumPage from '../ForumPage/ForumPage';
 import AddListing from '../AddListing/AddListing';
+import Messages from '../Messages/Messages';
 
 import './App.css';
 
@@ -77,6 +78,12 @@ class App extends Component {
               exact
               path="/form"
               component={AddListing}
+            /> 
+
+          <ProtectedRoute
+              exact
+              path="/messages"
+              component={Messages}
             /> 
 
             {/* When a value is supplied for the authRedirect prop the user will
