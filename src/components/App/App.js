@@ -22,7 +22,7 @@ import RegisterPage from '../RegisterPage/RegisterPage';
 import ForumPage from '../ForumPage/ForumPage';
 import AddListing from '../AddListing/AddListing';
 import Messages from '../Messages/Messages';
-import UserProfile from '../UserProfile/UserProfile';
+import UserProfile from '../UserProfile/UserProfileList';
 
 import './App.css';
 
@@ -103,7 +103,7 @@ class App extends Component {
               exact
               path="/login"
               component={LoginPage}
-              authRedirect="/user"
+              authRedirect="/forum"
             />
             <ProtectedRoute
               // with authRedirect:
@@ -112,7 +112,7 @@ class App extends Component {
               exact
               path="/registration"
               component={RegisterPage}
-              authRedirect="/user"
+              authRedirect="/forum"
             />
             <ProtectedRoute
               // with authRedirect:

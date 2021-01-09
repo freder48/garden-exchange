@@ -12,15 +12,16 @@ const Nav = (props) => {
   };
 
   if (props.store.user.id != null) {
-    loginLinkData.path = '/user';
-    loginLinkData.text = 'Home';
+    loginLinkData.path = '/forum';
+    loginLinkData.text = 'Forum';
   }
 
   return (
     <div className="nav">
-      <Link to="/home">
+      {/* <Link to="/home">
         <h2 className="nav-title">Prime Solo Project</h2>
-      </Link>
+      </Link> */}
+
       <div className="nav-right">
         <Link className="nav-link" to={loginLinkData.path}>
           {/* Show this link if they are logged in or not,
@@ -31,16 +32,25 @@ const Nav = (props) => {
         {/* Show the link to the info page and the logout button if the user is logged in */}
         {props.store.user.id && (
           <>
-            <Link className="nav-link" to="/info">
-              Info Page
+            <Link className="nav-link" to="/form">
+              Add Listing 
             </Link>
+
+            <Link className="nav-link" to="/messages">
+             Messages
+            </Link>
+
+            <Link className="nav-link" to="/profile">
+              Profile
+            </Link>
+
             <LogOutButton className="nav-link" />
           </>
         )}
         {/* Always show this link since the about page is not protected */}
-        <Link className="nav-link" to="/about">
+        {/* <Link className="nav-link" to="/about">
           About
-        </Link>
+        </Link> */}
       </div>
     </div>
   );
