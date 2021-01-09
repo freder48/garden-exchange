@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import mapStoreToProps from '../../redux/mapStoreToProps';
 import MailOutlineIcon from '@material-ui/icons/MailOutline';
-// import Modal from '../Modal/Modal';
+import Modal from '../Modal/Modal';
 import Moment from 'react-moment';
 import './ForumPage.css'
 
@@ -12,14 +12,46 @@ class ForumPage extends Component {
     search: null,
     //for pop-up dialog form
     show: false,
+    messageObj: {
+      sent_to_user_id: '',
+      sent_from_user_id: '',
+      forum_id: '',
+      message: '',
+    }
   }//end local state
 
+  //get all listings on page load
   componentDidMount() {
     this.props.dispatch({ type: 'GET_FORUM' })
   }
 
-  render() {
+  handleModalChange = (inputValue, event) => {
+    this.setState({
+      messageObj: {
+        ...this.state.messageObj,
+        [inputValue]: event.target.value, 
+        sent_from_user_id: `${this.props.store.user.id}`
+      }
+    })//end setState
 
+    console.log('Message is:', this.state.messageObj);
+  }//end handleModalChange
+
+  addMessage = (event) => {
+    event.preventDefault();
+    this.props.dispatch({ type: 'ADD_MESSAGE', payload: this.state.messageObj })
+  }
+
+  showModal = (id, user_id) => {
+    this.setState({ show: true, messageObj: {forum_id: id, sent_to_user_id: user_id} });
+    console.log(user_id)
+  };
+
+  hideModal = () => {
+    this.setState({ show: false });
+  };
+
+  render() {
     return (
       <>
         <section>
@@ -30,13 +62,13 @@ class ForumPage extends Component {
 
         <table>
           <thead>
-          <tr>
-            <th>Have</th>
-            <th>Want</th>
-            <th>Location</th>
-            <th>Date Posted</th>
-            <th>Message</th>
-           </tr>
+            <tr>
+              <th>Have</th>
+              <th>Want</th>
+              <th>Location</th>
+              <th>Date Posted</th>
+              <th>Message</th>
+            </tr>
           </thead>
 
           <tbody>
@@ -56,7 +88,7 @@ class ForumPage extends Component {
                   <td>{post.want}</td>
                   <td>{post.location}</td>
                   <td><Moment format='MM/DD/YYYY'>{post.date}</Moment></td>
-                  <td onClick={this.showModal}><MailOutlineIcon /></td>
+                  <td onClick={()=>this.showModal(post.id, post.user_id)}><MailOutlineIcon /></td>
                 </tr>
 
               )
@@ -66,11 +98,14 @@ class ForumPage extends Component {
           </tbody>
         </table>
 
-        {/* <Modal show={this.state.show} handleClose={this.hideModal}>
-              <h3>Send Message: </h3>
-              <label type="text">Message:</label>
-              <input onChange={(event) => this.handleModalChange('message', event)} type="text" />
-          </Modal> */}
+        <Modal show={this.state.show} handleClose={this.hideModal}>
+          <h3>Send Message: </h3>
+          <label type="text">Message:</label>
+          <form onSubmit={this.addMessage}>
+          <input onChange={(event) => this.handleModalChange('message', event)} type="text" />
+          <button>Save</button>
+          </form>
+        </Modal>
       </>
     )
   }
