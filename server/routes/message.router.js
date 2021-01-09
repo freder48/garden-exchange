@@ -3,6 +3,17 @@ const pool = require('../modules/pool');
 const router = express.Router();
 const { rejectUnauthenticated } = require('../modules/authentication-middleware');
 
+  //DELETE support ON ADMIN PAGE
+  router.delete('/:id', rejectUnauthenticated, (req, res) => {
+    let id = req.params.id
+    const sqlText = 'DELETE FROM message WHERE id=$1';
+    pool.query(sqlText, [id])
+    .then(() => {res.sendStatus(200);})
+    .catch((err)=>{
+      console.log('Error completing DELETE query', err);
+      res.sendStatus(500);
+    });
+  });
 
   // This route will return logged in users messages
 router.get('/', rejectUnauthenticated, (req, res) => {

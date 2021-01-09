@@ -7,10 +7,15 @@ import DeleteOutlinedIcon from '@material-ui/icons/DeleteOutlined';
 import ReplyIcon from '@material-ui/icons/Reply';
 
 class Messages extends Component {
-//get all messages for specific user upon page load
-  componentDidMount() {
-    this.props.dispatch({ type: 'GET_MESSAGES' })
-  }
+    //get all messages for specific user upon page load
+    componentDidMount() {
+        this.props.dispatch({ type: 'GET_MESSAGES' })
+    }
+
+    deleteMessage(id) {
+        this.props.dispatch({ type: 'DELETE_MESSAGE', payload: id })
+        // this.props.dispatch({ type: 'GET_FORUM', payload: this.state.direction})
+    }
 
     render() {
         return (
@@ -28,22 +33,22 @@ class Messages extends Component {
                     </thead>
 
                     <tbody>
-                
-                    {this.props.store.message.map((message) =>
-                    
-                    <tr key={message.id}>
-                        <td>{message.message}</td>
-                        <td><Moment format='hh:mm A, MM/DD/YYYY'>
-                            {message.time_received}
-                            </Moment></td>
-                        <td><ReplyIcon></ReplyIcon></td>
-                        <td><DeleteOutlinedIcon 
-                            onClick={()=> {this.deleteMessage(message.id)}}>
-                            </DeleteOutlinedIcon></td>
-                    </tr>
 
-                    )}
-                     
+                        {this.props.store.message.map((message) =>
+
+                            <tr key={message.id}>
+                                <td>{message.message}</td>
+                                <td><Moment format='hh:mm A, MM/DD/YYYY'>
+                                    {message.time_received}
+                                </Moment></td>
+                                <td><ReplyIcon></ReplyIcon></td>
+                                <td><DeleteOutlinedIcon
+                                    onClick={() => { this.deleteMessage(message.id) }}>
+                                </DeleteOutlinedIcon></td>
+                            </tr>
+
+                        )}
+
                     </tbody>
                 </table>
             </div>
