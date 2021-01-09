@@ -5,7 +5,7 @@ import { TextField, Button, Grid, Card, CardContent, Typography } from '@materia
 import mapStoreToProps from '../../redux/mapStoreToProps';
 
 const styles = {
-    
+
 }
 
 class AddListing extends Component {
@@ -14,9 +14,26 @@ class AddListing extends Component {
             have: '',
             want: '',
             location: '',
+            user_id: `${this.props.store.user.id}`,
         },
     }
 
+    handleChange = (inputValue, event) => {
+        event.preventDefault();
+        this.setState({
+          newListing: {
+            ...this.state.newListing,
+            [inputValue]: event.target.value
+          }
+        })//end setState
+
+      }//end handleChange
+
+    handleSubmit = (event) => {
+        event.preventDefault();
+        this.props.dispatch({ type: 'ADD_LISTING', payload: this.state.newListing })
+        
+    }
 
     render() {
         const { classes } = this.props;
