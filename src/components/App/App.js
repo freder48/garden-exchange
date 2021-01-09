@@ -22,6 +22,7 @@ import RegisterPage from '../RegisterPage/RegisterPage';
 import ForumPage from '../ForumPage/ForumPage';
 import AddListing from '../AddListing/AddListing';
 import Messages from '../Messages/Messages';
+import UserProfile from '../UserProfile/UserProfile';
 
 import './App.css';
 
@@ -84,6 +85,12 @@ class App extends Component {
               exact
               path="/messages"
               component={Messages}
+            /> 
+
+          <ProtectedRoute
+              exact
+              path="/profile"
+              component={UserProfile}
             /> 
 
             {/* When a value is supplied for the authRedirect prop the user will
