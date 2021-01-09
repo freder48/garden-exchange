@@ -31,6 +31,7 @@ class Messages extends Component {
                     
                     <tr key={message.id}>
                         <td>{message.message}</td>
+                        <td><Moment format='hh:mm A, MM/DD/YYYY'>{message.time_received}</Moment></td>
                     </tr>
 
                     )}

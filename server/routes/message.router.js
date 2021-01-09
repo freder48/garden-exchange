@@ -16,7 +16,7 @@ router.get('/', rejectUnauthenticated, (req, res) => {
 });//end GET
 
 //POST message
-router.post('/', (req, res) => {
+router.post('/', rejectUnauthenticated, (req, res) => {
   const message = req.body;
   console.log('req.body', message)
   const queryText = `INSERT INTO "message" (sent_to_user_id, sent_from_user_id, forum_id, message)
