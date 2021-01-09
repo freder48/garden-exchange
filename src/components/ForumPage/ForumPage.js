@@ -16,6 +16,7 @@ class ForumPage extends Component {
       sent_to_user_id: '',
       sent_from_user_id: `${this.props.store.user.id}`,
       forum_id: '',
+      message: '',
     }
   }//end local state
 
@@ -26,13 +27,13 @@ class ForumPage extends Component {
 
   handleModalChange = (inputValue, event) => {
     this.setState({
-      newListing: {
-        ...this.state.newListing,
+      messageObj: {
+        ...this.state.messageObj,
         [inputValue]: event.target.value
       }
     })//end setState
-    this.props.dispatch({ type: 'SET_MESSAGE', payload: [message] })
-    console.log('Message is:', message);
+
+    console.log('Message is:', this.state.messageObj);
   }//end handleModalChange
 
   showModal = (id, user_id) => {
@@ -47,7 +48,7 @@ class ForumPage extends Component {
   render() {
     return (
       <>
-      {JSON.stringify(this.props.store.forum)}
+      {JSON.stringify(this.state.messageObj)}
         <section>
           <label>Search: </label>
           <input type="text" onChange={(e) => this.searchSpace(e)} />
