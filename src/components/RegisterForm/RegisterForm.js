@@ -22,6 +22,9 @@ const styles = {
     backgroundColor: '#7e9a9a',
     border: '20px solid white'
   },
+  form: {
+    textAlign: 'center'
+  },
   header: {
     backgroundColor: "#c78b50",
     margin: " auto",
@@ -29,7 +32,8 @@ const styles = {
     textAlign: "center",
     padding: "3rem",
     border: '3px solid #fff9e6',
-    letterSpacing: '5px'
+    letterSpacing: '5px',
+    fontFamily: 'Copperplate'
   },
   textField: {
     marginTop: '1rem',
@@ -74,7 +78,7 @@ class RegisterForm extends Component {
     return (
       <Grid>
         <Card className={classes.card} >
-          <form onSubmit={this.registerUser}>
+          <form onSubmit={this.registerUser} className={classes.form}>
             <Typography gutterBottom variant="h4" component="h2" className={classes.header}>
               Register User
           </Typography>
@@ -84,9 +88,9 @@ class RegisterForm extends Component {
               </h3>
             )}
             <div>
+
               <label htmlFor="username">
-                Username:
-            <TextField
+                <TextField
                   type="text"
                   id="filled-required"
                   label="Username"
@@ -101,8 +105,7 @@ class RegisterForm extends Component {
             </div>
             <div>
               <label htmlFor="password">
-                Password:
-            <TextField
+                <TextField
                   type="password"
                   name="password"
                   id="filled-required"
@@ -115,8 +118,7 @@ class RegisterForm extends Component {
                 />
               </label>
               <label htmlFor="first_name">
-                First Name:
-            <TextField
+                <TextField
                   id="filled-required"
                   label="First Name"
                   variant="filled"
@@ -128,8 +130,7 @@ class RegisterForm extends Component {
                   onChange={this.handleInputChangeFor('first_name')}
                 />
                 <label htmlFor="last_name">
-                  Last Name:
-            <TextField
+                  <TextField
                     type="last_name"
                     name="last_name"
                     id="filled-required"
@@ -142,8 +143,7 @@ class RegisterForm extends Component {
                   />
                 </label>
                 <label htmlFor="email">
-                  Email:
-            <TextField
+                  <TextField
                     type="email"
                     name="email"
                     id="filled-required"
