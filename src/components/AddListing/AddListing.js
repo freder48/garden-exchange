@@ -6,20 +6,28 @@ import mapStoreToProps from '../../redux/mapStoreToProps';
 
 class AddListing extends Component {
     state = {
-        newListing:  {
+        newListing: {
             have: '',
             want: '',
             location: '',
         },
     }
 
-   
+
     render() {
         const { classes } = this.props;
         return (
             <>
+                <Grid>
+                    <Card className={classes.card} >
+                        <CardContent>
+                            <Typography gutterBottom variant="h4" component="h2" className={classes.header}>
+                                Add Listing
+                        </Typography>
+                        </CardContent>
+                    </Card>
+                </Grid>
 
-               
             </>
 
         )
