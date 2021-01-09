@@ -14,7 +14,6 @@ const Modal = ({ handleClose, show, children }) => {
         <button type="button" onClick={handleClose}>
           Close
         </button>
-        <button>Save</button>
       </section>
     </div>
   );

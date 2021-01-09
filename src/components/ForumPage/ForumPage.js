@@ -14,7 +14,7 @@ class ForumPage extends Component {
     show: false,
     messageObj: {
       sent_to_user_id: '',
-      sent_from_user_id: `${this.props.store.user.id}`,
+      sent_from_user_id: '',
       forum_id: '',
       message: '',
     }
@@ -29,12 +29,17 @@ class ForumPage extends Component {
     this.setState({
       messageObj: {
         ...this.state.messageObj,
-        [inputValue]: event.target.value
+        [inputValue]: event.target.value, 
+        sent_from_user_id: `${this.props.store.user.id}`
       }
     })//end setState
 
     console.log('Message is:', this.state.messageObj);
   }//end handleModalChange
+
+  addMessage = () => {
+    this.props.dispatch({ type: 'ADD_MESSAGE', payload: this.state.messageObj })
+  }
 
   showModal = (id, user_id) => {
     this.setState({ show: true, messageObj: {forum_id: id, sent_to_user_id: user_id} });
@@ -48,7 +53,7 @@ class ForumPage extends Component {
   render() {
     return (
       <>
-      {JSON.stringify(this.state.messageObj)}
+      {JSON.stringify(this.props.store.user.id)}
         <section>
           <label>Search: </label>
           <input type="text" onChange={(e) => this.searchSpace(e)} />
@@ -97,6 +102,7 @@ class ForumPage extends Component {
           <h3>Send Message: </h3>
           <label type="text">Message:</label>
           <input onChange={(event) => this.handleModalChange('message', event)} type="text" />
+          <button onClick={this.addMessage}>Save</button>
         </Modal>
       </>
     )
