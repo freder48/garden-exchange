@@ -2,7 +2,6 @@ table {
     width: 98%; 
     border-collapse: collapse; 
 	margin: auto;
-	
   }
   /* Zebra striping */
   tr:nth-of-type(even) { 
