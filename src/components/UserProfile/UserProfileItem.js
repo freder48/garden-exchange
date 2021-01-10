@@ -9,7 +9,7 @@ import { TextField, Button, Grid, Card, CardContent, Typography } from '@materia
 class UserProfileItem extends Component {
     state = {
         editListing: {
-            have: '',
+            have: `${this.props.store.details.have}`,
             want: `${this.props.store.details.want}`,
             location: `${this.props.store.details.location}`,
             user_id: `${this.props.store.user.id}`,
@@ -41,12 +41,21 @@ class UserProfileItem extends Component {
 
       handleChange = (inputValue, event) => {
         event.preventDefault();
-        this.setState({
-          editListing: {
-            ...this.state.editListing,
-            [inputValue]: event.target.value
-          }
-        })//end setState
+        // this.setState({
+        //   editListing: {
+        //     ...this.state.editListing,
+        //     [inputValue]: event.target.value
+        //   }
+        //})//end setState
+        let updatedListing = {
+            ...this.state.editListing, [inputValue]: event.target.value
+        }
+        this.props.dispatch({type: 'SET_DETAILS', payload: [updatedListing]})
+
+    }
+
+    saveEditedListing = () => {
+        this.props.dispatch({type: 'UPDATE_LISTING', payload: this.props.store.details})
     }
 
 
@@ -54,7 +63,7 @@ class UserProfileItem extends Component {
         const { classes } = this.props;
         return (
             <>
-      
+      {JSON.stringify(this.state.editListing)}
                 {this.state.isEditable ?
                     <>
                     <td> <TextField
@@ -80,7 +89,7 @@ class UserProfileItem extends Component {
                     <td><Moment format='MM/DD/YYYY'>{this.props.listing.date}</Moment></td>
                     <td>
                     <button onClick={this.cancelButton} >Cancel</button>
-                    <button>Save</button>
+                    <button onClick={this.saveEditedListing}>Save</button>
                     </td>
                     <td><DeleteOutlinedIcon
                             
