@@ -32,7 +32,7 @@
   color: #f2f2f2;
   text-align: center;
   padding: 24px 10px;
-  text-decoration: none;
+  text-decoration: none; 
   font-size: 15px; */
 
   /*these last two make the logout button in
@@ -44,11 +44,15 @@
   color: white;
   font-size: 18px;
   padding-left: 20px;
+  text-decoration: none; 
+  border-radius: 5%;
   
 } 
 
 .nav-link:hover {
   background-color: rgb(69, 109, 109);
+  color: black;
+  width: 100%;
 }
 
 .menu-bars {
@@ -135,3 +139,6 @@
   -webkit-text-stroke: 1px black;
 }
 
+a.nav-link{
+  
+}

@@ -68,6 +68,12 @@ class ForumPage extends Component {
     this.setState({ show: false });
   };
 
+  //search bar
+  searchSpace = (event) => {
+    let keyword = event.target.value;
+    this.setState({ search: keyword })
+}
+
   //displays message form if show in local state is set to true
   showModal = (id, user_id) => {
     this.setState({ show: true, messageObj: { forum_id: id, sent_to_user_id: user_id } });

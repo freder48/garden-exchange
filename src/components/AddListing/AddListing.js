@@ -5,7 +5,41 @@ import { TextField, Button, Grid, Card, CardContent, Typography } from '@materia
 import mapStoreToProps from '../../redux/mapStoreToProps';
 
 const styles = {
-
+    button: {
+        backgroundColor: '#fff9e6',
+        justifyContent: 'center',
+        '&:hover': {
+            backgroundColor: 'rgb(69, 109, 109);',
+            color: '#fff9e6'
+        }
+    },
+    card: {
+        margin: 'auto',
+        width: '60%',
+        height: '60vh',
+        marginTop: '4em',
+        justifyContent: 'center',
+        backgroundColor: '#7e9a9a',
+        border: '20px solid white'
+    },
+    form: {
+        textAlign: 'center',
+        width: '100%',
+    },
+    header: {
+        backgroundColor: "#c78b50",
+        margin: " auto",
+        width: "80%",
+        textAlign: "center",
+        padding: "3rem",
+        border: '3px solid #fff9e6',
+        letterSpacing: '5px',
+    },  
+    textField: {
+        marginTop: '1rem',
+        width: '90%',
+        backgroundColor: '#fff9e6',
+    },
 }
 
 class AddListing extends Component {
@@ -44,7 +78,7 @@ class AddListing extends Component {
                         <CardContent>
                             <Typography gutterBottom variant="h4" component="h2" className={classes.header}>
                                 Add Listing
-                        </Typography>
+                            </Typography>
                             <form onSubmit={this.handleSubmit} className={classes.form}>
 
                                 <TextField
