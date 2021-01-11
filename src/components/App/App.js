@@ -23,7 +23,7 @@ import ForumPage from '../ForumPage/ForumPage';
 import AddListing from '../AddListing/AddListing';
 import Messages from '../Messages/Messages';
 import UserProfile from '../UserProfile/UserProfileList';
-
+import CustomNav from '../CustomNav/CustomNav';
 import './App.css';
 
 class App extends Component {

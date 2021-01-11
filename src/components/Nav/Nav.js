@@ -7,7 +7,9 @@ import mapStoreToProps from '../../redux/mapStoreToProps';
 import HomeIcon from '@material-ui/icons/Home';
 import MenuIcon from '@material-ui/icons/Menu';
 import CloseIcon from '@material-ui/icons/Close';
-
+import AddIcon from '@material-ui/icons/Add';
+import MessageIcon from '@material-ui/icons/Message';
+import PersonOutlineIcon from '@material-ui/icons/PersonOutline';
 
 function Nav(props) {
   const [sidebar, setSidebar] = useState(false)
@@ -22,9 +24,8 @@ function Nav(props) {
   if (props.store.user.id != null) {
     loginLinkData.path = '/forum';
     loginLinkData.text = 'Forum';
+    loginLinkData.className = ""
   }
-
-
 
 
   return (
@@ -39,7 +40,7 @@ function Nav(props) {
           <h1 className="title">Garden <br></br>Exchange</h1>
           {/* <p className="quote">"You don't have a garden just for yourself.  You have it to share."
           -  Augusta Carter</p> */}
-          </section>
+        </section>
       </div>
 
       {/* <Link to="/home">
@@ -51,7 +52,7 @@ function Nav(props) {
           <li className="navbar-toggle">
 
             <Link to="#" className="menu-bars">
-              <CloseIcon />
+              <CloseIcon className="bars"/>
             </Link>
           </li>
 
@@ -67,17 +68,19 @@ function Nav(props) {
             <>
               <li className="nav-text">
                 <Link className="nav-link" to="/form">
-                  <HomeIcon></HomeIcon>
+                  <AddIcon className="icon" />
                     Add Listing
                   </Link>
               </li>
               <li className="nav-text">
                 <Link className="nav-link" to="/messages">
+                  <MessageIcon className="icon" />
                   Messages
                  </Link>
               </li>
               <li className="nav-text">
                 <Link className="nav-link" to="/profile">
+                  <PersonOutlineIcon className="icon" />
                   Profile
                   </Link>
               </li>

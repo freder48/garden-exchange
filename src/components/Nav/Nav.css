@@ -1,4 +1,7 @@
 
+.icon {
+  padding-right: 10px;
+}
 
 .navbar {
   background-image: url('../img/vegbasket.jpg');
@@ -45,13 +48,15 @@
 } 
 
 .nav-link:hover {
-  background-color: #008183;
+  background-color: rgb(69, 109, 109);
 }
 
 .menu-bars {
   margin-left: 2rem;
   font-size: 2rem;
   background:  none;
+  width: 100px;
+
 }  
 
 .nav-menu.active {
@@ -76,7 +81,7 @@
   display: flex;
   justify-content: flex-start;
   align-items: left;
-  padding: 8px 0px 8px 16px;
+  padding: 5px 0px 5px 1px;
   height: 60px;
   list-style: none;
   color: #fff9e6;
