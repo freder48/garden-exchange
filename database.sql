@@ -23,7 +23,7 @@ CREATE TABLE "message" (
     "id" SERIAL PRIMARY KEY,
     "sent_to_user_id" INT REFERENCES "user",
     "sent_from_user_id" INT REFERENCES "user",
-    "forum_id" INT REFERENCES "forum",
+    "forum_id" INT REFERENCES "forum" ON DELETE CASCADE,
     "message" TEXT NOT NULL, 
     "mail_sent" boolean DEFAULT false,
     "time_received" TIMESTAMP DEFAULT CURRENT_TIMESTAMP

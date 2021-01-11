@@ -53,7 +53,6 @@ class Messages extends Component {
 
     deleteMessage(id) {
         this.props.dispatch({ type: 'DELETE_MESSAGE', payload: id })
-        // this.props.dispatch({ type: 'GET_FORUM', payload: this.state.direction})
     }
 
     //gets input values on pop-up modal and sets local state
@@ -77,14 +76,10 @@ class Messages extends Component {
         this.setState({ show: true, messageObj: { forum_id: id, sent_to_user_id: user_id } });
     };
 
-
-
-
     render() {
         const { classes } = this.props;
         return (
             <div>
-                {JSON.stringify(this.props.store.message)}
                 <h1>Messages</h1>
                 <table>
                     <thead>
@@ -119,7 +114,7 @@ class Messages extends Component {
                 <Modal show={this.state.show} handleClose={this.hideModal}>
                     <Card className={classes.card}>
                         <Typography gutterBottom variant="h5" component="h2" className={classes.header}>
-                            Reply: 
+                            Reply:
                         </Typography>
 
                         <label type="text">Message:</label>

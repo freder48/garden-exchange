@@ -22,7 +22,8 @@ import RegisterPage from '../RegisterPage/RegisterPage';
 import ForumPage from '../ForumPage/ForumPage';
 import AddListing from '../AddListing/AddListing';
 import Messages from '../Messages/Messages';
-
+import UserProfile from '../UserProfile/UserProfileList';
+import CustomNav from '../CustomNav/CustomNav';
 import './App.css';
 
 class App extends Component {
@@ -86,6 +87,12 @@ class App extends Component {
               component={Messages}
             /> 
 
+          <ProtectedRoute
+              exact
+              path="/profile"
+              component={UserProfile}
+            /> 
+
             {/* When a value is supplied for the authRedirect prop the user will
             be redirected to the path supplied when logged in, otherwise they will
             be taken to the component and path supplied. */}
@@ -96,7 +103,7 @@ class App extends Component {
               exact
               path="/login"
               component={LoginPage}
-              authRedirect="/user"
+              authRedirect="/forum"
             />
             <ProtectedRoute
               // with authRedirect:
@@ -105,7 +112,7 @@ class App extends Component {
               exact
               path="/registration"
               component={RegisterPage}
-              authRedirect="/user"
+              authRedirect="/forum"
             />
             <ProtectedRoute
               // with authRedirect:
