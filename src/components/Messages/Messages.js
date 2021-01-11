@@ -39,6 +39,7 @@ class Messages extends Component {
             forum_id: '',
             subject: '',
             message: '',
+            mail_sent: true, 
         }
     }//end local state
 
@@ -75,7 +76,7 @@ class Messages extends Component {
 
     //displays message form if show in local state is set to true
     showModal = (id, user_id) => {
-        this.setState({ show: true, messageObj: { forum_id: id, sent_to_user_id: user_id } });
+        this.setState({ show: true, messageObj: { forum_id: id, sent_to_user_id: user_id, mail_sent: true, } });
     };
 
     render() {

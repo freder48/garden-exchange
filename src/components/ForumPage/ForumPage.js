@@ -2,16 +2,15 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import mapStoreToProps from '../../redux/mapStoreToProps';
 import Modal from '../Modal/Modal';
-import { Card, Typography, } from '@material-ui/core';
+import { Card, Typography, TextField, CardContent, Button } from '@material-ui/core';
 import { withStyles } from '@material-ui/core/styles';
 import MailOutlineIcon from '@material-ui/icons/MailOutline';
 import Moment from 'react-moment';
 import './ForumPage.css'
+import swal from 'sweetalert';
+
 
 const styles = {
-  card: {
-    backgroundColor: '#7e9a9a',
-  },
   header: {
     backgroundColor: "#c78b50",
     margin: "auto",
@@ -23,8 +22,14 @@ const styles = {
     fontFamily: 'Copperplate'
   },
   form: {
-    height: '52vh'
-  }
+    height: '52vh',
+    textAlign: 'center'
+  }, 
+  textField: {
+    marginTop: '1rem',
+    width: '90%',
+    backgroundColor: '#fff9e6',
+},
 }
 
 class ForumPage extends Component {
@@ -56,7 +61,10 @@ class ForumPage extends Component {
   //dispatches messageObj to saga for post route
   addMessage = (event) => {
     event.preventDefault();
+    swal("Success!", "Your Message Was Sent!", "success");
+    this.setState({show: false})
     this.props.dispatch({ type: 'ADD_MESSAGE', payload: this.state.messageObj })
+
   }
 
   //gets input values on pop-up modal and sets local state
@@ -91,7 +99,6 @@ class ForumPage extends Component {
     const { classes } = this.props;
     return (
       <>
-      {JSON.stringify(this.state.messageObj)}
         <section>
           <label>Search: </label>
           <input type="text"
@@ -141,24 +148,33 @@ class ForumPage extends Component {
         </table>
 
         <Modal show={this.state.show} handleClose={this.hideModal}>
-          <Card className={classes.card}>
+          <CardContent className={classes.card}>
             <Typography gutterBottom variant="h5" component="h2" className={classes.header}>
               Send Message:
            </Typography>
 
 
-            <form onSubmit={this.addMessage} className={classes.form}>
-
-              <label type="text">Subject:</label>
-              <textarea onChange={(event) => this.handleModalChange('subject', event)} type="text" />
+            <form className={classes.form}>
+              <TextField
+                  label="Subject"
+                  type="text"
+                  onChange={(event) => this.handleModalChange('subject', event)}
+                  className={classes.textField}
+              />
               <br></br><br></br>
-              <label type="text">Message:</label>
-              <textarea onChange={(event) => this.handleModalChange('message', event)} type="text" />
+              <TextField
+                label="Message"
+                type="text"
+                multiline
+                className={classes.textField}
+                onChange={(event) => this.handleModalChange('message', event)}
+              />
               <br></br>
               <br></br>
-              <button>Save</button>
+              <Button
+              onClick={this.addMessage}>Save</Button>
             </form>
-          </Card>
+          </CardContent>
         </Modal>
       </>
     )

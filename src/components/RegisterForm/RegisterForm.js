@@ -88,7 +88,6 @@ class RegisterForm extends Component {
     const { classes } = this.props;
     return (
       <Grid>
-        {JSON.stringify(this.state)}
         <Card className={classes.card} >
           <form onSubmit={this.registerUser} className={classes.form}>
             <Typography gutterBottom variant="h4" component="h2" className={classes.header}>

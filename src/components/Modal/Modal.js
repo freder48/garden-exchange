@@ -1,6 +1,21 @@
 import './Modal.css';
 import React from 'react';
-import {Card} from '@material-ui/core';
+import {Card, Button} from '@material-ui/core';
+
+// const styles = {
+//   modalMain: {
+//     position:'fixed',
+//     width: '60%',
+//     top:'50%',
+//     left: '50%',
+//     height: '70vh',
+//     justifyContent: 'center',
+//     transform: 'translate(-50%,-50%)',
+//     padding: '2em',
+//     backgroundColor: '#7e9a9a',
+//     border: '5px solid white'
+//   }
+// }
 
 
 const Modal = ({ handleClose, show, children }) => {
@@ -9,15 +24,16 @@ const Modal = ({ handleClose, show, children }) => {
 
 
   return (
+    
     <div className={showHideClassName}>
       
       <Card className="modal-main">
         
         {children}
         
-        <button type="button" onClick={handleClose}>
+        <Button type="button" onClick={handleClose}>
           Close
-        </button>
+        </Button>
       </Card>
      
     </div>
