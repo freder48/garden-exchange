@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import mapStoreToProps from '../../redux/mapStoreToProps';
 import { withStyles } from '@material-ui/core/styles';
-import { TextField, Button, Grid, Card, CardContent, Typography } from '@material-ui/core';
+import { TextField, Button, Grid, Card, Typography, FormControlLabel, Checkbox } from '@material-ui/core';
 
 const styles = {
   button: {
@@ -50,7 +50,7 @@ class RegisterForm extends Component {
     first_name: '',
     last_name: '',
     email: '',
-    email_messages: '',
+    email_messages: false,
   };
 
   //handle inputs user information
@@ -60,14 +60,13 @@ class RegisterForm extends Component {
     });
   };
 
+  //toggles the boolean of if users want email notifications for their messages
   handleCheck = () => {
     this.setState({
-        supportMessage: {
-            ...this.state.supportMessage,
-            checked: !this.state.email_messages
-        }
+        ...this.state,
+        email_messages: !this.state.email_messages
     })
-}
+  }
 
   registerUser = (event) => {
     event.preventDefault();
@@ -79,7 +78,8 @@ class RegisterForm extends Component {
         password: this.state.password,
         first_name: this.state.first_name,
         last_name: this.state.last_name,
-        email: this.state.email
+        email: this.state.email,
+        email_messages: this.state.email_messages,
       },
     });
   }; // end registerUser
@@ -88,6 +88,7 @@ class RegisterForm extends Component {
     const { classes } = this.props;
     return (
       <Grid>
+        {JSON.stringify(this.state)}
         <Card className={classes.card} >
           <form onSubmit={this.registerUser} className={classes.form}>
             <Typography gutterBottom variant="h4" component="h2" className={classes.header}>
@@ -140,33 +141,40 @@ class RegisterForm extends Component {
                   className={classes.textField}
                   onChange={this.handleInputChangeFor('first_name')}
                 />
-                <label htmlFor="last_name">
-                  <TextField
-                    type="last_name"
-                    name="last_name"
-                    id="filled-required"
-                    label="Last Name"
-                    variant="filled"
-                    value={this.state.last_name}
-                    required
-                    className={classes.textField}
-                    onChange={this.handleInputChangeFor('last_name')}
-                  />
-                </label>
-                <label htmlFor="email">
-                  <TextField
-                    type="email"
-                    name="email"
-                    id="filled-required"
-                    label="Email"
-                    variant="filled"
-                    value={this.state.email}
-                    required
-                    className={classes.textField}
-                    onChange={this.handleInputChangeFor('email')}
-                  />
-                </label>
               </label>
+              <label htmlFor="last_name">
+                <TextField
+                  type="last_name"
+                  name="last_name"
+                  id="filled-required"
+                  label="Last Name"
+                  variant="filled"
+                  value={this.state.last_name}
+                  required
+                  className={classes.textField}
+                  onChange={this.handleInputChangeFor('last_name')}
+                />
+              </label>
+              <label htmlFor="email">
+                <TextField
+                  type="email"
+                  name="email"
+                  id="filled-required"
+                  label="Email"
+                  variant="filled"
+                  value={this.state.email}
+                  required
+                  className={classes.textField}
+                  onChange={this.handleInputChangeFor('email')}
+                />
+              </label>
+              <FormControlLabel
+                control={<Checkbox
+                  checked={this.state.email_messages}
+                  onClick={this.handleCheck}
+                  name="checked" />}
+                  label="Want Email Updates"
+              />
             </div>
             <div>
               <input className={classes.button} type="submit" name="submit" value="Register" variant="outlined" />
