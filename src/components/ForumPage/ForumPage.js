@@ -41,6 +41,11 @@ class ForumPage extends Component {
     }
   }//end local state
 
+  //cancel button on search input
+  cancelSearch = () => {
+    this.setState({ search: ''})
+  }
+
   //get all listings on page load
   componentDidMount() {
     this.props.dispatch({ type: 'GET_FORUM' })
@@ -86,7 +91,11 @@ class ForumPage extends Component {
       <>
         <section>
           <label>Search: </label>
-          <input type="text" onChange={(e) => this.searchSpace(e)} />
+          <input type="text" 
+          onChange={(e) => this.searchSpace(e)}
+          value={this.state.search} />
+         
+          <button onClick={this.cancelSearch}>Cancel</button>
         </section>
 
 
