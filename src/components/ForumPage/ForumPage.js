@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import mapStoreToProps from '../../redux/mapStoreToProps';
 import Modal from '../Modal/Modal';
-import {Card, Typography,} from '@material-ui/core';
+import { Card, Typography, } from '@material-ui/core';
 import { withStyles } from '@material-ui/core/styles';
 import MailOutlineIcon from '@material-ui/icons/MailOutline';
 import Moment from 'react-moment';
@@ -37,13 +37,15 @@ class ForumPage extends Component {
       sent_to_user_id: '',
       sent_from_user_id: '',
       forum_id: '',
+      subject: '',
       message: '',
+      mail_sent: true, 
     }
   }//end local state
 
   //cancel button on search input
   cancelSearch = () => {
-    this.setState({ search: ''})
+    this.setState({ search: '' })
   }
 
   //get all listings on page load
@@ -77,11 +79,11 @@ class ForumPage extends Component {
   searchSpace = (event) => {
     let keyword = event.target.value;
     this.setState({ search: keyword })
-}
+  }
 
   //displays message form if show in local state is set to true
   showModal = (id, user_id) => {
-    this.setState({ show: true, messageObj: { forum_id: id, sent_to_user_id: user_id } });
+    this.setState({ show: true, messageObj: { forum_id: id, sent_to_user_id: user_id, mail_sent: true, } });
   };
 
 
@@ -89,12 +91,13 @@ class ForumPage extends Component {
     const { classes } = this.props;
     return (
       <>
+      {JSON.stringify(this.state.messageObj)}
         <section>
           <label>Search: </label>
-          <input type="text" 
-          onChange={(e) => this.searchSpace(e)}
-          value={this.state.search} />
-         
+          <input type="text"
+            onChange={(e) => this.searchSpace(e)}
+            value={this.state.search} />
+
           <button onClick={this.cancelSearch}>Cancel</button>
         </section>
 
@@ -139,15 +142,22 @@ class ForumPage extends Component {
 
         <Modal show={this.state.show} handleClose={this.hideModal}>
           <Card className={classes.card}>
-          <Typography gutterBottom variant="h5" component="h2" className={classes.header}>
-           Send Message:
+            <Typography gutterBottom variant="h5" component="h2" className={classes.header}>
+              Send Message:
            </Typography>
 
-          <label type="text">Message:</label>
-          <form onSubmit={this.addMessage} className={classes.form}>
-            <textarea onChange={(event) => this.handleModalChange('message', event)} type="text" />
-            <button>Save</button>
-          </form>
+
+            <form onSubmit={this.addMessage} className={classes.form}>
+
+              <label type="text">Subject:</label>
+              <textarea onChange={(event) => this.handleModalChange('subject', event)} type="text" />
+              <br></br><br></br>
+              <label type="text">Message:</label>
+              <textarea onChange={(event) => this.handleModalChange('message', event)} type="text" />
+              <br></br>
+              <br></br>
+              <button>Save</button>
+            </form>
           </Card>
         </Modal>
       </>

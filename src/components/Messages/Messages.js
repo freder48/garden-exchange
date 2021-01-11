@@ -37,6 +37,7 @@ class Messages extends Component {
             sent_to_user_id: '',
             sent_from_user_id: '',
             forum_id: '',
+            subject: '',
             message: '',
         }
     }//end local state
@@ -49,11 +50,12 @@ class Messages extends Component {
     addMessage = (event) => {
         event.preventDefault();
         this.props.dispatch({ type: 'ADD_MESSAGE', payload: this.state.messageObj })
-    }
+    }//end addMessage
 
+    //deletes message based upon id 
     deleteMessage(id) {
         this.props.dispatch({ type: 'DELETE_MESSAGE', payload: id })
-    }
+    }//end deleteMessage
 
     //gets input values on pop-up modal and sets local state
     handleModalChange = (inputValue, event) => {
@@ -117,9 +119,14 @@ class Messages extends Component {
                             Reply:
                         </Typography>
 
-                        <label type="text">Message:</label>
+
                         <form onSubmit={this.addMessage} className={classes.form}>
+                            <label type="text">Subject:</label>
+                            <textarea onChange={(event) => this.handleModalChange('subject', event)} type="text" />
+                            <br></br>
+                            <label type="text">Message:</label>
                             <textarea onChange={(event) => this.handleModalChange('message', event)} type="text" />
+
                             <button>Save</button>
                         </form>
                     </Card>
