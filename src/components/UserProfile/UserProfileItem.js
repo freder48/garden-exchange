@@ -5,6 +5,7 @@ import Moment from 'react-moment';
 import DeleteOutlinedIcon from '@material-ui/icons/DeleteOutlined';
 import EditIcon from '@material-ui/icons/Edit';
 import { TextField, Button, Grid, Card, CardContent, Typography } from '@material-ui/core';
+import swal from 'sweetalert';
 
 class UserProfileItem extends Component {
     state = {
@@ -21,14 +22,30 @@ class UserProfileItem extends Component {
          this.props.dispatch({ type: 'GET_USER_LISTING' })
     }
 
-    //get all messages for specific user upon page load
+    //get all listings for specific user upon page load
     componentDidMount() {
         this.props.dispatch({ type: 'GET_USER_LISTING' })
     }
 
     deleteListing(id) {
-        this.props.dispatch({ type: 'DELETE_LISTING', payload: id })
-        // this.props.dispatch({ type: 'GET_FORUM', payload: this.state.direction})
+        
+        swal({
+            title: "Are you sure?",
+            text: "Once deleted, you will not be able to recover this post!",
+            icon: "warning",
+            buttons: true,
+            dangerMode: true,
+          })
+          .then((willDelete) => {
+            if (willDelete) {
+              swal("Poof! Your post has been deleted!", {
+                icon: "success",
+              });
+              this.props.dispatch({ type: 'DELETE_LISTING', payload: id })
+            } else {
+              swal("Your post is safe!");
+            }
+          });
     }
 
     editListing = (id) => {
