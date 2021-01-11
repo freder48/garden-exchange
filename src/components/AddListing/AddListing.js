@@ -3,6 +3,7 @@ import { connect } from 'react-redux';
 import { withStyles } from '@material-ui/core/styles';
 import { TextField, Button, Grid, Card, CardContent, Typography } from '@material-ui/core';
 import mapStoreToProps from '../../redux/mapStoreToProps';
+import swal from 'sweetalert';
 
 const styles = {
     button: {
@@ -66,7 +67,6 @@ class AddListing extends Component {
     handleSubmit = (event) => {
         event.preventDefault();
         this.props.dispatch({ type: 'ADD_LISTING', payload: this.state.newListing })
-        
     }
 
     render() {

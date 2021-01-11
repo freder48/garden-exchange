@@ -4,13 +4,22 @@ import Moment from 'react-moment';
 import mapStoreToProps from '../../redux/mapStoreToProps';
 import { connect } from 'react-redux';
 import Modal from '../Modal/Modal';
+import swal from 'sweetalert';
 
-import { Card, Typography, } from '@material-ui/core';
+import { Card, Typography, TextField, Button} from '@material-ui/core';
 import { withStyles } from '@material-ui/core/styles';
 import DeleteOutlinedIcon from '@material-ui/icons/DeleteOutlined';
 import ReplyIcon from '@material-ui/icons/Reply';
 
 const styles = {
+    button: {
+        backgroundColor: '#fff9e6',
+        justifyContent: 'center',
+        '&:hover': {
+            backgroundColor: 'rgb(69, 109, 109);',
+            color: '#fff9e6'
+        }
+    },
     card: {
         backgroundColor: '#7e9a9a',
     },
@@ -25,8 +34,14 @@ const styles = {
         fontFamily: 'Copperplate'
     },
     form: {
-        height: '52vh'
-    }
+        height: '52vh',
+        textAlign: 'center',
+    },
+    textField: {
+        marginTop: '1rem',
+        width: '90%',
+        backgroundColor: '#fff9e6',
+    },
 }
 
 class Messages extends Component {
@@ -39,7 +54,7 @@ class Messages extends Component {
             forum_id: '',
             subject: '',
             message: '',
-            mail_sent: true, 
+            mail_sent: true,
         }
     }//end local state
 
@@ -50,12 +65,31 @@ class Messages extends Component {
     //dispatches messageObj to saga for post route
     addMessage = (event) => {
         event.preventDefault();
+        swal("Success!", "Your Message Was Sent!", "success");
         this.props.dispatch({ type: 'ADD_MESSAGE', payload: this.state.messageObj })
+        this.setState({ show: false })
     }//end addMessage
 
     //deletes message based upon id 
     deleteMessage(id) {
-        this.props.dispatch({ type: 'DELETE_MESSAGE', payload: id })
+        swal({
+            title: "Are you sure?",
+            text: "Once deleted, you will not be able to recover this imaginary file!",
+            icon: "warning",
+            buttons: true,
+            dangerMode: true,
+          })
+          .then((willDelete) => {
+            if (willDelete) {
+              swal("Poof! Your message has been deleted!", {
+                icon: "success",
+              });
+              this.props.dispatch({ type: 'DELETE_MESSAGE', payload: id })
+            } else {
+              swal("Your message is safe!");
+            }
+          });
+       
     }//end deleteMessage
 
     //gets input values on pop-up modal and sets local state
@@ -121,14 +155,25 @@ class Messages extends Component {
                         </Typography>
 
 
-                        <form onSubmit={this.addMessage} className={classes.form}>
-                            <label type="text">Subject:</label>
-                            <textarea onChange={(event) => this.handleModalChange('subject', event)} type="text" />
+                        <form className={classes.form}>
+                            <TextField
+                                label="Subject"
+                                type="text"
+                                onChange={(event) => this.handleModalChange('subject', event)}
+                                className={classes.textField}
+                            />
+                            <br></br><br></br>
+                            <TextField
+                                label="Message"
+                                type="text"
+                                multiline
+                                className={classes.textField}
+                                onChange={(event) => this.handleModalChange('message', event)}
+                            />
                             <br></br>
-                            <label type="text">Message:</label>
-                            <textarea onChange={(event) => this.handleModalChange('message', event)} type="text" />
-
-                            <button>Save</button>
+                            <br></br>
+                            <Button
+                                onClick={this.addMessage}>Save</Button>
                         </form>
                     </Card>
                 </Modal>
@@ -136,5 +181,9 @@ class Messages extends Component {
         )
     }
 }
+
+
+
+
 
 export default connect(mapStoreToProps)(withStyles(styles)(Messages));
