@@ -50,7 +50,24 @@ class RegisterForm extends Component {
     first_name: '',
     last_name: '',
     email: '',
+    email_messages: '',
   };
+
+  //handle inputs user information
+  handleInputChangeFor = (propertyName) => (event) => {
+    this.setState({
+      [propertyName]: event.target.value,
+    });
+  };
+
+  handleCheck = () => {
+    this.setState({
+        supportMessage: {
+            ...this.state.supportMessage,
+            checked: !this.state.email_messages
+        }
+    })
+}
 
   registerUser = (event) => {
     event.preventDefault();
@@ -66,12 +83,6 @@ class RegisterForm extends Component {
       },
     });
   }; // end registerUser
-
-  handleInputChangeFor = (propertyName) => (event) => {
-    this.setState({
-      [propertyName]: event.target.value,
-    });
-  };
 
   render() {
     const { classes } = this.props;
