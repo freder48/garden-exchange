@@ -41,6 +41,11 @@ class ForumPage extends Component {
     }
   }//end local state
 
+  //cancel button on search input
+  cancelSearch = () => {
+    this.setState({ search: ''})
+  }
+
   //get all listings on page load
   componentDidMount() {
     this.props.dispatch({ type: 'GET_FORUM' })
@@ -68,6 +73,12 @@ class ForumPage extends Component {
     this.setState({ show: false });
   };
 
+  //search bar
+  searchSpace = (event) => {
+    let keyword = event.target.value;
+    this.setState({ search: keyword })
+}
+
   //displays message form if show in local state is set to true
   showModal = (id, user_id) => {
     this.setState({ show: true, messageObj: { forum_id: id, sent_to_user_id: user_id } });
@@ -80,7 +91,11 @@ class ForumPage extends Component {
       <>
         <section>
           <label>Search: </label>
-          <input type="text" onChange={(e) => this.searchSpace(e)} />
+          <input type="text" 
+          onChange={(e) => this.searchSpace(e)}
+          value={this.state.search} />
+         
+          <button onClick={this.cancelSearch}>Cancel</button>
         </section>
 
 

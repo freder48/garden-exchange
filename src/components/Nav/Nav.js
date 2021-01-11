@@ -24,7 +24,7 @@ function Nav(props) {
   if (props.store.user.id != null) {
     loginLinkData.path = '/forum';
     loginLinkData.text = 'Forum';
-    loginLinkData.className = ""
+    loginLinkData.className = "forumLink"
   }
 
 
