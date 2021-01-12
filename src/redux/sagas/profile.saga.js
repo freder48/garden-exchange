@@ -5,6 +5,7 @@ function* profileSaga() {
   yield takeLatest('GET_USER_LISTING', getUserListing);
   yield takeLatest('DELETE_LISTING', deleteListing);
   yield takeLatest('GET_DETAILS', getDetails);
+  yield takeLatest('UPDATE_LISTING', updateListing);
 
 }
 
@@ -39,6 +40,21 @@ function* getUserListing() {
         console.log('error with forum get request in profile.saga.js', error);
     }
 }//end getUserListing
+
+//PUT ROUTE 
+function* updateListing(action) {
+    console.log('In UPDATE Listing');
+    
+    console.log('Action Payload', action.payload);
+    
+    // console.log('index post', action.payload);
+    // try {
+    //     yield axios.put(`/api/movie/${action.payload.id}`, action.payload)
+    //     yield put({ type: 'SET_FORUM'});
+    // } catch (error) {
+    //     console.log('error with put movie request', error);
+    // }
+}//end updateMovie
 
 
 

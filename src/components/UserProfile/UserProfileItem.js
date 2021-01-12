@@ -9,12 +9,12 @@ import swal from 'sweetalert';
 
 class UserProfileItem extends Component {
     state = {
-        editListing: {
-            have: `${this.props.store.details.have}`,
-            want: `${this.props.store.details.want}`,
-            location: `${this.props.store.details.location}`,
-            user_id: `${this.props.store.user.id}`,
-        },
+        // editListing: {
+        //     have: `${this.props.store.details.have}`,
+        //     want: `${this.props.store.details.want}`,
+        //     location: `${this.props.store.details.location}`,
+        //     user_id: `${this.props.store.user.id}`,
+        // },
         isEditable: false,
     }
     cancelButton = () => {
@@ -42,8 +42,6 @@ class UserProfileItem extends Component {
                 icon: "success",
               });
               this.props.dispatch({ type: 'DELETE_LISTING', payload: id })
-            } else {
-              swal("Your post is safe!");
             }
           });
     }
@@ -67,18 +65,20 @@ class UserProfileItem extends Component {
         let updatedListing = {
             ...this.state.editListing, [inputValue]: event.target.value
         }
+       
         this.props.dispatch({type: 'SET_DETAILS', payload: [updatedListing]})
 
     }
 
-    saveEditedListing = () => {
+    saveEditedListing = (id) => {
         this.props.dispatch({type: 'UPDATE_LISTING', payload: this.props.store.details})
+        
     }
 
 
     render() {
         const { classes } = this.props;
-        {JSON.stringify(this.state.editListing)}
+        
         return (
             <>
      

@@ -39,7 +39,7 @@ const styles = {
     },
     textField: {
         marginTop: '1rem',
-        width: '90%',
+        width: '100%',
         backgroundColor: '#fff9e6',
     },
 }
@@ -55,20 +55,15 @@ class Messages extends Component {
             subject: '',
             message: '',
             mail_sent: true,
-        }
+        }, 
+        search: '', 
     }//end local state
 
     //get all messages for specific user upon page load
     componentDidMount() {
         this.props.dispatch({ type: 'GET_MESSAGES' })
     }
-    //dispatches messageObj to saga for post route
-    addMessage = (event) => {
-        event.preventDefault();
-        swal("Success!", "Your Message Was Sent!", "success");
-        this.props.dispatch({ type: 'ADD_MESSAGE', payload: this.state.messageObj })
-        this.setState({ show: false })
-    }//end addMessage
+
 
     //deletes message based upon id 
     deleteMessage(id) {
@@ -91,17 +86,6 @@ class Messages extends Component {
           });
        
     }//end deleteMessage
-
-    //gets input values on pop-up modal and sets local state
-    handleModalChange = (inputValue, event) => {
-        this.setState({
-            messageObj: {
-                ...this.state.messageObj,
-                [inputValue]: event.target.value,
-                sent_from_user_id: `${this.props.store.user.id}`
-            }
-        })
-    }//end handleModalChange
 
     //hides pop-up modal by setting local state show to false
     hideModal = () => {

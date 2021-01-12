@@ -7,8 +7,6 @@ import { withStyles } from '@material-ui/core/styles';
 import MailOutlineIcon from '@material-ui/icons/MailOutline';
 import Moment from 'react-moment';
 import './ForumPage.css'
-import swal from 'sweetalert';
-
 
 const styles = {
   header: {
@@ -24,12 +22,12 @@ const styles = {
   form: {
     height: '52vh',
     textAlign: 'center'
-  }, 
+  },
   textField: {
     marginTop: '1rem',
     width: '90%',
     backgroundColor: '#fff9e6',
-},
+  },
 }
 
 class ForumPage extends Component {
@@ -44,7 +42,7 @@ class ForumPage extends Component {
       forum_id: '',
       subject: '',
       message: '',
-      mail_sent: true, 
+      mail_sent: true,
     }
   }//end local state
 
@@ -57,26 +55,6 @@ class ForumPage extends Component {
   componentDidMount() {
     this.props.dispatch({ type: 'GET_FORUM' })
   }
-
-  //dispatches messageObj to saga for post route
-  addMessage = (event) => {
-    event.preventDefault();
-    swal("Success!", "Your Message Was Sent!", "success");
-    this.setState({show: false})
-    this.props.dispatch({ type: 'ADD_MESSAGE', payload: this.state.messageObj })
-
-  }
-
-  //gets input values on pop-up modal and sets local state
-  handleModalChange = (inputValue, event) => {
-    this.setState({
-      messageObj: {
-        ...this.state.messageObj,
-        [inputValue]: event.target.value,
-        sent_from_user_id: `${this.props.store.user.id}`
-      }
-    })
-  }//end handleModalChange
 
   //hides pop-up modal by setting local state show to false
   hideModal = () => {
@@ -92,13 +70,14 @@ class ForumPage extends Component {
   //displays message form if show in local state is set to true
   showModal = (id, user_id) => {
     this.setState({ show: true, messageObj: { forum_id: id, sent_to_user_id: user_id, mail_sent: true, } });
-  };
 
+  };
 
   render() {
     const { classes } = this.props;
     return (
       <>
+        {JSON.stringify(this.state.messageObj)}
         <section>
           <label>Search: </label>
           <input type="text"
@@ -138,6 +117,7 @@ class ForumPage extends Component {
                   <td>{post.location}</td>
                   <td><Moment format='MM/DD/YYYY'>{post.date}</Moment></td>
                   <td onClick={() => this.showModal(post.id, post.user_id)}><MailOutlineIcon /></td>
+                  <td>{JSON.stringify(post.user_id)}</td>
                 </tr>
 
               )
@@ -147,35 +127,9 @@ class ForumPage extends Component {
           </tbody>
         </table>
 
-        <Modal show={this.state.show} handleClose={this.hideModal}>
-          <CardContent className={classes.card}>
-            <Typography gutterBottom variant="h5" component="h2" className={classes.header}>
-              Send Message:
-           </Typography>
+        <Modal show={this.state.show} handleClose={this.hideModal} showModal={this.showModal} messageObj={this.state.messageObj}/>
 
-
-            <form className={classes.form}>
-              <TextField
-                  label="Subject"
-                  type="text"
-                  onChange={(event) => this.handleModalChange('subject', event)}
-                  className={classes.textField}
-              />
-              <br></br><br></br>
-              <TextField
-                label="Message"
-                type="text"
-                multiline
-                className={classes.textField}
-                onChange={(event) => this.handleModalChange('message', event)}
-              />
-              <br></br>
-              <br></br>
-              <Button
-              onClick={this.addMessage}>Save</Button>
-            </form>
-          </CardContent>
-        </Modal>
+    
       </>
     )
   }
