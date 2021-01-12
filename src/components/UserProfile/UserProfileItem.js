@@ -78,9 +78,10 @@ class UserProfileItem extends Component {
 
     render() {
         const { classes } = this.props;
+        {JSON.stringify(this.state.editListing)}
         return (
             <>
-      {JSON.stringify(this.state.editListing)}
+     
                 {this.state.isEditable ?
                     <>
                     <td> <TextField

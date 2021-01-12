@@ -3,7 +3,7 @@ import { connect } from 'react-redux';
 import { withStyles } from '@material-ui/core/styles';
 import { TextField, Button, Grid, Card, CardContent, Typography } from '@material-ui/core';
 import mapStoreToProps from '../../redux/mapStoreToProps';
-
+import swal from 'sweetalert';
 
 const styles = {
     button: {
@@ -35,7 +35,7 @@ const styles = {
         padding: "3rem",
         border: '3px solid #fff9e6',
         letterSpacing: '5px',
-    },  
+    },
     textField: {
         marginTop: '1rem',
         width: '90%',
@@ -56,17 +56,40 @@ class AddListing extends Component {
     handleChange = (inputValue, event) => {
         event.preventDefault();
         this.setState({
-          newListing: {
-            ...this.state.newListing,
-            [inputValue]: event.target.value
-          }
+            newListing: {
+                ...this.state.newListing,
+                [inputValue]: event.target.value
+            }
         })//end setState
 
-      }//end handleChange
+    }//end handleChange
 
     handleSubmit = (event) => {
         event.preventDefault();
         this.props.dispatch({ type: 'ADD_LISTING', payload: this.state.newListing })
+        swal('Success, your listing was submitted!', {
+            icon: "success",
+            buttons: {
+                cancel: "Add Another Listing",
+                forum: {
+                    text: "Back to Forum",
+                    value: "back"
+                }
+            }
+        }).then((value) => {
+            if (value === "back") {
+                this.props.history.push('/forum')
+            } else {
+                this.setState({
+                    newListing: {
+                        have: '',
+                        want: '',
+                        location: '',
+                    },
+                })
+            }
+        })
+
     }
 
     render() {
