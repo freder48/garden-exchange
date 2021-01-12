@@ -124,9 +124,9 @@
   align-items: center;
 }
 
-.span {
+/* .span {
   margin-left: 16px;
-} 
+}  */
 
 .title {
   margin-left: 50px;
@@ -137,8 +137,4 @@
   justify-content: flex-start;
   display: inline;
   -webkit-text-stroke: 1px black;
-}
-
-a.nav-link{
-  
 }

@@ -26,7 +26,6 @@ function Nav(props) {
     loginLinkData.text = 'Forum';
   }
 
-
   return (
 
     <div className="nav">

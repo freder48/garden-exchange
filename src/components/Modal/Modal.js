@@ -7,6 +7,27 @@ import mapStoreToProps from '../../redux/mapStoreToProps';
 import { connect } from 'react-redux';
 
 const styles = {
+  button: {
+    // backgroundColor: '#fff9e6',
+    justifyContent: 'center',
+    '&:hover': {
+      backgroundColor: 'rgb(69, 109, 109);',
+      color: '#fff9e6'
+    }
+  },
+  card: {
+    position: 'fixed', 
+    width: '60%',
+    top:'50%',
+    left:'50%',
+    height: '70vh',
+    justifyContent: 'center',
+    transform: 'translate(-50%,-50%)',
+    padding: '2em',
+    backgroundColor: '#7e9a9a',
+    border: '20px solid white',
+  },
+
   header: {
     backgroundColor: "#c78b50",
     margin: "auto",
@@ -59,22 +80,22 @@ class Modal extends Component {
         sent_from_user_id: `${this.props.store.user.id}`,
         sent_to_user_id: `${this.props.messageObj.sent_to_user_id}`,
         forum_id: `${this.props.messageObj.forum_id}`,
-      
+
       },
-     
+
     })
   }//end handleModalChange
 
-  
+
 
   render() {
     const showHideClassName = this.props.show ? "modal display-block" : "modal display-none";
     const { classes } = this.props;
 
     return (
-      
+
       <div className={showHideClassName}>
-        <Card className="modal-main">
+        <Card className={classes.card}>
           <Typography gutterBottom variant="h5" component="h2" className={classes.header}>
             Send Message:
            </Typography>
@@ -98,14 +119,17 @@ class Modal extends Component {
               />
               <br></br>
               <br></br>
-              <Button
-                onClick={this.addMessage}>Save</Button>
-            </form>
-          </CardContent>
 
-          <Button type="button" onClick={this.props.handleClose}>
-            Close
-        </Button>
+              <Button type="button" onClick={this.props.handleClose}>
+                Close
+             </Button>
+             <Button className={classes.button}
+             onClick={this.addMessage}>
+             Save
+             </Button>
+            </form>
+
+          </CardContent>
         </Card>
 
       </div>

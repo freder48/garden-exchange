@@ -41,6 +41,22 @@ router.get('/:id', rejectUnauthenticated, (req, res) => {
     });
 }); // END GET Route
 
+//PUT ROUTE - change listing details
+router.put('/:id', (req, res) => {
+  let edit = req.body;
+  console.log('req.body' ,req.body);
+  let id = req.params.id; // identify which item to update
+  console.log('id:', id);
+  let sqlText = `UPDATE "forum" SET "have"=$1, "want" =$2, "location"=$3 WHERE "id"= $4;`
+  pool.query(sqlText, [edit.have, edit.want, edit.location, id]) 
+      .then((result) => { 
+          res.sendStatus(200); 
+      })
+      .catch( (error) => {
+          console.log('Error from db...', error);
+          res.sendStatus(500);
+      })
+})
 
 
 

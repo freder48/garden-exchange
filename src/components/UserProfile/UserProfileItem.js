@@ -6,6 +6,25 @@ import DeleteOutlinedIcon from '@material-ui/icons/DeleteOutlined';
 import EditIcon from '@material-ui/icons/Edit';
 import { TextField, Button, Grid, Card, CardContent, Typography } from '@material-ui/core';
 import swal from 'sweetalert';
+import { withStyles } from '@material-ui/core/styles';
+
+const styles = {
+    button: {
+        backgroundColor: '#fff9e6',
+        justifyContent: 'center',
+        marginLeft: '5px',
+
+        '&:hover': {
+            backgroundColor: 'rgb(69, 109, 109);',
+            color: '#fff9e6'
+        },
+        cancelButton: {
+            justifyContent: 'center',
+
+        }
+    },
+}
+
 
 class UserProfileItem extends Component {
     state = {
@@ -13,6 +32,8 @@ class UserProfileItem extends Component {
             have: null,
             want: null,
             location: null,
+            id: null,
+            // user_id: this.props.store.user_id,
         },
         isEditable: false,
     }
@@ -29,20 +50,20 @@ class UserProfileItem extends Component {
     componentDidUpdate(prevProps) {
         if (this.props.store.details.have !== prevProps.have && this.state.editListing.have === null
             || this.props.store.details.want !== prevProps.want && this.state.editListing.want === null
-            || this.props.store.details.location !== prevProps.location && this.state.editListing.location === null) {
+            || this.props.store.details.location !== prevProps.location && this.state.editListing.location === null
+            || this.props.store.details.id !== prevProps.id && this.state.editListing.id === null) {
             this.setState({
                 editListing: {
                     have: this.props.store.details.have,
                     want: this.props.store.details.want,
-                    location: this.props.store.details.location
+                    location: this.props.store.details.location,
+                    id: this.props.store.details.id
                 }
             })
         }
     }
-
-
+    //start deleteListing
     deleteListing(id) {
-
         swal({
             title: "Are you sure?",
             text: "Once deleted, you will not be able to recover this post!",
@@ -58,8 +79,9 @@ class UserProfileItem extends Component {
                     this.props.dispatch({ type: 'DELETE_LISTING', payload: id })
                 }
             });
-    }
+    }//end deleteListing
 
+    //changes isEditable to true and gets the details for specific row clicked on
     editListing = (id) => {
         this.setState({
             isEditable: true,
@@ -67,6 +89,7 @@ class UserProfileItem extends Component {
         this.props.dispatch({ type: 'GET_DETAILS', payload: id })
     }
 
+    //handles input values
     handleChange = (inputValue, event) => {
         this.setState({
             editListing: {
@@ -74,10 +97,10 @@ class UserProfileItem extends Component {
                 [inputValue]: event.target.value
             }
         })//end setState
-        console.log(event.target.value)
     }
 
-    saveEditedListing = () => {
+    //dispatches to saga to start put route
+    saveEditedListing = (id) => {
         console.log('updated listing', this.state.editListing)
         this.props.dispatch({ type: 'UPDATE_LISTING', payload: this.state.editListing })
         this.setState({
@@ -86,7 +109,7 @@ class UserProfileItem extends Component {
                 want: '',
                 location: '',
             },
-            isEditable: false, 
+            isEditable: false,
         })
     }
 
@@ -95,7 +118,6 @@ class UserProfileItem extends Component {
 
         return (
             <>
-                {JSON.stringify(this.state.editListing)}
                 {this.state.isEditable ?
                     <>
                         <td> <TextField
@@ -120,11 +142,22 @@ class UserProfileItem extends Component {
                         /></td>
                         <td><Moment format='MM/DD/YYYY'>{this.props.listing.date}</Moment></td>
                         <td>
-                            <button onClick={this.cancelButton} >Cancel</button>
-                            <button onClick={this.saveEditedListing}>Save</button>
+                            <Button
+                                onClick={this.cancelButton}
+                                variant="outlined"
+                                color="secondary"
+                                className={classes.cancelButton}
+                            >Cancel
+                             </Button>
+                            <Button
+                                onClick={() => this.saveEditedListing(this.props.listing.id)}
+                                variant="outlined"
+                                className={classes.button}
+                            > Save
+                            </Button>
                         </td>
-                        <td><DeleteOutlinedIcon
 
+                        <td>Delete<DeleteOutlinedIcon
                             onClick={() => { this.deleteListing(this.props.listing.id) }}>
                         </DeleteOutlinedIcon></td>
 
@@ -135,11 +168,15 @@ class UserProfileItem extends Component {
                         <td>{this.props.listing.want}</td>
                         <td>{this.props.listing.location}</td>
                         <td><Moment format='MM/DD/YYYY'>{this.props.listing.date}</Moment></td>
-                        <td>Edit<EditIcon onClick={() => this.editListing(this.props.listing.id)}></EditIcon></td>
-                        <td>Delete <DeleteOutlinedIcon
-                            onClick={() => { this.deleteListing(this.props.listing.id) }}>
+                        <td><Button>Edit
+                            <EditIcon
+                                onClick={() => this.editListing(this.props.listing.id)}>
+                            </EditIcon></Button></td>
 
-                        </DeleteOutlinedIcon></td>
+                        <td><Button>Delete
+                            <DeleteOutlinedIcon
+                                onClick={() => { this.deleteListing(this.props.listing.id) }}>
+                            </DeleteOutlinedIcon></Button></td>
                     </>
                 }
 
@@ -152,4 +189,4 @@ class UserProfileItem extends Component {
     }
 }
 
-export default connect(mapStoreToProps)(UserProfileItem);
+export default connect(mapStoreToProps)(withStyles(styles)(UserProfileItem));

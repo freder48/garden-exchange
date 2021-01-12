@@ -42,19 +42,15 @@ function* getUserListing() {
 }//end getUserListing
 
 //PUT ROUTE 
-function* updateListing(action) {
-    console.log('In UPDATE Listing');
-    
+function* updateListing(action) { 
     console.log('Action Payload', action.payload);
-    
-    // console.log('index post', action.payload);
-    // try {
-    //     yield axios.put(`/api/movie/${action.payload.id}`, action.payload)
-    //     yield put({ type: 'SET_FORUM'});
-    // } catch (error) {
-    //     console.log('error with put movie request', error);
-    // }
-}//end 
+    try {
+        yield axios.put(`/api/profile/${action.payload.id}`, action.payload)
+        yield put({ type: 'GET_USER_LISTING'});
+    } catch (error) {
+        console.log('error with put in profile.saga.js request', error);
+    }
+}//end updateListing
 
 
 
