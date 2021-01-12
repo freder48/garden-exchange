@@ -9,25 +9,7 @@ import Moment from 'react-moment';
 import './ForumPage.css'
 
 const styles = {
-  header: {
-    backgroundColor: "#c78b50",
-    margin: "auto",
-    width: "80%",
-    textAlign: "center",
-    padding: "3rem",
-    border: '3px solid #fff9e6',
-    letterSpacing: '5px',
-    fontFamily: 'Copperplate'
-  },
-  form: {
-    height: '52vh',
-    textAlign: 'center'
-  },
-  textField: {
-    marginTop: '1rem',
-    width: '90%',
-    backgroundColor: '#fff9e6',
-  },
+
 }
 
 class ForumPage extends Component {
@@ -77,7 +59,6 @@ class ForumPage extends Component {
     const { classes } = this.props;
     return (
       <>
-        {JSON.stringify(this.state.messageObj)}
         <section>
           <label>Search: </label>
           <input type="text"
@@ -117,7 +98,6 @@ class ForumPage extends Component {
                   <td>{post.location}</td>
                   <td><Moment format='MM/DD/YYYY'>{post.date}</Moment></td>
                   <td onClick={() => this.showModal(post.id, post.user_id)}><MailOutlineIcon /></td>
-                  <td>{JSON.stringify(post.user_id)}</td>
                 </tr>
 
               )

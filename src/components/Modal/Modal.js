@@ -7,18 +7,26 @@ import mapStoreToProps from '../../redux/mapStoreToProps';
 import { connect } from 'react-redux';
 
 const styles = {
-
   header: {
     backgroundColor: "#c78b50",
-    margin: " auto",
+    margin: "auto",
     width: "80%",
     textAlign: "center",
     padding: "3rem",
     border: '3px solid #fff9e6',
     letterSpacing: '5px',
+    fontFamily: 'Copperplate'
   },
-
-};
+  form: {
+    height: '52vh',
+    textAlign: 'center'
+  },
+  textField: {
+    marginTop: '1rem',
+    width: '90%',
+    backgroundColor: '#fff9e6',
+  },
+}
 
 class Modal extends Component {
   state = {
@@ -55,7 +63,6 @@ class Modal extends Component {
       },
      
     })
-    console.log('messageObj in modal', this.state.messageObj)
   }//end handleModalChange
 
   

@@ -54,7 +54,7 @@ function* updateListing(action) {
     // } catch (error) {
     //     console.log('error with put movie request', error);
     // }
-}//end updateMovie
+}//end 
 
 
 

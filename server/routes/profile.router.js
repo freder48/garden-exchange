@@ -27,13 +27,12 @@ const { rejectUnauthenticated } = require('../modules/authentication-middleware'
   });//end GET
 
   //Get post details for specific user listing
-router.get('/:id', (req, res) => {
+router.get('/:id', rejectUnauthenticated, (req, res) => {
   let id = req.params.id;
   const sqlText = `SELECT * FROM forum WHERE id=$1`;
   //pool is the database, here we are sending the query to the database, running a query similar to a command in Postico
   pool.query(sqlText, [id])
     .then((result) => {
-     console.log('rows', result.rows[0])
       res.send(result.rows[0]);
     })
     .catch((error) => {
