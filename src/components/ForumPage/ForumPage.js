@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import mapStoreToProps from '../../redux/mapStoreToProps';
 import Modal from '../Modal/Modal';
-import { Card, Typography, TextField, CardContent, Button } from '@material-ui/core';
+import { Button } from '@material-ui/core';
 import { withStyles } from '@material-ui/core/styles';
 import MailOutlineIcon from '@material-ui/icons/MailOutline';
 import Moment from 'react-moment';

@@ -5,7 +5,6 @@ import { withStyles } from '@material-ui/core/styles';
 import swal from 'sweetalert';
 import mapStoreToProps from '../../redux/mapStoreToProps';
 import { connect } from 'react-redux';
-import { Autorenew } from '@material-ui/icons';
 
 const styles = {
   button: {

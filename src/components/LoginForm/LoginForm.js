@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import mapStoreToProps from '../../redux/mapStoreToProps';
 import { withStyles } from '@material-ui/core/styles';
-import { TextField, Button, Grid, Card, Typography, FormControlLabel, Checkbox } from '@material-ui/core';
+import { TextField, Button, Card} from '@material-ui/core';
 
 const styles = {
   button: {

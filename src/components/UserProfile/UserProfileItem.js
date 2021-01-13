@@ -4,7 +4,7 @@ import mapStoreToProps from '../../redux/mapStoreToProps';
 import Moment from 'react-moment';
 import DeleteOutlinedIcon from '@material-ui/icons/DeleteOutlined';
 import EditIcon from '@material-ui/icons/Edit';
-import { TextField, Button, Grid, Card, CardContent, Typography } from '@material-ui/core';
+import { TextField, Button} from '@material-ui/core';
 import swal from 'sweetalert';
 import { withStyles } from '@material-ui/core/styles';
 

@@ -2,17 +2,20 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { Card, CardActionArea, CardContent, Typography, TextField, Button} from '@material-ui/core';
 import { withStyles } from '@material-ui/core/styles';
-
+import mapStoreToProps from '../../redux/mapStoreToProps';
+import swal from 'sweetalert';
 
 const styles = {
     button: {
         backgroundColor: '#fff9e6',
+        border: '2px solid #c78b50',
+        marginTop: '15px',
         justifyContent: 'center',
         '&:hover': {
-            backgroundColor: 'rgb(69, 109, 109);',
-            color: '#fff9e6'
+          backgroundColor: 'rgb(69, 109, 109);',
+          color: '#fff9e6'
         }
-    },
+      },
     card: {
         margin: 'auto',
         width: '60%',
@@ -29,7 +32,8 @@ const styles = {
         textAlign: "center",
         padding: "3rem",
         border: '3px solid #fff9e6',
-        letterSpacing: '5px'
+        letterSpacing: '5px',
+        fontFamily: 'Copperplate',
 
     },
     textField: {
@@ -46,27 +50,54 @@ class SupportForm extends Component {
 
     state = {
         supportMessage: {
-            name: '',
-            email: '',
             subject: '',
             message: '',
             message_sent: true,
+            sent_to_user_id: 1, 
+            sent_from_user_id: `${this.props.store.user.id}`,
+            forum_id: null,
+            mail_sent: true,
         }
     }
 
-    handleSubmit = (event) => {
+   addMessage = (event) => {
         console.log('clicked')
         event.preventDefault();
-        this.props.dispatch({ type: 'ADD_SUPPORT', payload: this.state.supportMessage })
+        this.props.dispatch({ type: 'ADD_MESSAGE', payload: this.state.supportMessage })
         this.setState({
             supportMessage: {
-                name: '',
-                email: '',
                 subject: '',
                 message: '',
-                message_sent: true,
+                sent_to_user_id: 1, 
+                sent_from_user_id: `${this.props.store.user.id}`,
+                forum_id: null,
+                mail_sent: true,
             }
         })
+        swal('Success, your feedback was sent!', {
+            icon: "success",
+            buttons: {
+                cancel: "Send More Feedback",
+                forum: {
+                    text: "Back to Forum",
+                    value: "back"
+                }
+            }
+        }).then((value) => {
+            if (value === "back") {
+                this.props.history.push('/forum')
+            } else {
+                this.setState({
+                    newListing: {
+                        have: '',
+                        want: '',
+                        location: '',
+                        user_id: `${this.props.store.user.id}`,
+                    },
+                })
+            }
+        })
+
     }
 
     handleChange = (inputValue, event) => {
@@ -87,79 +118,36 @@ class SupportForm extends Component {
         const { classes } = this.props;
 
         return (
-            <div className="support">
+         
+            <div>
                 <Card className={classes.card}>
                     <CardActionArea>
                         <CardContent>
                             <Typography gutterBottom variant="h5" component="h2" className={classes.header}>
                                 How can I support you?
                            </Typography>
-                            <form>
+                            <form className={classes.form}>
+                            <TextField
+                              label="Subject"
+                              type="text"
+                              onChange={(event) => this.handleChange('subject', event)}
+                              className={classes.textField}
+                            />
+                            <br></br><br></br>
+                            <TextField
+                              label="Message"
+                              type="text"
+                              multiline
+                              className={classes.textField}
+                              onChange={(event) => this.handleChange('message', event)}
+                            />
+                            <br></br>
 
-                                <TextField
-                                    label="name"
-                                    type="text"
-                                    id="filled-required"
-                                    className={classes.textField}
-                                    variant="filled"
-                                    name="name"
-                                    value={this.state.supportMessage.name}
-                                    onChange={(event) => this.handleChange('name', event)}
-                                />
-                                <br></br>
-                                <br></br>
-
-                                <TextField
-                                    label="email"
-                                    id="filled-required"
-                                    variant="filled"
-                                    required
-                                    className={classes.textField}
-                                    type="text"
-                                    name="email"
-                                    value={this.state.supportMessage.email}
-                                    onChange={(event) => this.handleChange('email', event)}
-                                />
-                                <br></br>
-                                <br></br>
-
-                                <TextField
-                                    label="subject"
-                                    type="text"
-                                    required
-                                    id="filled-required"
-                                    className={classes.textField}
-                                    variant="filled"
-                                    name="subject"
-                                    value={this.state.supportMessage.subject}
-                                    onChange={(event) => this.handleChange('subject', event)}
-                                />
-                                <br></br>
-                                <br></br>
-
-                                <TextField
-                                    label="message"
-                                    id="filled-required"
-                                    variant="filled"
-                                    required
-                                    multiline
-                                    rows={4}
-                                    className={classes.textField}
-                                    type="textarea"
-                                    name="Message"
-                                    value={this.state.supportMessage.message}
-                                    onChange={(event) => this.handleChange('message', event)}
-                                />
-                                <br></br>
-                                <br></br>
-
-                                <Button
-                                    onClick={this.handleSubmit}
-                                    className={classes.button}
-                                    variant="outlined"
-                                   >Submit
-                                </Button>
-                            </form>
+                           <Button className={classes.button}
+                           onClick={this.addMessage}>
+                           Send
+                           </Button>
+                          </form>
 
                         </CardContent>
                     </CardActionArea>
@@ -170,6 +158,4 @@ class SupportForm extends Component {
     }
 }
 
-const mapReduxStateToProps = (reduxState) => ({ reduxState });
-
-export default connect(mapReduxStateToProps)(withStyles(styles)(SupportForm));
+export default connect(mapStoreToProps)(withStyles(styles)(SupportForm));

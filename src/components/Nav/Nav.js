@@ -5,8 +5,7 @@ import LogOutButton from '../LogOutButton/LogOutButton';
 import './Nav.css';
 import mapStoreToProps from '../../redux/mapStoreToProps';
 import { withStyles } from '@material-ui/core/styles';
-import { makeStyles } from '@material-ui/core/styles';
-import HomeIcon from '@material-ui/icons/Home';
+// import HomeIcon from '@material-ui/icons/Home';
 import MenuIcon from '@material-ui/icons/Menu';
 import CloseIcon from '@material-ui/icons/Close';
 import AddIcon from '@material-ui/icons/Add';
@@ -18,6 +17,7 @@ const styles = {
   menuBars: {
     fontSize: '46px',
     color: '#fff9e6',
+   
     '&:hover': {
       color: '#c78b50'
   },
@@ -25,7 +25,6 @@ const styles = {
   x: {
     fontSize: '46px',
     color: '#fff9e6',
-    marginLeft: '0',
     '&:hover': {
       color: '#c78b50'
   },

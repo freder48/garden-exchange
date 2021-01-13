@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import mapStoreToProps from '../../redux/mapStoreToProps';
 import { withStyles } from '@material-ui/core/styles';
-import { TextField, Button, Grid, Card, CardContent, Typography } from '@material-ui/core';
+import { Grid, Card} from '@material-ui/core';
 import './LandingPage.css';
 
 // CUSTOM COMPONENTS
