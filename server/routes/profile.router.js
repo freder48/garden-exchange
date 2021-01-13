@@ -42,7 +42,7 @@ router.get('/:id', rejectUnauthenticated, (req, res) => {
 }); // END GET Route
 
 //PUT ROUTE - change listing details
-router.put('/:id', (req, res) => {
+router.put('/:id', rejectUnauthenticated, (req, res) => {
   let edit = req.body;
   console.log('req.body' ,req.body);
   let id = req.params.id; // identify which item to update

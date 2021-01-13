@@ -7,6 +7,7 @@ import { TextField, Button, Grid, Card, Typography, FormControlLabel, Checkbox }
 const styles = {
   button: {
     backgroundColor: '#fff9e6',
+    border: '2px solid #c78b50',
     justifyContent: 'center',
     marginBottom: '1%',
     '&:hover': {

@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import mapStoreToProps from '../../redux/mapStoreToProps';
 import Modal from '../Modal/Modal';
-import { Card, Typography, TextField, CardContent, Button } from '@material-ui/core';
+import { Button } from '@material-ui/core';
 import { withStyles } from '@material-ui/core/styles';
 import MailOutlineIcon from '@material-ui/icons/MailOutline';
 import Moment from 'react-moment';
@@ -12,17 +12,18 @@ const styles = {
   button: {
     backgroundColor: '#fff9e6',
     justifyContent: 'center',
+    border: '2px solid black',
+    padding: '3px',
     '&:hover': {
       backgroundColor: 'rgb(69, 109, 109);',
       color: '#fff9e6'
     }
   },
   header: {
-    paddingLeft: '20px',
-    paddingRight: '100px',
     letterSpacing: '5px',
     fontFamily: 'Copperplate',
     fontSize: '36px',
+    marginBottom: '0',
   },
   headerContainer: {
     width: '92%',
@@ -30,19 +31,23 @@ const styles = {
     margin: 'auto',
     marginTop: '20px',
     marginBottom: '20px',
-    padding: '2rem',
+    padding: '3%',
     backgroundColor: "#c78b50",
     border: '3px solid #fff9e6',
   },
   headerFloat: {
-    float: 'left',
+    textAlign: 'center',
+  },
+  icon: {
+    paddingRight: '5px',
   },
   search: {
-    width: '60%',
+    width: '50%',
     justifyContent: 'center',
     backgroundColor: '#fff9e6',
     marginTop: '20px',
     height: '30px',
+    borderRadius: '5%',
   },
 
 }
@@ -144,7 +149,12 @@ class ForumPage extends Component {
                   <td>{post.want}</td>
                   <td>{post.location}</td>
                   <td><Moment format='MM/DD/YYYY'>{post.date}</Moment></td>
-                  <td onClick={() => this.showModal(post.id, post.user_id)}><MailOutlineIcon /></td>
+                  <td onClick={() => this.showModal(post.id, post.user_id)}>
+                    <Button>
+                    <MailOutlineIcon className={classes.icon} />
+                    Message
+                    </Button>
+                    </td>
                 </tr>
 
               )

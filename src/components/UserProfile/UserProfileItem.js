@@ -4,24 +4,33 @@ import mapStoreToProps from '../../redux/mapStoreToProps';
 import Moment from 'react-moment';
 import DeleteOutlinedIcon from '@material-ui/icons/DeleteOutlined';
 import EditIcon from '@material-ui/icons/Edit';
-import { TextField, Button, Grid, Card, CardContent, Typography } from '@material-ui/core';
+import { TextField, Button} from '@material-ui/core';
 import swal from 'sweetalert';
 import { withStyles } from '@material-ui/core/styles';
 
 const styles = {
+    btnContainer: {
+        display: 'in-line block',
+        margin: '0',
+    },
     button: {
         backgroundColor: '#fff9e6',
-        justifyContent: 'center',
-        marginLeft: '5px',
-
+        marginLeft: '2px',
+        minWidth: '60px',
+        float: 'right',
+        width: '25%',
+        border: '2px solid #c78b50',
         '&:hover': {
             backgroundColor: 'rgb(69, 109, 109);',
             color: '#fff9e6'
         },
         cancelButton: {
-            justifyContent: 'center',
-
+            width: '20%',
+            float: 'left',
         }
+    },
+    icon: {
+        paddingRight: '5px',
     },
 }
 
@@ -144,7 +153,7 @@ class UserProfileItem extends Component {
                             onChange={(event) => this.handleChange('location', event)}
                         /></td>
                         <td><Moment format='MM/DD/YYYY'>{this.props.listing.date}</Moment></td>
-                        <td>
+                        <td className={classes.btnContainer}>
                             <Button
                                 onClick={this.cancelButton}
                                 variant="outlined"
@@ -172,16 +181,18 @@ class UserProfileItem extends Component {
                         <td>{this.props.listing.location}</td>
                         <td><Moment format='MM/DD/YYYY'>{this.props.listing.date}</Moment></td>
                         
-                        <td><Button>Edit
-                            <EditIcon
-                                onClick={() => this.editListing(this.props.listing.id)}>
-                            </EditIcon>
-                            </Button></td>
+                        <td><Button
+                            onClick={() => this.editListing(this.props.listing.id)}>
+                            <EditIcon className={classes.icon}/>
+                            Edit
+                            </Button>
+                        </td>
 
-                        <td><Button onClick={() => { this.deleteListing(this.props.listing.id) }}>Delete
-                            <DeleteOutlinedIcon
-                                >
-                            </DeleteOutlinedIcon></Button></td>
+                        <td><Button onClick={() => { this.deleteListing(this.props.listing.id) }}>
+                            <DeleteOutlinedIcon className={classes.icon} />
+                            Delete
+                            </Button>
+                        </td>
                     </>
                 }
             </>

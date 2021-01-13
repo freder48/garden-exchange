@@ -14,7 +14,7 @@ import Footer from '../Footer/Footer';
 import ProtectedRoute from '../ProtectedRoute/ProtectedRoute';
 
 import AboutPage from '../AboutPage/AboutPage';
-import UserPage from '../UserPage/UserPage';
+// import UserPage from '../UserPage/UserPage';
 import InfoPage from '../InfoPage/InfoPage';
 import LandingPage from '../LandingPage/LandingPage';
 import LoginPage from '../LoginPage/LoginPage';
@@ -23,6 +23,7 @@ import ForumPage from '../ForumPage/ForumPage';
 import AddListing from '../AddListing/AddListing';
 import Messages from '../Messages/Messages';
 import UserProfile from '../UserProfile/UserProfileList';
+import SupportForm from '../SupportForm/SupportForm';
 import './App.css';
 
 class App extends Component {
@@ -55,8 +56,8 @@ class App extends Component {
             <ProtectedRoute
               // logged in shows UserPage else shows LoginPage
               exact
-              path="/user"
-              component={UserPage}
+              path="/forum"
+              component={ForumPage}
             />
 
             <ProtectedRoute
@@ -91,6 +92,12 @@ class App extends Component {
               exact
               path="/profile"
               component={UserProfile}
+            /> 
+
+          <ProtectedRoute
+              exact
+              path="/support"
+              component={SupportForm}
             /> 
 
             {/* When a value is supplied for the authRedirect prop the user will

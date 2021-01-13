@@ -29,7 +29,7 @@ router.get('/', rejectUnauthenticated, (req, res) => {
 });//end GET
 
 //POST message from logged in user
-router.post('/', (req, res) => {
+router.post('/', rejectUnauthenticated, (req, res) => {
   console.log('email', req.body);
   const data = req.body;
 
