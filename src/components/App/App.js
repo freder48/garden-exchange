@@ -23,6 +23,7 @@ import ForumPage from '../ForumPage/ForumPage';
 import AddListing from '../AddListing/AddListing';
 import Messages from '../Messages/Messages';
 import UserProfile from '../UserProfile/UserProfileList';
+import SupportForm from '../SupportForm/SupportForm';
 import './App.css';
 
 class App extends Component {
@@ -91,6 +92,12 @@ class App extends Component {
               exact
               path="/profile"
               component={UserProfile}
+            /> 
+
+          <ProtectedRoute
+              exact
+              path="/support"
+              component={SupportForm}
             /> 
 
             {/* When a value is supplied for the authRedirect prop the user will

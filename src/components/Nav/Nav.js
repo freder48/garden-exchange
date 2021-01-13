@@ -12,6 +12,7 @@ import CloseIcon from '@material-ui/icons/Close';
 import AddIcon from '@material-ui/icons/Add';
 import MessageIcon from '@material-ui/icons/Message';
 import PersonOutlineIcon from '@material-ui/icons/PersonOutline';
+import HelpOutlineIcon from '@material-ui/icons/HelpOutline';
 
 const styles = {
   menuBars: {
@@ -101,6 +102,12 @@ function Nav(props) {
                 <Link className="nav-link" to="/profile">
                   <PersonOutlineIcon className="icon" />
                   Profile
+                  </Link>
+              </li>
+              <li className="nav-text">
+                <Link className="nav-link" to="/support">
+                  <HelpOutlineIcon className="icon" />
+                  Support
                   </Link>
               </li>
               <li className="nav-text">
