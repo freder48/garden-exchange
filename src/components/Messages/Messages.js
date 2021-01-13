@@ -37,6 +37,9 @@ const styles = {
         height: '52vh',
         textAlign: 'center',
     },
+    icon: {
+        paddingRight: '5px',
+    },
     textField: {
         marginTop: '1rem',
         width: '100%',
@@ -121,13 +124,13 @@ class Messages extends Component {
                                 <td><Moment format='hh:mm A, MM/DD/YYYY'>
                                     {message.time_received}
                                 </Moment></td>
-                                <td><Button>
-                                    <ReplyIcon
-                                        onClick={() => this.showModal(message.forum_id, message.sent_from_user_id)}>
+                                <td><Button onClick={() => this.showModal(message.forum_id, message.sent_from_user_id)}>
+                                    <ReplyIcon className={classes.icon}>
                                     </ReplyIcon>Reply
                                 </Button></td>
 
                                 <td><Button><DeleteOutlinedIcon
+                                    className={classes.icon}
                                     onClick={() => { this.deleteMessage(message.id) }}>
                                 </DeleteOutlinedIcon>Delete</Button></td>
                             </tr>

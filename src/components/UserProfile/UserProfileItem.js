@@ -23,6 +23,9 @@ const styles = {
 
         }
     },
+    icon: {
+        paddingRight: '5px',
+    },
 }
 
 
@@ -172,16 +175,18 @@ class UserProfileItem extends Component {
                         <td>{this.props.listing.location}</td>
                         <td><Moment format='MM/DD/YYYY'>{this.props.listing.date}</Moment></td>
                         
-                        <td><Button>Edit
-                            <EditIcon
-                                onClick={() => this.editListing(this.props.listing.id)}>
-                            </EditIcon>
-                            </Button></td>
+                        <td><Button
+                            onClick={() => this.editListing(this.props.listing.id)}>
+                            <EditIcon className={classes.icon}/>
+                            Edit
+                            </Button>
+                        </td>
 
-                        <td><Button onClick={() => { this.deleteListing(this.props.listing.id) }}>Delete
-                            <DeleteOutlinedIcon
-                                >
-                            </DeleteOutlinedIcon></Button></td>
+                        <td><Button onClick={() => { this.deleteListing(this.props.listing.id) }}>
+                            <DeleteOutlinedIcon className={classes.icon} />
+                            Delete
+                            </Button>
+                        </td>
                     </>
                 }
             </>

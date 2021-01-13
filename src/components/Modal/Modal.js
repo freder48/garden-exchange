@@ -1,14 +1,17 @@
 import './Modal.css';
 import React, { Component } from 'react';
-import { Card, Button, Typography, TextField, CardContent } from '@material-ui/core';
+import { Card, Button, Typography, TextField, CardContent, Grid} from '@material-ui/core';
 import { withStyles } from '@material-ui/core/styles';
 import swal from 'sweetalert';
 import mapStoreToProps from '../../redux/mapStoreToProps';
 import { connect } from 'react-redux';
+import { Autorenew } from '@material-ui/icons';
 
 const styles = {
   button: {
-    // backgroundColor: '#fff9e6',
+    backgroundColor: '#fff9e6',
+    border: '2px solid #c78b50',
+    marginRight: '15px',
     justifyContent: 'center',
     '&:hover': {
       backgroundColor: 'rgb(69, 109, 109);',
@@ -19,13 +22,15 @@ const styles = {
     position: 'fixed', 
     width: '60%',
     top:'50%',
-    left:'50%',
-    height: '70vh',
+    left:'48%',
+    height: '50%',
     justifyContent: 'center',
+    textAlign: 'center',
     transform: 'translate(-50%,-50%)',
-    padding: '2em',
+    padding: '5%',
     backgroundColor: '#7e9a9a',
     border: '20px solid white',
+    margin: 'auto',
   },
 
   header: {
@@ -33,7 +38,7 @@ const styles = {
     margin: "auto",
     width: "80%",
     textAlign: "center",
-    padding: "3rem",
+    padding: "8%",
     border: '3px solid #fff9e6',
     letterSpacing: '5px',
     fontFamily: 'Copperplate'
@@ -95,7 +100,8 @@ class Modal extends Component {
     return (
 
       <div className={showHideClassName}>
-        <Card className={classes.card}>
+      <Grid container>
+        <Card className={classes.card} item={12}>
           <Typography gutterBottom variant="h5" component="h2" className={classes.header}>
             Send Message:
            </Typography>
@@ -120,7 +126,10 @@ class Modal extends Component {
               <br></br>
               <br></br>
 
-              <Button type="button" onClick={this.props.handleClose}>
+              <Button 
+              type="button" 
+              onClick={this.props.handleClose}
+              className={classes.button}>
                 Close
              </Button>
              <Button className={classes.button}
@@ -131,7 +140,7 @@ class Modal extends Component {
 
           </CardContent>
         </Card>
-
+        </Grid>
       </div>
     );
   }
