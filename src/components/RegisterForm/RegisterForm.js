@@ -8,6 +8,7 @@ const styles = {
   button: {
     backgroundColor: '#fff9e6',
     justifyContent: 'center',
+    marginBottom: '1%',
     '&:hover': {
       backgroundColor: 'rgb(69, 109, 109);',
       color: '#fff9e6'
@@ -15,9 +16,9 @@ const styles = {
   },
   card: {
     margin: 'auto',
-    width: '60%',
-    height: '70vh',
-    marginTop: '4em',
+    width: '80%',
+    height: '100%',
+    marginTop: '6em',
     justifyContent: 'center',
     backgroundColor: '#7e9a9a',
     border: '20px solid white'
@@ -28,9 +29,9 @@ const styles = {
   header: {
     backgroundColor: "#c78b50",
     margin: " auto",
-    width: "90%",
+    width: "100%",
     textAlign: "center",
-    padding: "3rem",
+    padding: "3%",
     border: '3px solid #fff9e6',
     letterSpacing: '5px',
     fontFamily: 'Copperplate'
@@ -63,8 +64,8 @@ class RegisterForm extends Component {
   //toggles the boolean of if users want email notifications for their messages
   handleCheck = () => {
     this.setState({
-        ...this.state,
-        email_messages: !this.state.email_messages
+      ...this.state,
+      email_messages: !this.state.email_messages
     })
   }
 
@@ -172,11 +173,17 @@ class RegisterForm extends Component {
                   checked={this.state.email_messages}
                   onClick={this.handleCheck}
                   name="checked" />}
-                  label="Want Email Updates"
+                label="Want Email Updates"
               />
             </div>
             <div>
-              <input className={classes.button} type="submit" name="submit" value="Register" variant="outlined" />
+              <Button className={classes.button}
+                type="submit"
+                name="submit" v
+                alue="Register"
+                variant="outlined">
+                Register
+                </Button>
             </div>
           </form>
         </Card>

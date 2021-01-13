@@ -17,8 +17,8 @@ const styles = {
     card: {
         margin: 'auto',
         width: '60%',
-        height: '60vh',
-        marginTop: '4em',
+        height: '100%',
+        marginTop: '3%',
         justifyContent: 'center',
         backgroundColor: '#7e9a9a',
         border: '20px solid white'
@@ -32,15 +32,26 @@ const styles = {
         margin: " auto",
         width: "80%",
         textAlign: "center",
-        padding: "3rem",
+        padding: "5%",
         border: '3px solid #fff9e6',
         letterSpacing: '5px',
+        fontFamily: 'Copperplate'
     },
     textField: {
         marginTop: '1rem',
         width: '90%',
         backgroundColor: '#fff9e6',
     },
+    title: {
+        backgroundColor: "#c78b50",
+        width: "100%",
+        textAlign: "left",
+        padding: "1rem",
+        paddingLeft: '20px',
+        border: '3px solid #fff9e6',
+        letterSpacing: '5px',
+        fontFamily: 'Copperplate'
+    }
 }
 
 class AddListing extends Component {
@@ -85,7 +96,7 @@ class AddListing extends Component {
                         have: '',
                         want: '',
                         location: '',
-                        user_id: `${this.props.store.user.id}`, 
+                        user_id: `${this.props.store.user.id}`,
                     },
                 })
             }
@@ -97,7 +108,8 @@ class AddListing extends Component {
         const { classes } = this.props;
         return (
             <>
-                <Grid>
+                <Grid container>
+                <h2 className={classes.title}> New Listing</h2>
                     <Card className={classes.card} >
                         <CardContent>
                             <Typography gutterBottom variant="h4" component="h2" className={classes.header}>
@@ -153,6 +165,7 @@ class AddListing extends Component {
                         </CardContent>
                     </Card>
                 </Grid>
+
 
             </>
 

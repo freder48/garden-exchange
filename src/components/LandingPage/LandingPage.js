@@ -1,11 +1,23 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import mapStoreToProps from '../../redux/mapStoreToProps';
-
+import { withStyles } from '@material-ui/core/styles';
+import { TextField, Button, Grid, Card, CardContent, Typography } from '@material-ui/core';
 import './LandingPage.css';
 
 // CUSTOM COMPONENTS
 import RegisterForm from '../RegisterForm/RegisterForm';
+
+const styles = {
+  card: {
+    margin: 'auto',
+    width: '80%',
+    marginTop: '4em',
+    justifyContent: 'center',
+    backgroundColor: '#7e9a9a',
+    border: '20px solid white'
+  }
+}
 
 class LandingPage extends Component {
   state = {
@@ -17,12 +29,16 @@ class LandingPage extends Component {
   };
 
   render() {
+    const { classes } = this.props;
     return (
-      <div className="container">
-        <h2>{this.state.heading}</h2>
-
-        <div className="grid">
-          <div className="grid-col grid-col_5">
+      // <div className="container">
+      <Grid container>
+        
+       
+          {/* <div className="grid-col grid-col_5"> */}
+          <Grid item xs={12} sm={6}>
+            <Card className={classes.card}>
+          <h2>{this.state.heading}</h2>
             <p>
               Lorem ipsum dolor sit amet, consectetur adipiscing elit. Curabitur
               id felis metus. Vestibulum et pulvinar tortor. Morbi pharetra
@@ -54,9 +70,12 @@ class LandingPage extends Component {
               Nullam non fermentum mauris. Sed in enim ac turpis faucibus
               pretium in sit amet nisi.
             </p>
-          </div>
-          <div className="grid-col grid-col_5">
-            <RegisterForm />
+            </Card>
+            </Grid>
+
+            <Grid item xs={12} sm={6}>
+          {/* <div className="grid-col grid-col_5"> */}
+            <RegisterForm /> 
 
             <center>
               <h4>Already a Member?</h4>
@@ -64,11 +83,11 @@ class LandingPage extends Component {
                 Login
               </button>
             </center>
-          </div>
-        </div>
-      </div>
+            </Grid>
+        </Grid>
+ 
     );
   }
 }
 
-export default connect(mapStoreToProps)(LandingPage);
+export default connect(mapStoreToProps)(withStyles(styles)(LandingPage));
