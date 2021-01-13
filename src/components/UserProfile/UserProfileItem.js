@@ -9,18 +9,24 @@ import swal from 'sweetalert';
 import { withStyles } from '@material-ui/core/styles';
 
 const styles = {
+    btnContainer: {
+        display: 'in-line block',
+        margin: '0',
+    },
     button: {
         backgroundColor: '#fff9e6',
-        justifyContent: 'center',
-        marginLeft: '5px',
-
+        marginLeft: '2px',
+        minWidth: '60px',
+        float: 'right',
+        width: '25%',
+        border: '2px solid #c78b50',
         '&:hover': {
             backgroundColor: 'rgb(69, 109, 109);',
             color: '#fff9e6'
         },
         cancelButton: {
-            justifyContent: 'center',
-
+            width: '20%',
+            float: 'left',
         }
     },
     icon: {
@@ -147,7 +153,7 @@ class UserProfileItem extends Component {
                             onChange={(event) => this.handleChange('location', event)}
                         /></td>
                         <td><Moment format='MM/DD/YYYY'>{this.props.listing.date}</Moment></td>
-                        <td>
+                        <td className={classes.btnContainer}>
                             <Button
                                 onClick={this.cancelButton}
                                 variant="outlined"

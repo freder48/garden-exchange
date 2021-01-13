@@ -4,6 +4,8 @@ import { connect } from 'react-redux';
 import LogOutButton from '../LogOutButton/LogOutButton';
 import './Nav.css';
 import mapStoreToProps from '../../redux/mapStoreToProps';
+import { withStyles } from '@material-ui/core/styles';
+import { makeStyles } from '@material-ui/core/styles';
 import HomeIcon from '@material-ui/icons/Home';
 import MenuIcon from '@material-ui/icons/Menu';
 import CloseIcon from '@material-ui/icons/Close';
@@ -11,7 +13,26 @@ import AddIcon from '@material-ui/icons/Add';
 import MessageIcon from '@material-ui/icons/Message';
 import PersonOutlineIcon from '@material-ui/icons/PersonOutline';
 
+const styles = {
+  menuBars: {
+    fontSize: '46px',
+    color: '#fff9e6',
+    '&:hover': {
+      color: '#c78b50'
+  },
+  },
+  x: {
+    fontSize: '46px',
+    color: '#fff9e6',
+    marginLeft: '0',
+    '&:hover': {
+      color: '#c78b50'
+  },
+  },
+};
+
 function Nav(props) {
+  const { classes } = props;
   const [sidebar, setSidebar] = useState(false)
   //will set to the opposite of what it was
   const showSidebar = () => setSidebar(!sidebar)
@@ -27,12 +48,12 @@ function Nav(props) {
   }
 
   return (
-
+    
     <div className="nav">
-
+     
       <div className="navbar">
         <Link to="#" className="menu-bars">
-          <MenuIcon className="menuSize" onClick={showSidebar} />
+          <MenuIcon className={classes.menuBars} onClick={showSidebar} />
         </Link>
         <section>
           <h1 className="title">Garden <br></br>Exchange</h1>
@@ -50,7 +71,7 @@ function Nav(props) {
           <li className="navbar-toggle">
 
             <Link to="#" className="menu-bars">
-              <CloseIcon className="bars"/>
+              <CloseIcon className="bars" className={classes.x}/>
             </Link>
           </li>
 
@@ -98,4 +119,4 @@ function Nav(props) {
   );
 };
 
-export default connect(mapStoreToProps)(Nav);
+export default connect(mapStoreToProps)(withStyles(styles)(Nav));

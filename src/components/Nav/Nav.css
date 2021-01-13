@@ -3,10 +3,14 @@
   padding-right: 10px;
 }
 
+.menuSize {
+  font-size: 
+}
+
 .navbar {
   background-image: url('../img/vegbasket.jpg');
   background-size: cover;
-  height: 250px; 
+  height: 240px; 
   display: flex;
   /* justify-content: flex-start; */
   align-items: center;
@@ -57,9 +61,10 @@
 
 .menu-bars {
   margin-left: 2rem;
-  font-size: 2rem;
+  margin-right: 0;
+  /* font-size: 2rem; */
   background:  none;
-  width: 100px;
+  width: 50px;
 
 }  
 
@@ -127,6 +132,7 @@ button.nav-link a:hover {
   display: flex;
   justify-content: flex-start;
   align-items: center;
+  margin-left: 0;
 }
 
 /* .span {
@@ -134,7 +140,7 @@ button.nav-link a:hover {
 }  */
 
 .title {
-  margin-left: 20px;
+  margin-left: 5%;
   color: #fff9e6;
   font-family: Copperplate;
   font-size: 3.5rem;

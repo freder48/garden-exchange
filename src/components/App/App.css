@@ -55,10 +55,9 @@ Button
   width: 100%;
 }
 
-/* .btn:hover {
-  background-color: #008183;
+.btn:hover {
   text-decoration: none;
-} */
+}
 
 /* This line makes the "Register" and "Login" buttons look like links */
 /* .btn_asLink {
@@ -71,11 +70,11 @@ Button
   color: #444;
 } */
 
-/* .btn_asLink:hover {
+.btn_asLink:hover {
   background-color: transparent;
-  border-color: #008183;
   color: #008183;
-} */
+  text-transform: none;
+}
 
 /* --------------------------------------------------------------------------------
 Alert
