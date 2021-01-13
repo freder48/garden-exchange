@@ -9,6 +9,41 @@ import Moment from 'react-moment';
 import './ForumPage.css'
 
 const styles = {
+  button: {
+    backgroundColor: '#fff9e6',
+    justifyContent: 'center',
+    '&:hover': {
+      backgroundColor: 'rgb(69, 109, 109);',
+      color: '#fff9e6'
+    }
+  },
+  header: {
+    paddingLeft: '20px',
+    paddingRight: '100px',
+    letterSpacing: '5px',
+    fontFamily: 'Copperplate',
+    fontSize: '36px',
+  },
+  headerContainer: {
+    width: '92%',
+    textAlign: 'center',
+    margin: 'auto',
+    marginTop: '20px',
+    marginBottom: '20px',
+    padding: '2rem',
+    backgroundColor: "#c78b50",
+    border: '3px solid #fff9e6',
+  },
+  headerFloat: {
+    float: 'left',
+  },
+  search: {
+    width: '60%',
+    justifyContent: 'center',
+    backgroundColor: '#fff9e6',
+    marginTop: '20px',
+    height: '30px',
+  },
 
 }
 
@@ -59,13 +94,25 @@ class ForumPage extends Component {
     const { classes } = this.props;
     return (
       <>
-        <section>
-          <label>Search: </label>
-          <input type="text"
-            onChange={(e) => this.searchSpace(e)}
-            value={this.state.search} />
+        <section className={classes.headerContainer}>
+          <div className={classes.headerFloat}>
+            <h1 className={classes.header}>Forum</h1>
+          </div>
+          <div>
+            <input
+              placeholder="Search"
+              type="text"
+              className={classes.search}
+              label="Search"
+              onChange={(e) => this.searchSpace(e)}
+              value={this.state.search} />
 
-          <button onClick={this.cancelSearch}>Cancel</button>
+            <Button
+              onClick={this.cancelSearch}
+              className={classes.button}>
+              Cancel
+            </Button>
+          </div>
         </section>
 
 
@@ -107,9 +154,9 @@ class ForumPage extends Component {
           </tbody>
         </table>
 
-        <Modal show={this.state.show} handleClose={this.hideModal} showModal={this.showModal} messageObj={this.state.messageObj}/>
+        <Modal show={this.state.show} handleClose={this.hideModal} showModal={this.showModal} messageObj={this.state.messageObj} />
 
-    
+
       </>
     )
   }

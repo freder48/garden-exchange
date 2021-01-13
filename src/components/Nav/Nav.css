@@ -129,12 +129,13 @@
 }  */
 
 .title {
-  margin-left: 50px;
+  margin-left: 20px;
   color: #fff9e6;
   font-family: Copperplate;
   font-size: 3.5rem;
-  text-align: justify;
+  text-align: center;
   justify-content: flex-start;
-  display: inline;
+  display: inline-block;
   -webkit-text-stroke: 1px black;
+  width: 80%;
 }

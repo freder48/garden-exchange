@@ -6,7 +6,7 @@ import { connect } from 'react-redux';
 import Modal from '../Modal/Modal';
 import swal from 'sweetalert';
 
-import { Card, Typography, TextField, Button} from '@material-ui/core';
+import { Card, Typography, TextField, Button } from '@material-ui/core';
 import { withStyles } from '@material-ui/core/styles';
 import DeleteOutlinedIcon from '@material-ui/icons/DeleteOutlined';
 import ReplyIcon from '@material-ui/icons/Reply';
@@ -25,10 +25,10 @@ const styles = {
     },
     header: {
         backgroundColor: "#c78b50",
-        margin: "auto",
-        width: "80%",
-        textAlign: "center",
-        padding: "3rem",
+        width: "100%",
+        textAlign: "left",
+        padding: "1rem",
+        paddingLeft: '20px',
         border: '3px solid #fff9e6',
         letterSpacing: '5px',
         fontFamily: 'Copperplate'
@@ -55,8 +55,8 @@ class Messages extends Component {
             subject: '',
             message: '',
             mail_sent: true,
-        }, 
-        search: '', 
+        },
+        search: '',
     }//end local state
 
     //get all messages for specific user upon page load
@@ -73,18 +73,18 @@ class Messages extends Component {
             icon: "warning",
             buttons: true,
             dangerMode: true,
-          })
-          .then((willDelete) => {
-            if (willDelete) {
-              swal("Poof! Your message has been deleted!", {
-                icon: "success",
-              });
-              this.props.dispatch({ type: 'DELETE_MESSAGE', payload: id })
-            } else {
-              swal("Your message is safe!");
-            }
-          });
-       
+        })
+            .then((willDelete) => {
+                if (willDelete) {
+                    swal("Poof! Your message has been deleted!", {
+                        icon: "success",
+                    });
+                    this.props.dispatch({ type: 'DELETE_MESSAGE', payload: id })
+                } else {
+                    swal("Your message is safe!");
+                }
+            });
+
     }//end deleteMessage
 
     //hides pop-up modal by setting local state show to false
@@ -101,7 +101,7 @@ class Messages extends Component {
         const { classes } = this.props;
         return (
             <div>
-                <h1>Messages</h1>
+                <h2 className={classes.header}>Messages</h2>
                 <table>
                     <thead>
                         <tr>
@@ -121,10 +121,15 @@ class Messages extends Component {
                                 <td><Moment format='hh:mm A, MM/DD/YYYY'>
                                     {message.time_received}
                                 </Moment></td>
-                                <td><ReplyIcon onClick={() => this.showModal(message.forum_id, message.sent_from_user_id)}></ReplyIcon></td>
-                                <td><DeleteOutlinedIcon
+                                <td><Button>
+                                    <ReplyIcon
+                                        onClick={() => this.showModal(message.forum_id, message.sent_from_user_id)}>
+                                    </ReplyIcon>Reply
+                                </Button></td>
+
+                                <td><Button><DeleteOutlinedIcon
                                     onClick={() => { this.deleteMessage(message.id) }}>
-                                </DeleteOutlinedIcon></td>
+                                </DeleteOutlinedIcon>Delete</Button></td>
                             </tr>
 
                         )}

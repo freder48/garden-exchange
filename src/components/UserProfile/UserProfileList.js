@@ -2,6 +2,23 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import mapStoreToProps from '../../redux/mapStoreToProps';
 import UserProfileItem from './UserProfileItem';
+import { withStyles } from '@material-ui/core/styles';
+
+const styles = {
+    header: {
+        backgroundColor: "#c78b50",
+        width: "100%",
+        textAlign: "left",
+        padding: "1rem",
+        paddingLeft: '20px',
+        border: '3px solid #fff9e6',
+        letterSpacing: '5px',
+        fontFamily: 'Copperplate'
+    },
+    yourListings: {
+        paddingLeft: '20px',
+    }
+}
 
 class UserProfileList extends Component {
     //get all messages for specific user upon page load
@@ -11,10 +28,11 @@ class UserProfileList extends Component {
 
 
     render() {
+        const { classes } = this.props;
         return (
             <div>
-                <h2>Profile</h2>
-                <h4>Your Listings</h4>
+                <h2 className={classes.header}> Your Profile</h2>
+                <h4 className={classes.yourListings}>Your Listings</h4>
                 <table>
                     <thead>
                         <tr>
@@ -41,4 +59,5 @@ class UserProfileList extends Component {
     }
 }
 
-export default connect(mapStoreToProps)(UserProfileList);
+
+export default connect(mapStoreToProps)(withStyles(styles)(UserProfileList));

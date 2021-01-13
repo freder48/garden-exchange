@@ -32,7 +32,7 @@ function Nav(props) {
 
       <div className="navbar">
         <Link to="#" className="menu-bars">
-          <MenuIcon onClick={showSidebar} />
+          <MenuIcon className="menuSize" onClick={showSidebar} />
         </Link>
         <section>
           <h1 className="title">Garden <br></br>Exchange</h1>

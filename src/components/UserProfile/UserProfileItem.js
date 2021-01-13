@@ -33,7 +33,6 @@ class UserProfileItem extends Component {
             want: null,
             location: null,
             id: null,
-            // user_id: this.props.store.user_id,
         },
         isEditable: false,
     }
@@ -87,6 +86,7 @@ class UserProfileItem extends Component {
             isEditable: true,
         });
         this.props.dispatch({ type: 'GET_DETAILS', payload: id })
+        console.log('id is', id)
     }
 
     //handles input values
@@ -109,8 +109,8 @@ class UserProfileItem extends Component {
                 want: '',
                 location: '',
             },
-            isEditable: false,
-        })
+             isEditable: false,
+         })
     }
 
     render() {
@@ -123,21 +123,24 @@ class UserProfileItem extends Component {
                         <td> <TextField
                             variant="filled"
                             // className={classes.textField}
-                            value={this.state.editListing.have}
+                            // value={this.state.editListing.have}
+                            placeholder={this.props.store.details.have}
                             onChange={(event) => this.handleChange('have', event)}
                         /></td>
 
                         <td> <TextField
                             variant="filled"
                             // className={classes.textField}
-                            value={this.state.editListing.want}
+                            // value={this.state.editListing.want}
+                            placeholder={this.props.store.details.want}
                             onChange={(event) => this.handleChange('want', event)}
                         /></td>
 
                         <td> <TextField
                             variant="filled"
                             // className={classes.textField}
-                            value={this.state.editListing.location}
+                            // value={this.state.editListing.location}
+                            placeholder={this.props.store.details.location}
                             onChange={(event) => this.handleChange('location', event)}
                         /></td>
                         <td><Moment format='MM/DD/YYYY'>{this.props.listing.date}</Moment></td>
@@ -168,22 +171,19 @@ class UserProfileItem extends Component {
                         <td>{this.props.listing.want}</td>
                         <td>{this.props.listing.location}</td>
                         <td><Moment format='MM/DD/YYYY'>{this.props.listing.date}</Moment></td>
+                        
                         <td><Button>Edit
                             <EditIcon
                                 onClick={() => this.editListing(this.props.listing.id)}>
-                            </EditIcon></Button></td>
+                            </EditIcon>
+                            </Button></td>
 
-                        <td><Button>Delete
+                        <td><Button onClick={() => { this.deleteListing(this.props.listing.id) }}>Delete
                             <DeleteOutlinedIcon
-                                onClick={() => { this.deleteListing(this.props.listing.id) }}>
+                                >
                             </DeleteOutlinedIcon></Button></td>
                     </>
                 }
-
-
-
-
-
             </>
         );
     }
