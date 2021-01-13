@@ -9,7 +9,7 @@ const styles = {
     backgroundColor: '#fff9e6',
     border: '2px solid #c78b50',
     justifyContent: 'center',
-    marginBottom: '1%',
+    marginBottom: '3%',
     '&:hover': {
       backgroundColor: 'rgb(69, 109, 109);',
       color: '#fff9e6'
@@ -17,12 +17,15 @@ const styles = {
   },
   card: {
     margin: 'auto',
-    width: '80%',
+    width: '60%',
     height: '100%',
     marginTop: '6em',
     justifyContent: 'center',
     backgroundColor: '#7e9a9a',
     border: '20px solid white'
+  },
+  checkbox: {
+    padding: '2%',
   },
   form: {
     textAlign: 'center'
@@ -170,17 +173,20 @@ class RegisterForm extends Component {
                 />
               </label>
               <FormControlLabel
+                className={classes.checkbox}
                 control={<Checkbox
+                  
                   checked={this.state.email_messages}
                   onClick={this.handleCheck}
                   name="checked" />}
-                label="Want Email Updates"
+                label="Get Email Updates"
+                
               />
             </div>
             <div>
               <Button className={classes.button}
                 type="submit"
-                name="submit" v
+                name="submit" 
                 alue="Register"
                 variant="outlined">
                 Register
