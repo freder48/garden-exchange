@@ -10,15 +10,17 @@ import { withStyles } from '@material-ui/core/styles';
 
 const styles = {
     btnContainer: {
-        display: 'in-line block',
-        margin: '0',
+        // display: 'in-line block',
+        // margin: '0',
+        marginRight: '0px',
+        // width: '18%'
     },
     button: {
         backgroundColor: '#fff9e6',
-        marginLeft: '2px',
         minWidth: '60px',
         float: 'right',
         width: '25%',
+        marginLeft: '0',
         border: '2px solid #c78b50',
         '&:hover': {
             backgroundColor: 'rgb(69, 109, 109);',
@@ -27,6 +29,7 @@ const styles = {
         cancelButton: {
             width: '20%',
             float: 'left',
+            marginLeft: '1%',
         }
     },
     icon: {

@@ -38,7 +38,8 @@ const styles = {
     padding: "3%",
     border: '3px solid #fff9e6',
     letterSpacing: '5px',
-    fontFamily: 'Copperplate'
+    fontFamily: 'Copperplate', 
+    fontSize: '26px',
   },
   textField: {
     marginTop: '1rem',

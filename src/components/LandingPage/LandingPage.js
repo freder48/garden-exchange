@@ -14,15 +14,27 @@ const styles = {
     width: '80%',
     marginTop: '4em',
     justifyContent: 'center',
+    backgroundColor: '#c78b50',
+    border: '20px solid white',
+    padding: '2%',
+    textAlign: 'center',
+  }, 
+  header: {
+    textAlign: 'center',
+    fontFamily: 'Copperplate',
+    fontSize: '26px',
+    letterSpacing: '5px',
+
+  },
+  quote: {
+    textAlign: 'center',
     backgroundColor: '#7e9a9a',
-    border: '20px solid white'
+    padding: '2%',
+    border: '3px solid #fff9e6',
   }
 }
 
 class LandingPage extends Component {
-  state = {
-    heading: 'Welcome!',
-  };
 
   onLogin = (event) => {
     this.props.history.push('/login');
@@ -38,37 +50,20 @@ class LandingPage extends Component {
           {/* <div className="grid-col grid-col_5"> */}
           <Grid item xs={12} sm={6}>
             <Card className={classes.card}>
-          <h2>{this.state.heading}</h2>
+          <h2 className={classes.header}>Welcome!</h2>
             <p>
-              Lorem ipsum dolor sit amet, consectetur adipiscing elit. Curabitur
-              id felis metus. Vestibulum et pulvinar tortor. Morbi pharetra
-              lacus ut ex molestie blandit. Etiam et turpis sit amet risus
-              mollis interdum. Suspendisse et justo vitae metus bibendum
-              fringilla sed sed justo. Aliquam sollicitudin dapibus lectus,
-              vitae consequat odio elementum eget. Praesent efficitur eros vitae
-              nunc interdum, eu interdum justo facilisis. Sed pulvinar nulla ac
-              dignissim efficitur. Quisque eget eros metus. Vestibulum bibendum
-              fringilla nibh a luctus. Duis a sapien metus.
+          <p className={classes.quote}>"You don't have a garden just for yourself.  You have it to share."
+          -  Augusta Carter</p>
             </p>
 
             <p>
-              Praesent consectetur orci dui, id elementum eros facilisis id. Sed
-              id dolor in augue porttitor faucibus eget sit amet ante. Nunc
-              consectetur placerat pharetra. Aenean gravida ex ut erat commodo,
-              ut finibus metus facilisis. Nullam eget lectus non urna rhoncus
-              accumsan quis id massa. Curabitur sit amet dolor nisl. Proin
-              euismod, augue at condimentum rhoncus, massa lorem semper lacus,
-              sed lobortis augue mi vel felis. Duis ultrices sapien at est
-              convallis congue.
+              Welcome to Garden Exchange, an open forum dedicated to preventing food waste while cultivating
+              community connections. 
             </p>
 
             <p>
-              Fusce porta diam ac tortor elementum, ut imperdiet metus volutpat.
-              Suspendisse posuere dapibus maximus. Aliquam vitae felis libero.
-              In vehicula sapien at semper ultrices. Vivamus sed feugiat libero.
-              Sed sagittis neque id diam euismod, ut egestas felis ultricies.
-              Nullam non fermentum mauris. Sed in enim ac turpis faucibus
-              pretium in sit amet nisi.
+              As a member, you will have access the ability browse, message, and exchange surplus garden and 
+              artisinal products with fellow users located within your area. 
             </p>
             </Card>
             </Grid>

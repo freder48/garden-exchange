@@ -121,8 +121,9 @@ class AddListing extends Component {
                                 <TextField
 
                                     label="Have"
-                                    variant="filled"
                                     required
+                                    variant="filled"
+                                   
                                     className={classes.textField}
                                     value={this.state.newListing.have}
                                     onChange={(event) => this.handleChange('have', event)}

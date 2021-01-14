@@ -62,8 +62,6 @@ function Nav(props) {
         </Link>
         <section>
           <h1 className="title">Garden <br></br>Exchange</h1>
-          {/* <p className="quote">"You don't have a garden just for yourself.  You have it to share."
-          -  Augusta Carter</p> */}
         </section>
       </div>
 

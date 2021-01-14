@@ -119,6 +119,7 @@ class Modal extends Component {
                 label="Message"
                 type="text"
                 multiline
+                rows="5"
                 className={classes.textField}
                 onChange={(event) => this.handleModalChange('message', event)}
               />
