@@ -8,6 +8,7 @@ import swal from 'sweetalert';
 const styles = {
     button: {
         backgroundColor: '#fff9e6',
+        border: '2px solid #c78b50',
         justifyContent: 'center',
         '&:hover': {
             backgroundColor: 'rgb(69, 109, 109);',

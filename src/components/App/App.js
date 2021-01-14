@@ -12,6 +12,7 @@ import Nav from '../Nav/Nav';
 import Footer from '../Footer/Footer';
 
 import ProtectedRoute from '../ProtectedRoute/ProtectedRoute';
+import mapStoreToProps from '../../redux/mapStoreToProps';
 
 import AboutPage from '../AboutPage/AboutPage';
 // import UserPage from '../UserPage/UserPage';
@@ -24,6 +25,7 @@ import AddListing from '../AddListing/AddListing';
 import Messages from '../Messages/Messages';
 import UserProfile from '../UserProfile/UserProfileList';
 import SupportForm from '../SupportForm/SupportForm';
+import Admin from '../Admin/Admin';
 import './App.css';
 
 class App extends Component {
@@ -33,7 +35,7 @@ class App extends Component {
 
   render() {
     return (
-      
+
       <Router>
         <div>
           <Nav />
@@ -76,30 +78,37 @@ class App extends Component {
               component={ForumPage}
             />
 
-          <ProtectedRoute
+            <ProtectedRoute
               exact
               path="/form"
               component={AddListing}
-            /> 
+            />
 
-          <ProtectedRoute
+            <ProtectedRoute
               exact
               path="/messages"
               component={Messages}
-            /> 
+            />
 
-          <ProtectedRoute
+            <ProtectedRoute
               exact
               path="/profile"
               component={UserProfile}
-            /> 
+            />
 
-          <ProtectedRoute
+            <ProtectedRoute
               exact
               path="/support"
               component={SupportForm}
-            /> 
+            />
 
+            {(this.props.store.user.administrator) &&
+              <ProtectedRoute
+                exact
+                path="/admin"
+                component={Admin}
+              />
+            }
             {/* When a value is supplied for the authRedirect prop the user will
             be redirected to the path supplied when logged in, otherwise they will
             be taken to the component and path supplied. */}
@@ -114,7 +123,7 @@ class App extends Component {
             />
             <ProtectedRoute
               // with authRedirect:
-              // - if logged in, redirects to "/user"
+              // - if logged in, redirects to "/forum"
               // - else shows RegisterPage at "/registration"
               exact
               path="/registration"
@@ -124,11 +133,11 @@ class App extends Component {
             <ProtectedRoute
               // with authRedirect:
               // - if logged in, redirects to "/user"
-              // - else shows LandingPage at "/home"
+              // - else shows LandingPage at "/forum"
               exact
               path="/home"
               component={LandingPage}
-              authRedirect="/user"
+              authRedirect="/forum"
             />
 
             {/* If none of the other routes matched, we will show a 404. */}
@@ -141,4 +150,4 @@ class App extends Component {
   }
 }
 
-export default connect()(App);
+export default connect(mapStoreToProps)(App);

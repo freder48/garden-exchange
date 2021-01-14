@@ -5,7 +5,7 @@ import LogOutButton from '../LogOutButton/LogOutButton';
 import './Nav.css';
 import mapStoreToProps from '../../redux/mapStoreToProps';
 import { withStyles } from '@material-ui/core/styles';
-// import HomeIcon from '@material-ui/icons/Home';
+import HomeIcon from '@material-ui/icons/Home';
 import MenuIcon from '@material-ui/icons/Menu';
 import CloseIcon from '@material-ui/icons/Close';
 import AddIcon from '@material-ui/icons/Add';
@@ -44,7 +44,12 @@ function Nav(props) {
 
   if (props.store.user.id != null) {
     loginLinkData.path = '/forum';
-    loginLinkData.text = 'Forum';
+    loginLinkData.text = `Welcome ${props.store.user.first_name}!`;
+  } 
+  
+  if (props.store.user.administrator){
+    loginLinkData.path = '/admin';
+    loginLinkData.text = 'Admin';
   }
 
   return (
@@ -86,6 +91,13 @@ function Nav(props) {
           {props.store.user.id && (
             <>
               <li className="nav-text">
+                <Link className="nav-link" to="/forum">
+                  <HomeIcon className="icon" />
+                    Forum
+                  </Link>
+              </li>
+
+              <li className="nav-text">
                 <Link className="nav-link" to="/form">
                   <AddIcon className="icon" />
                     Add Listing
@@ -112,6 +124,7 @@ function Nav(props) {
               <li className="nav-text">
                 <LogOutButton className="nav-link" />
               </li>
+
             </>
           )}
           {/* Always show this link since the about page is not protected */}

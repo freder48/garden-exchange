@@ -8,6 +8,7 @@ const styles = {
   button: {
     backgroundColor: '#fff9e6',
     justifyContent: 'center',
+    border: '2px solid black',
     marginBottom: '1%',
     marginTop: '1%',
     '&:hover': {
