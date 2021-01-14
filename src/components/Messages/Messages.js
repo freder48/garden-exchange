@@ -146,7 +146,7 @@ class Messages extends Component {
                     </tbody>
                 </table>
 
-                <Modal show={this.state.show} handleClose={this.hideModal}>
+                <Modal show={this.state.show} handleClose={this.hideModal} messageObj={this.state.messageObj}>
                     <Card className={classes.card}>
                         <Typography gutterBottom variant="h5" component="h2" className={classes.header}>
                             Reply:
