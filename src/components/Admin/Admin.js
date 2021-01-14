@@ -1,89 +1,93 @@
 //imports //imports JUST the component from react not ALL of react 
 import React, { Component } from 'react';
+import mapStoreToProps from '../../redux/mapStoreToProps';
 import {
-    Table,
-    TableBody,
-    TableCell,
-    TableContainer,
-    TableHead,
-    TableRow, 
-    Paper, 
+    Button
 } from '@material-ui/core'
 import DeleteOutlinedIcon from '@material-ui/icons/DeleteOutlined';
 import { withStyles } from '@material-ui/core/styles';
 import { connect } from 'react-redux';
 import Moment from 'react-moment';
 
+const styles = {
+    header: {
+        backgroundColor: "#c78b50",
+        width: "100%",
+        textAlign: "left",
+        padding: "1rem",
+        paddingLeft: '20px',
+        border: '3px solid #fff9e6',
+        letterSpacing: '5px',
+        fontFamily: 'Copperplate'
+    },
+    icon: {
+      paddingRight: '5px',
+    },
+  }
 //class
-class Admin extends Component{
-    state = {
-        direction: 'default'
-    }
-
+class Admin extends Component {
     componentDidMount() {
-        this.props.dispatch({ type: 'GET_FORUM', payload: this.state.direction})
-        this.props.dispatch({type: 'GET_SUPPORT'})
+        this.props.dispatch({ type: 'GET_FORUM'})
     }
 
-    deleteItem(id){
+    deleteItem(id) {
         console.log('id', id)
-        this.props.dispatch({type: 'DELETE_ADMIN',  payload: id})
-        // this.props.dispatch({ type: 'GET_FORUM', payload: this.state.direction})
+        this.props.dispatch({ type: 'DELETE_LISTING_ADMIN', payload: id })
     }
 
-    deleteSupport(id){
-        console.log('id', id)
-        this.props.dispatch({type: 'DELETE_SUPPORT',  payload: id})
-        this.props.dispatch({ type: 'GET_SUPPORT'})
-    }
+    // deleteSupport(id) {
+    //     console.log('id', id)
+    //     this.props.dispatch({ type: 'DELETE_SUPPORT', payload: id })
+    //     this.props.dispatch({ type: 'GET_SUPPORT' })
+    // }
 
 
-    
-    render(){
-        const StyledTableCell = withStyles((theme) => ({
-            head: {
-                backgroundColor: theme.palette.common.black,
-                color: theme.palette.common.white,
-            },
-            body: {
-                fontSize: 14,
-            },
-        }))(TableCell);
-        return(
+
+    render() {
+        const { classes } = this.props;
+        return (
             <>
-            <h1>admin</h1>
-             <TableContainer component={Paper}>
-                    <Table aria-label="customized table">
-                        <TableHead>
-                            <TableRow>
-                                <StyledTableCell align="left">Have</StyledTableCell>
-                                <StyledTableCell align="left">Want</StyledTableCell>
-                                <StyledTableCell align="left">Location </StyledTableCell>
-                                <StyledTableCell align="left">Date Posted</StyledTableCell>
-                                <StyledTableCell align="left">Delete</StyledTableCell>
-                            </TableRow>
-                        </TableHead>
+                <h1 className={classes.header}>Manage All Listings</h1>
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Have</th>
+                            <th>Want</th>
+                            <th>Location</th>
+                            <th>Date Posted</th>
+                            <th>Delete</th>
+                        </tr>
+                    </thead>
 
-                        <TableBody>
-                            {this.props.reduxState.forum.map((post) => {
-                        
-                                return (
+                    <tbody>
+                        {this.props.store.forum.map(post => {
+                            return (
+                                <tr key={post.id}>
+                                    <td>{post.have}</td>
+                                    <td>{post.want}</td>
+                                    <td>{post.location}</td>
+                                    <td><Moment format='MM/DD/YYYY'>{post.date}</Moment></td>
+                                    <td>
+                                        <Button 
+                                        onClick={() => { this.deleteItem(post.id) }}>
+                                            <DeleteOutlinedIcon 
+                                            className={classes.icon}/>
+                                                Delete
+                                            </Button>
+                                    </td>
+                                </tr>
 
-                                    <TableRow key={post.id}>
-                                        <TableCell>{post.have}</TableCell>
-                                        <TableCell>{post.want}</TableCell>
-                                        <TableCell>{post.location}</TableCell>
-                                        <TableCell><Moment format='MM/DD/YYYY'>{post.date}</Moment></TableCell>
-                                        <TableCell><DeleteOutlinedIcon onClick={()=> {this.deleteItem(post.id)}}>
-                                                </DeleteOutlinedIcon></TableCell>
-                                    </TableRow>
-                                )
-                            })
-                            }
-                        </TableBody>
-                    </Table>
-                </TableContainer>
-                <TableContainer>
+                            )
+                        })
+                        }
+
+                    </tbody>
+                </table>
+
+
+
+
+                {/* <TableContainer>
                     <Table aria-label="customized table">
                         <TableHead>
                             <TableRow>
@@ -115,14 +119,12 @@ class Admin extends Component{
 
 
                     </Table>
-                </TableContainer>  
-                
+                </TableContainer>   */}
+
             </>
         ) //end return 
     } //end render
 } //end class 
 
-//export
-const mapReduxStateToProps = (reduxState) => ({ reduxState });
 
-export default connect(mapReduxStateToProps)(Admin);
+export default connect(mapStoreToProps)(withStyles(styles)(Admin));

@@ -4,6 +4,7 @@ import axios from 'axios';
 function* forumSaga() {
   yield takeLatest('GET_FORUM', getForum);
   yield takeLatest('ADD_LISTING', addListing);
+  yield takeLatest('DELETE_LISTING_ADMIN', deleteListing);
 }
 
 //POST saga for new listing
@@ -27,6 +28,16 @@ function* getForum() {
         console.log('error with forum get request in forum.saga.js', error);
     }
 }//end getForum
+
+function* deleteListing(action){
+    console.log('delete listing', action.payload);
+    try{
+        yield axios.delete(`/api/profile/${action.payload}`)
+        yield put({type: 'GET_FORUM'})
+    } catch (error) {
+        console.log('error with delete request in forum.saga.js', error)
+    }
+}//end deleteListing
 
 
 export default forumSaga;

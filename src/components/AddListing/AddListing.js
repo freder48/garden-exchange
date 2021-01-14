@@ -65,6 +65,7 @@ class AddListing extends Component {
         },
     }
 
+    
     handleChange = (inputValue, event) => {
         event.preventDefault();
         this.setState({
@@ -73,7 +74,6 @@ class AddListing extends Component {
                 [inputValue]: event.target.value
             }
         })//end setState
-
     }//end handleChange
 
     handleSubmit = (event) => {
