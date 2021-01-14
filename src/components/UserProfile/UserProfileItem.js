@@ -172,9 +172,11 @@ class UserProfileItem extends Component {
                             </Button>
                         </td>
 
-                        <td>Delete<DeleteOutlinedIcon
-                            onClick={() => { this.deleteListing(this.props.listing.id) }}>
-                        </DeleteOutlinedIcon></td>
+                        <td><Button onClick={() => { this.deleteListing(this.props.listing.id) }}>
+                            <DeleteOutlinedIcon className={classes.icon} />
+                            Delete
+                            </Button>
+                        </td>
 
                     </>
                     :

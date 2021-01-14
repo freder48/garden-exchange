@@ -2,12 +2,14 @@
 import React, { Component } from 'react';
 import mapStoreToProps from '../../redux/mapStoreToProps';
 import {
-    Button
+    Button, Typography, TextField, Card
 } from '@material-ui/core'
 import DeleteOutlinedIcon from '@material-ui/icons/DeleteOutlined';
+import Modal from '../Modal/Modal';
 import { withStyles } from '@material-ui/core/styles';
 import { connect } from 'react-redux';
 import Moment from 'react-moment';
+import ReplyIcon from '@material-ui/icons/Reply';
 
 const styles = {
     header: {
@@ -26,6 +28,11 @@ const styles = {
   }
 //class
 class Admin extends Component {
+    state = {
+        //for pop-up dialog form
+        show: false,
+        
+    }//end local state
     componentDidMount() {
         this.props.dispatch({ type: 'GET_FORUM'})
     }
@@ -40,8 +47,6 @@ class Admin extends Component {
     //     this.props.dispatch({ type: 'DELETE_SUPPORT', payload: id })
     //     this.props.dispatch({ type: 'GET_SUPPORT' })
     // }
-
-
 
     render() {
         const { classes } = this.props;
@@ -76,7 +81,6 @@ class Admin extends Component {
                                             </Button>
                                     </td>
                                 </tr>
-
                             )
                         })
                         }
@@ -85,7 +89,73 @@ class Admin extends Component {
                 </table>
 
 
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Subject</th>
+                            <th>Message</th>
+                            <th>Received At</th>
+                            <th>Reply</th>
+                            <th>Delete</th>
+                        </tr>
+                    </thead>
 
+                    <tbody>
+
+                        {this.props.store.message.map((message) =>
+
+                            <tr key={message.id}>
+                                <td>{message.subject}</td>
+                                <td>{message.message}</td>
+                                <td><Moment format='hh:mm A, MM/DD/YYYY'>
+                                    {message.time_sent}
+                                </Moment></td>
+                                <td><Button onClick={() => this.showModal(message.forum_id, message.sent_from_user_id)}>
+                                    <ReplyIcon className={classes.icon}>
+                                    </ReplyIcon>Reply
+                                </Button></td>
+
+                                <td><Button onClick={() => { this.deleteMessage(message.id) }}>
+                                    <DeleteOutlinedIcon
+                                    className={classes.icon}
+                                    >
+                                </DeleteOutlinedIcon>Delete</Button></td>
+                            </tr>
+
+                        )}
+
+                    </tbody>
+                </table>
+
+                <Modal show={this.state.show} handleClose={this.hideModal}>
+                    <Card className={classes.card}>
+                        <Typography gutterBottom variant="h5" component="h2" className={classes.header}>
+                            Reply:
+                        </Typography>
+
+
+                        <form className={classes.form}>
+                            <TextField
+                                label="Subject"
+                                type="text"
+                                onChange={(event) => this.handleModalChange('subject', event)}
+                                className={classes.textField}
+                            />
+                            <br></br><br></br>
+                            <TextField
+                                label="Message"
+                                type="text"
+                                multiline
+                                className={classes.textField}
+                                onChange={(event) => this.handleModalChange('message', event)}
+                            />
+                            <br></br>
+                            <br></br>
+                            <Button
+                                onClick={this.addMessage}>Save</Button>
+                        </form>
+                    </Card>
+                </Modal>
 
                 {/* <TableContainer>
                     <Table aria-label="customized table">

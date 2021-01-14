@@ -61,9 +61,7 @@ class SupportForm extends Component {
     }
 
    addMessage = (event) => {
-        console.log('clicked')
         event.preventDefault();
-        this.props.dispatch({ type: 'ADD_MESSAGE', payload: this.state.supportMessage })
         this.setState({
             supportMessage: {
                 subject: '',
@@ -74,6 +72,8 @@ class SupportForm extends Component {
                 mail_sent: true,
             }
         })
+        this.props.dispatch({ type: 'ADD_MESSAGE', payload: this.state.supportMessage })
+
         swal('Success, your feedback was sent!', {
             icon: "success",
             buttons: {
@@ -88,15 +88,14 @@ class SupportForm extends Component {
                 this.props.history.push('/forum')
             } else {
                 this.setState({
-                    newListing: {
-                        have: '',
-                        want: '',
-                        location: '',
-                        user_id: `${this.props.store.user.id}`,
+                    supportMessage: {
+                        subject: '',
+                        message: '',
                     },
                 })
             }
         })
+    
 
     }
 
@@ -130,6 +129,7 @@ class SupportForm extends Component {
                             <TextField
                               label="Subject"
                               type="text"
+                              value={this.state.supportMessage.subject}
                               onChange={(event) => this.handleChange('subject', event)}
                               className={classes.textField}
                             />
@@ -138,6 +138,7 @@ class SupportForm extends Component {
                               label="Message"
                               type="text"
                               multiline
+                              value={this.state.supportMessage.message}
                               className={classes.textField}
                               onChange={(event) => this.handleChange('message', event)}
                             />

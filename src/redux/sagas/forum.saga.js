@@ -29,6 +29,7 @@ function* getForum() {
     }
 }//end getForum
 
+//admin delete route
 function* deleteListing(action){
     console.log('delete listing', action.payload);
     try{

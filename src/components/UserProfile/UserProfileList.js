@@ -3,6 +3,7 @@ import { connect } from 'react-redux';
 import mapStoreToProps from '../../redux/mapStoreToProps';
 import UserProfileItem from './UserProfileItem';
 import { withStyles } from '@material-ui/core/styles';
+import {Card} from '@material-ui/core';
 
 const styles = {
     header: {
@@ -54,6 +55,16 @@ class UserProfileList extends Component {
 
                     </tbody>
                 </table>
+
+                <h4 className={classes.yourListings}>Your Personal Information</h4>
+                <Card>
+                    <ul>
+                        <li>Username: {this.props.store.user.username}</li>
+                         <li>First Name: {this.props.store.user.first_name}</li>
+                         <li>Last Name: {this.props.store.user.last_name}</li>
+                         <li>Email: {this.props.store.user.email}</li>
+                    </ul>
+                </Card>
             </div>
         );
     }
