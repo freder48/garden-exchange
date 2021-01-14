@@ -105,6 +105,13 @@ class AddListing extends Component {
 
     }
 
+    // ******** conditional rendering a component
+    // validateInput = () => {
+    //     function stuff happens here
+    // } return (
+    //     <p className="alert">special jsx</p>
+    // )
+
     render() {
         const { classes } = this.props;
         return (
@@ -119,17 +126,15 @@ class AddListing extends Component {
                             <form onSubmit={this.handleSubmit} className={classes.form}>
 
                                 <TextField
-
                                     label="Have"
                                     required
                                     variant="filled"
-                                   
                                     className={classes.textField}
                                     value={this.state.newListing.have}
                                     onChange={(event) => this.handleChange('have', event)}
                                 />
 
-
+{/* {() => this.validateInput()} */}
                                 <br></br>
                                 <br></br>
 

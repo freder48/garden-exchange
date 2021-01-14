@@ -84,7 +84,7 @@ class LoginForm extends Component {
           <h3 className="alert" role="alert">
             {this.props.store.errors.loginMessage}
           </h3>
-        )}
+        )},
         <div>
           <label htmlFor="username">
            

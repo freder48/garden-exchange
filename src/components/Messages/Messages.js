@@ -100,6 +100,9 @@ class Messages extends Component {
         this.setState({ show: true, messageObj: { forum_id: id, sent_to_user_id: user_id, mail_sent: true, } });
     };
 
+    // {this.state.sent_to_user_id !== undefined &&
+    
+    // }
     render() {
         const { classes } = this.props;
         return (

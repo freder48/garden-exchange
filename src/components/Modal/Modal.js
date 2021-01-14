@@ -72,6 +72,15 @@ class Modal extends Component {
     swal("Success!", "Your Message Was Sent!", "success");
     this.props.handleClose();
     this.props.dispatch({ type: 'ADD_MESSAGE', payload: this.state.messageObj })
+    this.setState({
+      messageObj: {
+        sent_to_user_id: '',
+        sent_from_user_id: '',
+        forum_id: '',
+        subject: '',
+        message: '',
+      },
+    })
 
   }
 
@@ -111,6 +120,7 @@ class Modal extends Component {
               <TextField
                 label="Subject"
                 type="text"
+                value={this.state.messageObj.subject}
                 onChange={(event) => this.handleModalChange('subject', event)}
                 className={classes.textField}
               />
@@ -118,6 +128,7 @@ class Modal extends Component {
               <TextField
                 label="Message"
                 type="text"
+                value={this.state.messageObj.message}
                 multiline
                 rows="5"
                 className={classes.textField}
