@@ -52,8 +52,7 @@ class Admin extends Component{
         return(
             <>
             <h1>admin</h1>
-            <h3>Admin</h3>
-            {/* <TableContainer component={Paper}>
+             <TableContainer component={Paper}>
                     <Table aria-label="customized table">
                         <TableHead>
                             <TableRow>
@@ -96,7 +95,8 @@ class Admin extends Component{
                         </TableHead>
 
                         <TableBody>
-                            {this.props.reduxState.support.map((message) => {
+                            
+                            {this.props.reduxState.message.map((message) => {
                         
                                 return (
 
@@ -104,8 +104,8 @@ class Admin extends Component{
                                         <TableCell>{message.name}</TableCell>
                                         <TableCell>{message.email}</TableCell>
                                         <TableCell>{message.description}</TableCell>
-                                        {/* <TableCell><Moment format='MM/DD/YYYY'>{post.date}</Moment></TableCell> */}
-                                       {/* <TableCell><DeleteOutlinedIcon onClick={()=> {this.deleteSupport(message.id)}}>
+                                        <TableCell><Moment format='MM/DD/YYYY'>{message.date}</Moment></TableCell>
+                                       <TableCell><DeleteOutlinedIcon onClick={()=> {this.deleteSupport(message.id)}}>
                                                 </DeleteOutlinedIcon></TableCell>
                                     </TableRow>
                                 )
@@ -115,7 +115,7 @@ class Admin extends Component{
 
 
                     </Table>
-                </TableContainer>  */}
+                </TableContainer>  
                 
             </>
         ) //end return 

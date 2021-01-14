@@ -108,6 +108,7 @@ class Messages extends Component {
                 <table>
                     <thead>
                         <tr>
+                            <th>Subject</th>
                             <th>Message</th>
                             <th>Received At</th>
                             <th>Reply</th>
@@ -120,18 +121,20 @@ class Messages extends Component {
                         {this.props.store.message.map((message) =>
 
                             <tr key={message.id}>
+                                <td>{message.subject}</td>
                                 <td>{message.message}</td>
                                 <td><Moment format='hh:mm A, MM/DD/YYYY'>
-                                    {message.time_received}
+                                    {message.time_sent}
                                 </Moment></td>
                                 <td><Button onClick={() => this.showModal(message.forum_id, message.sent_from_user_id)}>
                                     <ReplyIcon className={classes.icon}>
                                     </ReplyIcon>Reply
                                 </Button></td>
 
-                                <td><Button><DeleteOutlinedIcon
+                                <td><Button onClick={() => { this.deleteMessage(message.id) }}>
+                                    <DeleteOutlinedIcon
                                     className={classes.icon}
-                                    onClick={() => { this.deleteMessage(message.id) }}>
+                                    >
                                 </DeleteOutlinedIcon>Delete</Button></td>
                             </tr>
 

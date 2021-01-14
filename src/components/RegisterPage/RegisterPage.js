@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import mapStoreToProps from '../../redux/mapStoreToProps';
-import { Card, CardActionArea, CardContent, Typography, TextField, Button} from '@material-ui/core';
+import { Button} from '@material-ui/core';
 import { withStyles } from '@material-ui/core/styles';
 // CUSTOM COMPONENTS
 import RegisterForm from '../RegisterForm/RegisterForm';
