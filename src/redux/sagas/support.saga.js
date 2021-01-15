@@ -4,6 +4,7 @@ import axios from 'axios';
 function* supportSaga() {
   yield takeLatest('ADD_SUPPORT', addSupport);
   yield takeLatest('GET_SUPPORT', getSupport);
+  yield takeLatest('DELETE_SUPPORT', deleteSupport);
 }
 
 //POST saga for new support
@@ -27,6 +28,17 @@ function* getSupport() {
         console.log('error with support get request in support.saga.js', error);
     }
 }//end getSupport
+
+//Delete messages from admin
+function* deleteSupport(action){
+    console.log('delete', action.payload);
+    try{
+        yield axios.delete(`/api/support/${action.payload}`)
+        yield put({type: 'GET_SUPPORT'})
+    } catch (error) {
+        console.log('error with delete request in support.saga.js', error)
+    }
+}
 
 
 

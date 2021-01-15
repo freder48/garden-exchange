@@ -116,7 +116,7 @@ class Admin extends Component {
                                     </ReplyIcon>Reply
                                 </Button></td>
 
-                                <td><Button onClick={() => { this.deleteMessage(message.id) }}>
+                                <td><Button onClick={() => { this.deleteSupport(message.id) }}>
                                     <DeleteOutlinedIcon
                                     className={classes.icon}
                                     >
