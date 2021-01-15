@@ -18,7 +18,7 @@ const styles = {
     button: {
         backgroundColor: '#fff9e6',
         minWidth: '60px',
-        float: 'right',
+        // float: 'right',
         width: '25%',
         marginLeft: '0',
         border: '2px solid #c78b50',
@@ -28,7 +28,7 @@ const styles = {
         },
         cancelButton: {
             width: '20%',
-            float: 'left',
+            // float: 'left',
             marginLeft: '1%',
         }
     },
@@ -157,6 +157,7 @@ class UserProfileItem extends Component {
                         /></td>
                         <td><Moment format='MM/DD/YYYY'>{this.props.listing.date}</Moment></td>
                         <td className={classes.btnContainer}>
+                            <center>
                             <Button
                                 onClick={this.cancelButton}
                                 variant="outlined"
@@ -170,6 +171,7 @@ class UserProfileItem extends Component {
                                 className={classes.button}
                             > Save
                             </Button>
+                            </center>
                         </td>
 
                         <td><Button onClick={() => { this.deleteListing(this.props.listing.id) }}>

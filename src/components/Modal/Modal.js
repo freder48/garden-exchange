@@ -64,11 +64,25 @@ class Modal extends Component {
       mail_sent: true,
     },
     show: false,
+    subjectError: false, 
+    subjectErrorText: '',
+    messageError: false, 
+    messageErrorText: '',
   }
 
   //dispatches messageObj to saga for post route
   addMessage = (event) => {
     event.preventDefault();
+    if (this.state.messageObj.subject === '') {
+      this.setState({ subjectError: true, subjectErrorText: 'This field is required' })
+  } if (this.state.messageObj.message === '') {
+      this.setState({ messageError: true, messageErrorText: 'This field is required' })
+  } else {
+    this.setState({
+      subjectError: false, messageError: false, 
+      subjectErrorText: '', messageErrorText: '',
+  })
+    //sweetAlert success message
     swal("Success!", "Your Message Was Sent!", "success");
     this.props.handleClose();
     this.props.dispatch({ type: 'ADD_MESSAGE', payload: this.state.messageObj })
@@ -82,6 +96,7 @@ class Modal extends Component {
         mail_sent: true, 
       },
     })
+  }
 
   }
 
@@ -119,6 +134,9 @@ class Modal extends Component {
 
             <form className={classes.form}>
               <TextField
+                required
+                error={this.state.subjectError}
+                helperText={this.state.subjectErrorText}
                 label="Subject"
                 type="text"
                 value={this.state.messageObj.subject}
@@ -127,6 +145,9 @@ class Modal extends Component {
               />
               <br></br><br></br>
               <TextField
+              required
+              error={this.state.messageError}
+              helperText={this.state.messageErrorText}
                 label="Message"
                 type="text"
                 value={this.state.messageObj.message}
