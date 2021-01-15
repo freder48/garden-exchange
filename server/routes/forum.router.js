@@ -6,7 +6,7 @@ const { rejectUnauthenticated } = require('../modules/authentication-middleware'
 //GET forum
 router.get('/', rejectUnauthenticated, (req, res) => {
 // get all of listings from forum table in database
-pool.query('SELECT * FROM "forum" ORDER BY date;').then((result) => {
+pool.query('SELECT * FROM "forum" ORDER BY date DESC;').then((result) => {
     res.send(result.rows);
 }).catch((error) => {
     console.log('Error GET support', error);

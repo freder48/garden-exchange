@@ -63,10 +63,15 @@ class AddListing extends Component {
             location: '',
             user_id: `${this.props.store.user.id}`,
         },
-        error: false
+        haveError: false,
+        haveErrorText: '',
+        wantError: false,
+        wantErrorText: '',
+        locationError: false,
+        locationErrorText: '',
     }
 
-    
+
     handleChange = (inputValue, event) => {
         event.preventDefault();
         this.setState({
@@ -79,51 +84,50 @@ class AddListing extends Component {
 
     handleSubmit = (event) => {
         event.preventDefault();
-        if (this.state.newListing.have === '' 
-        || this.state.newListing.want === '' 
-        || this.state.newListing.location === ''){
-            this.setState({error: true})
+        if (this.state.newListing.have === '') {
+            this.setState({ haveError: true, haveErrorText: 'This field is required' })
+        } if (this.state.newListing.want === '') {
+            this.setState({ wantError: true, wantErrorText: 'This field is required' })
+        } if (this.state.newListing.location === '') {
+            this.setState({ locationError: true, locationErrorText: 'This field is required' })
         } else {
-        this.props.dispatch({ type: 'ADD_LISTING', payload: this.state.newListing })
-        swal('Success, your listing was submitted!', {
-            icon: "success",
-            buttons: {
-                cancel: "Add Another Listing",
-                forum: {
-                    text: "Back to Forum",
-                    value: "back"
+            this.setState({
+                haveError: false, wantError: false, locationError: false,
+                haveErrorText: '', wantErrorText: '', locationErrorText: '',
+            })
+            this.props.dispatch({ type: 'ADD_LISTING', payload: this.state.newListing })
+            swal('Success, your listing was submitted!', {
+                icon: "success",
+                buttons: {
+                    cancel: "Add Another Listing",
+                    forum: {
+                        text: "Back to Forum",
+                        value: "back"
+                    }
                 }
-            }
-        }).then((value) => {
-            if (value === "back") {
-                this.props.history.push('/forum')
-            } else {
-                this.setState({
-                    newListing: {
-                        have: '',
-                        want: '',
-                        location: '',
-                        user_id: `${this.props.store.user.id}`,
-                    },
-                })
-            }
-        })
+            }).then((value) => {
+                if (value === "back") {
+                    this.props.history.push('/forum')
+                } else {
+                    this.setState({
+                        newListing: {
+                            have: '',
+                            want: '',
+                            location: '',
+                            user_id: `${this.props.store.user.id}`,
+                        },
+                    })
+                }
+            })
+        }
     }
-    }
-
-    // ******** conditional rendering a component
-    // validateInput = () => {
-    //     function stuff happens here
-    // } return (
-    //     <p className="alert">special jsx</p>
-    // )
 
     render() {
         const { classes } = this.props;
         return (
             <>
                 <Grid container>
-                <h2 className={classes.title}> New Listing</h2>
+                    <h2 className={classes.title}> New Listing</h2>
                     <Card className={classes.card} >
                         <CardContent>
                             <Typography gutterBottom variant="h4" component="h2" className={classes.header}>
@@ -131,7 +135,8 @@ class AddListing extends Component {
                             </Typography>
                             <form onSubmit={this.handleSubmit} className={classes.form}>
                                 <TextField
-                                    error={this.state.error}
+                                    error={this.state.haveError}
+                                    helperText={this.state.haveErrorText}
                                     label="Have"
                                     required
                                     variant="filled"
@@ -140,12 +145,13 @@ class AddListing extends Component {
                                     onChange={(event) => this.handleChange('have', event)}
                                 />
 
-{/* {() => this.validateInput()} */}
                                 <br></br>
                                 <br></br>
 
                                 <TextField
                                     required
+                                    error={this.state.wantError}
+                                    helperText={this.state.wantErrorText}
                                     label="Want"
                                     variant="filled"
                                     className={classes.textField}
@@ -157,6 +163,8 @@ class AddListing extends Component {
                                 <br></br>
                                 <TextField
                                     required
+                                    error={this.state.locationError}
+                                    helperText={this.state.locationErrorText}
                                     label="Location"
                                     variant="filled"
                                     className={classes.textField}

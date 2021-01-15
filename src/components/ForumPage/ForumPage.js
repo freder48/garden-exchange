@@ -143,7 +143,7 @@ class ForumPage extends Component {
               }
             }).map(post => {
               return (
-
+                <>
                 <tr key={post.id}>
                   <td>{post.have}</td>
                   <td>{post.want}</td>
@@ -156,7 +156,7 @@ class ForumPage extends Component {
                     </Button>
                     </td>
                 </tr>
-
+                </>
               )
             })
             }

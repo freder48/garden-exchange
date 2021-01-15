@@ -34,6 +34,14 @@ class Admin extends Component {
     state = {
         //for pop-up dialog form
         show: false,
+        messageObj: {
+            sent_to_user_id: '',
+            sent_from_user_id: '',
+            forum_id: null,
+            subject: '',
+            message: '',
+            mail_sent: true,
+        },
         
     }//end local state
     componentDidMount() {
@@ -59,7 +67,7 @@ class Admin extends Component {
 
     //displays message form if show in local state is set to true
     showModal = (id, user_id) => {
-        this.setState({ show: true, messageObj: { forum_id: id, sent_to_user_id: user_id, mail_sent: true, } });
+        this.setState({ show: true, messageObj: { forum_id: null, sent_to_user_id: user_id, mail_sent: true, } });
     };
 
     render() {
@@ -141,7 +149,7 @@ class Admin extends Component {
                     </tbody>
                 </table>
 
-                <Modal show={this.state.show} handleClose={this.hideModal}>
+                <Modal show={this.state.show} handleClose={this.hideModal} messageObj={this.state.messageObj}>
                     <Card className={classes.card}>
                         <Typography gutterBottom variant="h5" component="h2" className={classes.header}>
                             Reply:

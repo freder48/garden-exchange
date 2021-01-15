@@ -47,7 +47,7 @@ const styles = {
 };
 
 class SupportForm extends Component {
-
+//local state
     state = {
         supportMessage: {
             subject: '',
@@ -55,7 +55,7 @@ class SupportForm extends Component {
             sent_from_user_id: this.props.store.user.id,
         }
     }
-
+//addMessage
    addMessage = (event) => {
         event.preventDefault();
         this.setState({
@@ -113,7 +113,6 @@ class SupportForm extends Component {
          
             <div>
                 <Card className={classes.card}>
-                    <CardActionArea>
                         <CardContent>
                             <Typography gutterBottom variant="h5" component="h2" className={classes.header}>
                                 How can I support you?
@@ -137,16 +136,14 @@ class SupportForm extends Component {
                               onChange={(event) => this.handleChange('message', event)}
                             />
                             <br></br>
-
+                            <CardActionArea>
                            <Button className={classes.button}
                            onClick={this.addMessage}>
                            Send
                            </Button>
+                           </CardActionArea>
                           </form>
-
                         </CardContent>
-                    </CardActionArea>
-
                 </Card>
             </div>
         )
