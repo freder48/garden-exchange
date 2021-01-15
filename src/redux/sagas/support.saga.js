@@ -3,6 +3,7 @@ import axios from 'axios';
 
 function* supportSaga() {
   yield takeLatest('ADD_SUPPORT', addSupport);
+  yield takeLatest('GET_SUPPORT', getSupport);
 }
 
 //POST saga for new support
@@ -17,15 +18,15 @@ function* addSupport(action) {
 }//end addSupport
 
 //GETting all of the postings for ForumPage and Admin
-function* getForum() {
+function* getSupport() {
     try {
-        const response = yield axios.get(`api/forum` )
-        yield put({ type: 'SET_FORUM', payload: response.data });
+        const response = yield axios.get(`api/support` )
+        yield put({ type: 'SET_SUPPORT', payload: response.data });
         console.log(response.data);
     } catch (error) {
-        console.log('error with forum get request in forum.saga.js', error);
+        console.log('error with support get request in support.saga.js', error);
     }
-}//end getForum
+}//end getSupport
 
 
 

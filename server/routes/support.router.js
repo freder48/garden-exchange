@@ -4,15 +4,15 @@ const router = express.Router();
 const { rejectUnauthenticated } = require('../modules/authentication-middleware');
 
 // //GET forum
-// router.get('/', rejectUnauthenticated, (req, res) => {
-// // get all of listings from forum table in database
-// pool.query('SELECT * FROM "forum" ORDER BY date;').then((result) => {
-//     res.send(result.rows);
-// }).catch((error) => {
-//     console.log('Error GET support', error);
-//     res.sendStatus(500);
-//     });
-// });//end GET
+router.get('/', rejectUnauthenticated, (req, res) => {
+// get all of listings from forum table in database
+pool.query('SELECT * FROM "support" ORDER BY time_sent;').then((result) => {
+    res.send(result.rows);
+}).catch((error) => {
+    console.log('Error GET support', error);
+    res.sendStatus(500);
+    });
+});//end GET
 
 //POST forum
 router.post('/', rejectUnauthenticated, (req, res) => {

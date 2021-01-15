@@ -35,6 +35,7 @@ class Admin extends Component {
     }//end local state
     componentDidMount() {
         this.props.dispatch({ type: 'GET_FORUM'})
+        this.props.dispatch({type: 'GET_SUPPORT'});
     }
 
     deleteItem(id) {
@@ -42,11 +43,11 @@ class Admin extends Component {
         this.props.dispatch({ type: 'DELETE_LISTING_ADMIN', payload: id })
     }
 
-    // deleteSupport(id) {
-    //     console.log('id', id)
-    //     this.props.dispatch({ type: 'DELETE_SUPPORT', payload: id })
-    //     this.props.dispatch({ type: 'GET_SUPPORT' })
-    // }
+    deleteSupport(id) {
+        console.log('id', id)
+        this.props.dispatch({ type: 'DELETE_SUPPORT', payload: id })
+        this.props.dispatch({ type: 'GET_SUPPORT' })
+    }
 
     render() {
         const { classes } = this.props;
@@ -102,7 +103,7 @@ class Admin extends Component {
 
                     <tbody>
 
-                        {this.props.store.message.map((message) =>
+                        {this.props.store.support.map((message) =>
 
                             <tr key={message.id}>
                                 <td>{message.subject}</td>
@@ -133,7 +134,6 @@ class Admin extends Component {
                             Reply:
                         </Typography>
 
-
                         <form className={classes.form}>
                             <TextField
                                 label="Subject"
@@ -157,40 +157,7 @@ class Admin extends Component {
                     </Card>
                 </Modal>
 
-                {/* <TableContainer>
-                    <Table aria-label="customized table">
-                        <TableHead>
-                            <TableRow>
-                            <StyledTableCell align="left">Name</StyledTableCell>
-                            <StyledTableCell align="left">Email</StyledTableCell>
-                            <StyledTableCell align="left">Message</StyledTableCell>
-                            <StyledTableCell align="left">Delete</StyledTableCell>
-                            </TableRow>
-                        </TableHead>
-
-                        <TableBody>
-                            
-                            {this.props.reduxState.message.map((message) => {
-                        
-                                return (
-
-                                    <TableRow key={message.id}>
-                                        <TableCell>{message.name}</TableCell>
-                                        <TableCell>{message.email}</TableCell>
-                                        <TableCell>{message.description}</TableCell>
-                                        <TableCell><Moment format='MM/DD/YYYY'>{message.date}</Moment></TableCell>
-                                       <TableCell><DeleteOutlinedIcon onClick={()=> {this.deleteSupport(message.id)}}>
-                                                </DeleteOutlinedIcon></TableCell>
-                                    </TableRow>
-                                )
-                            })
-                            }
-                        </TableBody> 
-
-
-                    </Table>
-                </TableContainer>   */}
-
+              
             </>
         ) //end return 
     } //end render

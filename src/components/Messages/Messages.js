@@ -111,7 +111,7 @@ class Messages extends Component {
                 <table>
                     <thead>
                         <tr>
-                            <th>From</th>
+                            {/* <th>From</th> */}
                             <th>Subject</th>
                             <th>Message</th>
                             <th>Received At</th>
