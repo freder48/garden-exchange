@@ -52,11 +52,7 @@ class SupportForm extends Component {
         supportMessage: {
             subject: '',
             message: '',
-            message_sent: true,
-            sent_to_user_id: 1, 
-            sent_from_user_id: `${this.props.store.user.id}`,
-            forum_id: null,
-            mail_sent: true,
+            sent_from_user_id: this.props.store.user.id,
         }
     }
 
@@ -65,14 +61,10 @@ class SupportForm extends Component {
         this.setState({
             supportMessage: {
                 subject: '',
-                message: '',
-                sent_to_user_id: 1, 
-                sent_from_user_id: `${this.props.store.user.id}`,
-                forum_id: null,
-                mail_sent: true,
-            }
+                message: '', 
+                sent_from_user_id: this.props.store.user.id,           }
         })
-        this.props.dispatch({ type: 'ADD_MESSAGE', payload: this.state.supportMessage })
+        this.props.dispatch({ type: 'ADD_SUPPORT', payload: this.state.supportMessage })
 
         swal('Success, your feedback was sent!', {
             icon: "success",
@@ -91,6 +83,7 @@ class SupportForm extends Component {
                     supportMessage: {
                         subject: '',
                         message: '',
+                        sent_from_user_id: this.props.store.user.id,
                     },
                 })
             }
@@ -138,6 +131,7 @@ class SupportForm extends Component {
                               label="Message"
                               type="text"
                               multiline
+                              rows={5}
                               value={this.state.supportMessage.message}
                               className={classes.textField}
                               onChange={(event) => this.handleChange('message', event)}

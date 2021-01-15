@@ -79,6 +79,7 @@ class Modal extends Component {
         forum_id: '',
         subject: '',
         message: '',
+        mail_sent: true, 
       },
     })
 

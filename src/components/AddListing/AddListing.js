@@ -83,7 +83,6 @@ class AddListing extends Component {
         || this.state.newListing.want === '' 
         || this.state.newListing.location === ''){
             this.setState({error: true})
-            alert('Please fill all fields')
         } else {
         this.props.dispatch({ type: 'ADD_LISTING', payload: this.state.newListing })
         swal('Success, your listing was submitted!', {
@@ -131,8 +130,8 @@ class AddListing extends Component {
                                 Add Listing
                             </Typography>
                             <form onSubmit={this.handleSubmit} className={classes.form}>
-                                {this.state.error}
                                 <TextField
+                                    error={this.state.error}
                                     label="Have"
                                     required
                                     variant="filled"

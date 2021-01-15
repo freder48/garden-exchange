@@ -4,6 +4,7 @@ import user from './user.reducer';
 import forum from './forum.reducer';
 import message from './message.reducer';
 import details from './details.reducer';
+import support from './support.reducer';
 // rootReducer is the primary reducer for our entire project
 // It bundles up all of the other reducers so our project can use them.
 // This is imported in index.js as rootSaga
@@ -15,7 +16,8 @@ const rootReducer = combineReducers({
   user, // will have an id and username if someone is logged in
   forum, //contains ForumPage and Admin
   message, //will contain the messages sent between users
-  details, 
+  details,
+  support,  
 });
 
 export default rootReducer;
