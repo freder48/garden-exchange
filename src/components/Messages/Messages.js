@@ -111,7 +111,7 @@ class Messages extends Component {
                 <table>
                     <thead>
                         <tr>
-                            {/* <th>From</th> */}
+                            <th>From</th>
                             <th>Subject</th>
                             <th>Message</th>
                             <th>Received At</th>
@@ -125,6 +125,7 @@ class Messages extends Component {
                         {this.props.store.message.map((message) =>
 
                             <tr key={message.id}>
+                                <td>{message.sent_from_username}</td>
                                 <td>{message.subject}</td>
                                 <td>{message.message}</td>
                                 <td><Moment format='hh:mm A, MM/DD/YYYY'>

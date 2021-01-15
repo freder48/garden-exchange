@@ -25,6 +25,9 @@ const styles = {
     icon: {
       paddingRight: '5px',
     },
+    tableOne: {
+        marginBottom: '30px', 
+    }
   }
 //class
 class Admin extends Component {
@@ -49,12 +52,22 @@ class Admin extends Component {
         this.props.dispatch({ type: 'GET_SUPPORT' })
     }
 
+    //hides pop-up modal by setting local state show to false
+    hideModal = () => {
+        this.setState({ show: false });
+    };
+
+    //displays message form if show in local state is set to true
+    showModal = (id, user_id) => {
+        this.setState({ show: true, messageObj: { forum_id: id, sent_to_user_id: user_id, mail_sent: true, } });
+    };
+
     render() {
         const { classes } = this.props;
         return (
             <>
-                <h1 className={classes.header}>Manage All Listings</h1>
-                <table>
+                <h2 className={classes.header}>Manage All Listings</h2>
+                <table className={classes.tableOne}>
                     <thead>
                         <tr>
                             <th>Have</th>
@@ -89,7 +102,7 @@ class Admin extends Component {
                     </tbody>
                 </table>
 
-
+                <h2 className={classes.header}>Support Messages</h2>
                 <table>
                     <thead>
                         <tr>

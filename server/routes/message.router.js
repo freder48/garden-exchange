@@ -32,7 +32,7 @@ router.get('/', rejectUnauthenticated, (req, res) => {
 router.post('/', rejectUnauthenticated, (req, res) => {
   console.log('email', req.body);
   const data = req.body;
-
+const sent_from_username = req.user.username
   if (req.user.email_messages){
 
   let password = process.env.password;
@@ -71,9 +71,9 @@ router.post('/', rejectUnauthenticated, (req, res) => {
           }
           smtpTransport.close();
           console.log(data)
-          const queryText = `INSERT INTO "message" (sent_to_user_id, sent_from_user_id, forum_id, subject, message, mail_sent)
-          VALUES ($1, $2, $3, $4, $5, $6);`;
-          pool.query(queryText, [data.sent_to_user_id, data.sent_from_user_id, data.forum_id, data.subject, data.message, data.mail_sent])
+          const queryText = `INSERT INTO "message" (sent_to_user_id, sent_from_user_id, forum_id, subject, message, mail_sent, sent_from_username)
+          VALUES ($1, $2, $3, $4, $5, $6, $7);`;
+          pool.query(queryText, [data.sent_to_user_id, data.sent_from_user_id, data.forum_id, data.subject, data.message, data.mail_sent, sent_from_username])
               .then(() => { res.sendStatus(201); })
               .catch((err) => {
                   console.log('Error completing POST server query', err);
@@ -81,9 +81,9 @@ router.post('/', rejectUnauthenticated, (req, res) => {
               });
       });
   } else {
-    const queryText = `INSERT INTO "message" (sent_to_user_id, sent_from_user_id, forum_id, subject, message, mail_sent)
-          VALUES ($1, $2, $3, $4, $5, $6);`;
-          pool.query(queryText, [data.sent_to_user_id, data.sent_from_user_id, data.forum_id, data.subject, data.message, data.mail_sent])
+    const queryText = `INSERT INTO "message" (sent_to_user_id, sent_from_user_id, forum_id, subject, message, mail_sent, sent_from_username)
+          VALUES ($1, $2, $3, $4, $5, $6, $7);`;
+          pool.query(queryText, [data.sent_to_user_id, data.sent_from_user_id, data.forum_id, data.subject, data.message, data.mail_sent, sent_from_username])
   .then(() => { res.sendStatus(201); })
   .catch((err) => {
     console.log('Error completing POST in forum server', err);
