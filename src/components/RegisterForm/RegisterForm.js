@@ -3,6 +3,10 @@ import { connect } from 'react-redux';
 import mapStoreToProps from '../../redux/mapStoreToProps';
 import { withStyles } from '@material-ui/core/styles';
 import { TextField, Button, Grid, Card, Typography, FormControlLabel, Checkbox } from '@material-ui/core';
+import InputAdornment from '@material-ui/core/InputAdornment';
+import IconButton from '@material-ui/core/IconButton';
+import Visibility from '@material-ui/icons/Visibility';
+import VisibilityOff from '@material-ui/icons/VisibilityOff';
 
 const styles = {
   button: {
@@ -57,6 +61,14 @@ class RegisterForm extends Component {
     last_name: '',
     email: '',
     email_messages: false,
+    showPassword: false, 
+  };
+
+
+  //toggles the password from visible to hidden
+  handleClickShowPassword = () => {
+    this.setState(state => ({ showPassword: !state.showPassword }));
+    console.log('flipped boolean', this.state.showPassword);
   };
 
   //handle inputs user information
@@ -122,7 +134,7 @@ class RegisterForm extends Component {
             <div>
               <label htmlFor="password">
                 <TextField
-                  type="password"
+                   type={this.state.showPassword ? 'text' : 'password'}
                   name="password"
                   id="filled-required"
                   label="Password"
@@ -131,6 +143,16 @@ class RegisterForm extends Component {
                   required
                   className={classes.textField}
                   onChange={this.handleInputChangeFor('password')}
+                  InputProps={{
+                    endAdornment: <InputAdornment position="end">
+                    <IconButton
+                      className={classes.icon}
+                      aria-label="Toggle password visibility"
+                      onClick={this.handleClickShowPassword}>
+                      {this.state.showPassword ? <Visibility /> : <VisibilityOff />}
+                      </IconButton>
+                    </InputAdornment>,
+                  }}
                 />
               </label>
               <label htmlFor="first_name">

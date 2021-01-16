@@ -53,8 +53,7 @@ const styles = {
     backgroundColor: '#fff9e6',
   },
   icon: {
-    color: 'black',
-    width: '100%',
+    paddingBottom: '25px',
   }
 
 };
