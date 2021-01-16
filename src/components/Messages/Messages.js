@@ -6,7 +6,7 @@ import { connect } from 'react-redux';
 import Modal from '../Modal/Modal';
 import swal from 'sweetalert';
 
-import { Card, Typography, TextField, Button } from '@material-ui/core';
+import { Button } from '@material-ui/core';
 import { withStyles } from '@material-ui/core/styles';
 import DeleteOutlinedIcon from '@material-ui/icons/DeleteOutlined';
 import ReplyIcon from '@material-ui/icons/Reply';

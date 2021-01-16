@@ -1,15 +1,14 @@
 //imports //imports JUST the component from react not ALL of react 
 import React, { Component } from 'react';
 import mapStoreToProps from '../../redux/mapStoreToProps';
-import {
-    Button, Typography, TextField, Card
-} from '@material-ui/core'
+import { Button, Typography, TextField, Card } from '@material-ui/core'
 import DeleteOutlinedIcon from '@material-ui/icons/DeleteOutlined';
 import Modal from '../Modal/Modal';
 import { withStyles } from '@material-ui/core/styles';
 import { connect } from 'react-redux';
 import Moment from 'react-moment';
 import ReplyIcon from '@material-ui/icons/Reply';
+import swal from 'sweetalert';
 
 const styles = {
     header: {
@@ -23,12 +22,12 @@ const styles = {
         fontFamily: 'Copperplate'
     },
     icon: {
-      paddingRight: '5px',
+        paddingRight: '5px',
     },
-  }
+}
 //class
 class Admin extends Component {
-        state = {
+    state = {
         //for pop-up dialog form
         show: false,
         messageObj: {
@@ -42,7 +41,7 @@ class Admin extends Component {
         search: '',
     }//end local state
     componentDidMount() {
-        this.props.dispatch({ type: 'GET_FORUM'})
+        this.props.dispatch({ type: 'GET_FORUM' })
         this.props.dispatch({ type: 'GET_MESSAGES' })
     }
 
@@ -51,11 +50,37 @@ class Admin extends Component {
         this.props.dispatch({ type: 'DELETE_LISTING_ADMIN', payload: id })
     }
 
-    // deleteSupport(id) {
-    //     console.log('id', id)
-    //     this.props.dispatch({ type: 'DELETE_SUPPORT', payload: id })
-    //     this.props.dispatch({ type: 'GET_SUPPORT' })
-    // }
+    //deletes message based upon id 
+    deleteMessage(id) {
+        swal({
+            title: "Are you sure?",
+            text: "Once deleted, you will not be able to recover this imaginary file!",
+            icon: "warning",
+            buttons: true,
+            dangerMode: true,
+        })
+            .then((willDelete) => {
+                if (willDelete) {
+                    swal("Poof! Your message has been deleted!", {
+                        icon: "success",
+                    });
+                    this.props.dispatch({ type: 'DELETE_MESSAGE', payload: id })
+                } else {
+                    swal("Your message is safe!");
+                }
+            });
+
+    }//end deleteMessage
+
+    //hides pop-up modal by setting local state show to false
+    hideModal = () => {
+        this.setState({ show: false });
+    };
+
+    //displays message form if show in local state is set to true
+    showModal = (id, user_id) => {
+        this.setState({ show: true, messageObj: { forum_id: id, sent_to_user_id: user_id, mail_sent: true, } });
+    };
 
     render() {
         const { classes } = this.props;
@@ -82,10 +107,10 @@ class Admin extends Component {
                                     <td>{post.location}</td>
                                     <td><Moment format='MM/DD/YYYY'>{post.date}</Moment></td>
                                     <td>
-                                        <Button 
-                                        onClick={() => { this.deleteItem(post.id) }}>
-                                            <DeleteOutlinedIcon 
-                                            className={classes.icon}/>
+                                        <Button
+                                            onClick={() => { this.deleteItem(post.id) }}>
+                                            <DeleteOutlinedIcon
+                                                className={classes.icon} />
                                                 Delete
                                             </Button>
                                     </td>
@@ -119,16 +144,21 @@ class Admin extends Component {
                                 <td><Moment format='hh:mm A, MM/DD/YYYY'>
                                     {message.time_sent}
                                 </Moment></td>
-                                <td><Button onClick={() => this.showModal(message.forum_id, message.sent_from_user_id)}>
-                                    <ReplyIcon className={classes.icon}>
-                                    </ReplyIcon>Reply
-                                </Button></td>
+                                <td>
+                                    <Button
+                                        onClick={() => this.showModal(message.forum_id, message.sent_from_user_id)}>
+                                        <ReplyIcon className={classes.icon} />
+                                   Reply
+                                </Button>
+                                </td>
 
-                                <td><Button onClick={() => { this.deleteMessage(message.id) }}>
-                                    <DeleteOutlinedIcon
-                                    className={classes.icon}
-                                    >
-                                </DeleteOutlinedIcon>Delete</Button></td>
+                                <td>
+                                    <Button onClick={() => { this.deleteMessage(message.id) }}>
+                                        <DeleteOutlinedIcon
+                                            className={classes.icon} />
+                                  Delete
+                                  </Button>
+                                </td>
                             </tr>
 
                         )}
@@ -136,69 +166,11 @@ class Admin extends Component {
                     </tbody>
                 </table>
 
-                <Modal show={this.state.show} handleClose={this.hideModal}>
-                    <Card className={classes.card}>
-                        <Typography gutterBottom variant="h5" component="h2" className={classes.header}>
-                            Reply:
-                        </Typography>
-
-
-                        <form className={classes.form}>
-                            <TextField
-                                label="Subject"
-                                type="text"
-                                onChange={(event) => this.handleModalChange('subject', event)}
-                                className={classes.textField}
-                            />
-                            <br></br><br></br>
-                            <TextField
-                                label="Message"
-                                type="text"
-                                multiline
-                                className={classes.textField}
-                                onChange={(event) => this.handleModalChange('message', event)}
-                            />
-                            <br></br>
-                            <br></br>
-                            <Button
-                                onClick={this.addMessage}>Save</Button>
-                        </form>
-                    </Card>
+                <Modal
+                    show={this.state.show}
+                    handleClose={this.hideModal}
+                    messageObj={this.state.messageObj}>
                 </Modal>
-
-                {/* <TableContainer>
-                    <Table aria-label="customized table">
-                        <TableHead>
-                            <TableRow>
-                            <StyledTableCell align="left">Name</StyledTableCell>
-                            <StyledTableCell align="left">Email</StyledTableCell>
-                            <StyledTableCell align="left">Message</StyledTableCell>
-                            <StyledTableCell align="left">Delete</StyledTableCell>
-                            </TableRow>
-                        </TableHead>
-
-                        <TableBody>
-                            
-                            {this.props.reduxState.message.map((message) => {
-                        
-                                return (
-
-                                    <TableRow key={message.id}>
-                                        <TableCell>{message.name}</TableCell>
-                                        <TableCell>{message.email}</TableCell>
-                                        <TableCell>{message.description}</TableCell>
-                                        <TableCell><Moment format='MM/DD/YYYY'>{message.date}</Moment></TableCell>
-                                       <TableCell><DeleteOutlinedIcon onClick={()=> {this.deleteSupport(message.id)}}>
-                                                </DeleteOutlinedIcon></TableCell>
-                                    </TableRow>
-                                )
-                            })
-                            }
-                        </TableBody> 
-
-
-                    </Table>
-                </TableContainer>   */}
 
             </>
         ) //end return 
