@@ -116,11 +116,11 @@ class UserProfileItem extends Component {
         console.log('updated listing', this.state.editListing)
         this.props.dispatch({ type: 'UPDATE_LISTING', payload: this.state.editListing })
         this.setState({
-            editListing: {
-                have: '',
-                want: '',
-                location: '',
-            },
+            // editListing: {
+            //     have: '',
+            //     want: '',
+            //     location: '',
+            // },
              isEditable: false,
          })
     }

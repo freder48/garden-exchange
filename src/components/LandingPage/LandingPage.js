@@ -12,7 +12,7 @@ const styles = {
   card: {
     margin: 'auto',
     width: '80%',
-    marginTop: '4em',
+    marginTop: '15%',
     justifyContent: 'center',
     backgroundColor: '#c78b50',
     border: '20px solid white',
@@ -62,7 +62,7 @@ class LandingPage extends Component {
             </p>
 
             <p>
-              As a member, you will have access the ability browse, message, and exchange surplus garden and 
+              As a member, you will have the ability to browse, message, and exchange surplus garden and 
               artisinal products with fellow users located within your area. 
             </p>
             </Card>

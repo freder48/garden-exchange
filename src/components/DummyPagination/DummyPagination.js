@@ -6,7 +6,7 @@ import { Button } from '@material-ui/core';
 import { withStyles } from '@material-ui/core/styles';
 import MailOutlineIcon from '@material-ui/icons/MailOutline';
 import Moment from 'react-moment';
-import './ForumPage.css'
+import './DummyPagination.css'
 import TablePagination from '@material-ui/core/TablePagination';
 
 
@@ -54,7 +54,7 @@ const styles = {
 
 }
 
-class ForumPage extends Component {
+class DummyPagination extends Component {
   state = {
     //for search bar input
     search: null,
@@ -67,7 +67,9 @@ class ForumPage extends Component {
       subject: '',
       message: '',
       mail_sent: true,
-    }
+    }, 
+    page: 0,
+    rowsPerPage: 5,
   }//end local state
 
   //cancel button on search input
@@ -96,6 +98,15 @@ class ForumPage extends Component {
     this.setState({ show: true, messageObj: { forum_id: id, sent_to_user_id: user_id, mail_sent: true, } });
 
   };
+
+  handleChangePage = (event, page) => {
+    this.setState({ page });
+  };
+
+    handleChangeRowsPerPage = event => {
+    this.setState({ rowsPerPage: event.target.value });
+  };
+
 
   render() {
     const { classes } = this.props;
@@ -176,4 +187,4 @@ class ForumPage extends Component {
 
 
 
-export default connect(mapStoreToProps)(withStyles(styles)(ForumPage));
+export default connect(mapStoreToProps)(withStyles(styles)(DummyPagination));

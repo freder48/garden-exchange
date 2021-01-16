@@ -25,28 +25,25 @@ const styles = {
     icon: {
       paddingRight: '5px',
     },
-    tableOne: {
-        marginBottom: '30px', 
-    }
   }
 //class
 class Admin extends Component {
-    state = {
+        state = {
         //for pop-up dialog form
         show: false,
         messageObj: {
             sent_to_user_id: '',
             sent_from_user_id: '',
-            forum_id: null,
+            forum_id: '',
             subject: '',
             message: '',
             mail_sent: true,
         },
-        
+        search: '',
     }//end local state
     componentDidMount() {
         this.props.dispatch({ type: 'GET_FORUM'})
-        this.props.dispatch({type: 'GET_SUPPORT'});
+        this.props.dispatch({ type: 'GET_MESSAGES' })
     }
 
     deleteItem(id) {
@@ -54,28 +51,18 @@ class Admin extends Component {
         this.props.dispatch({ type: 'DELETE_LISTING_ADMIN', payload: id })
     }
 
-    deleteSupport(id) {
-        console.log('id', id)
-        this.props.dispatch({ type: 'DELETE_SUPPORT', payload: id })
-        this.props.dispatch({ type: 'GET_SUPPORT' })
-    }
-
-    //hides pop-up modal by setting local state show to false
-    hideModal = () => {
-        this.setState({ show: false });
-    };
-
-    //displays message form if show in local state is set to true
-    showModal = (id, user_id) => {
-        this.setState({ show: true, messageObj: { forum_id: null, sent_to_user_id: user_id, mail_sent: true, } });
-    };
+    // deleteSupport(id) {
+    //     console.log('id', id)
+    //     this.props.dispatch({ type: 'DELETE_SUPPORT', payload: id })
+    //     this.props.dispatch({ type: 'GET_SUPPORT' })
+    // }
 
     render() {
         const { classes } = this.props;
         return (
             <>
                 <h2 className={classes.header}>Manage All Listings</h2>
-                <table className={classes.tableOne}>
+                <table>
                     <thead>
                         <tr>
                             <th>Have</th>
@@ -124,7 +111,7 @@ class Admin extends Component {
 
                     <tbody>
 
-                        {this.props.store.support.map((message) =>
+                        {this.props.store.message.map((message) =>
 
                             <tr key={message.id}>
                                 <td>{message.subject}</td>
@@ -137,7 +124,7 @@ class Admin extends Component {
                                     </ReplyIcon>Reply
                                 </Button></td>
 
-                                <td><Button onClick={() => { this.deleteSupport(message.id) }}>
+                                <td><Button onClick={() => { this.deleteMessage(message.id) }}>
                                     <DeleteOutlinedIcon
                                     className={classes.icon}
                                     >
@@ -149,11 +136,12 @@ class Admin extends Component {
                     </tbody>
                 </table>
 
-                <Modal show={this.state.show} handleClose={this.hideModal} messageObj={this.state.messageObj}>
+                <Modal show={this.state.show} handleClose={this.hideModal}>
                     <Card className={classes.card}>
                         <Typography gutterBottom variant="h5" component="h2" className={classes.header}>
                             Reply:
                         </Typography>
+
 
                         <form className={classes.form}>
                             <TextField
@@ -178,7 +166,40 @@ class Admin extends Component {
                     </Card>
                 </Modal>
 
-              
+                {/* <TableContainer>
+                    <Table aria-label="customized table">
+                        <TableHead>
+                            <TableRow>
+                            <StyledTableCell align="left">Name</StyledTableCell>
+                            <StyledTableCell align="left">Email</StyledTableCell>
+                            <StyledTableCell align="left">Message</StyledTableCell>
+                            <StyledTableCell align="left">Delete</StyledTableCell>
+                            </TableRow>
+                        </TableHead>
+
+                        <TableBody>
+                            
+                            {this.props.reduxState.message.map((message) => {
+                        
+                                return (
+
+                                    <TableRow key={message.id}>
+                                        <TableCell>{message.name}</TableCell>
+                                        <TableCell>{message.email}</TableCell>
+                                        <TableCell>{message.description}</TableCell>
+                                        <TableCell><Moment format='MM/DD/YYYY'>{message.date}</Moment></TableCell>
+                                       <TableCell><DeleteOutlinedIcon onClick={()=> {this.deleteSupport(message.id)}}>
+                                                </DeleteOutlinedIcon></TableCell>
+                                    </TableRow>
+                                )
+                            })
+                            }
+                        </TableBody> 
+
+
+                    </Table>
+                </TableContainer>   */}
+
             </>
         ) //end return 
     } //end render

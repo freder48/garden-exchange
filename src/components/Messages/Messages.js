@@ -149,7 +149,7 @@ class Messages extends Component {
                 </table>
 
                 <Modal show={this.state.show} handleClose={this.hideModal} messageObj={this.state.messageObj}>
-                    <Card className={classes.card}>
+                    {/* <Card className={classes.card}>
                         <Typography gutterBottom variant="h5" component="h2" className={classes.header}>
                             Reply:
                         </Typography>
@@ -175,7 +175,7 @@ class Messages extends Component {
                             <Button
                                 onClick={this.addMessage}>Save</Button>
                         </form>
-                    </Card>
+                    </Card> */}
                 </Modal>
             </div>
         )

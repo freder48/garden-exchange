@@ -17,7 +17,7 @@ const { rejectUnauthenticated } = require('../modules/authentication-middleware'
 
   // This route will return logged in users listings
   router.get('/', rejectUnauthenticated, (req, res) => {
-    let queryText = `SELECT * FROM "forum" WHERE "user_id" = $1 ORDER BY "date";`;
+    let queryText = `SELECT * FROM "forum" WHERE "user_id" = $1 ORDER BY date DESC;`;
     pool.query(queryText, [req.user.id]).then((result) => {
         res.send(result.rows);
     }).catch((error) => {
@@ -29,7 +29,7 @@ const { rejectUnauthenticated } = require('../modules/authentication-middleware'
   //Get post details for specific user listing
 router.get('/:id', rejectUnauthenticated, (req, res) => {
   let id = req.params.id;
-  const sqlText = `SELECT * FROM forum WHERE id=$1 ORDER BY "date"`;
+  const sqlText = `SELECT * FROM forum WHERE id=$1`;
   //pool is the database, here we are sending the query to the database, running a query similar to a command in Postico
   pool.query(sqlText, [id])
     .then((result) => {
@@ -47,7 +47,7 @@ router.put('/:id', rejectUnauthenticated, (req, res) => {
   console.log('req.body' ,req.body);
   let id = req.params.id; // identify which item to update
   console.log('id:', id);
-  let sqlText = `UPDATE "forum" SET "have"=$1, "want" =$2, "location"=$3 WHERE "id"= $4 ORDER BY "date";`
+  let sqlText = `UPDATE "forum" SET "have"=$1, "want" =$2, "location"=$3 WHERE "id"= $4;`
   pool.query(sqlText, [edit.have, edit.want, edit.location, id]) 
       .then((result) => { 
           res.sendStatus(200); 

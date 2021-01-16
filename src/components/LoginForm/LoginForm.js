@@ -3,6 +3,11 @@ import { connect } from 'react-redux';
 import mapStoreToProps from '../../redux/mapStoreToProps';
 import { withStyles } from '@material-ui/core/styles';
 import { TextField, Button, Card} from '@material-ui/core';
+import InputAdornment from '@material-ui/core/InputAdornment';
+import IconButton from '@material-ui/core/IconButton';
+import Visibility from '@material-ui/icons/Visibility';
+import VisibilityOff from '@material-ui/icons/VisibilityOff';
+
 
 const styles = {
   button: {
@@ -43,13 +48,20 @@ const styles = {
     width: '90%',
     backgroundColor: '#fff9e6',
   },
+  icon: {
+    color: 'black',
+    width: '100%',
+  }
 
 };
 
 class LoginForm extends Component {
+
+//local state
   state = {
     username: '',
     password: '',
+    showPassword: false, 
   };
 
   login = (event) => {
@@ -68,6 +80,13 @@ class LoginForm extends Component {
     }
   }; // end login
 
+  //toggles the password from visible to hidden
+  handleClickShowPassword = () => {
+    this.setState(state => ({ showPassword: !state.showPassword }));
+    console.log('flipped boolean', this.state.showPassword);
+  };
+
+  //handle inputs
   handleInputChangeFor = (propertyName) => (event) => {
     this.setState({
       [propertyName]: event.target.value,
@@ -103,13 +122,24 @@ class LoginForm extends Component {
           <label htmlFor="password">
             
             <TextField
+              required
               className={classes.textField}
               label="Password"
-              type="password"
-              name="password"
-              required
+              type={this.state.showPassword ? 'text' : 'password'}
+              // name="password"
               value={this.state.password}
               onChange={this.handleInputChangeFor('password')}
+              // endAdornment={
+              //   <InputAdornment position="end">
+              //     <IconButton
+              //       className={classes.icon}
+              //       aria-label="Toggle password visibility"
+              //       onClick={this.handleClickShowPassword}>
+              //       {this.state.showPassword ? <Visibility /> : <VisibilityOff />}
+              //       </IconButton>
+              //     </InputAdornment>
+              // }
+
             />
           </label>
         </div>

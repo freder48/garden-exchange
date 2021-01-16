@@ -78,25 +78,22 @@ class Modal extends Component {
   } if (this.state.messageObj.message === '') {
       this.setState({ messageError: true, messageErrorText: 'This field is required' })
   } else {
-    this.setState({
-      subjectError: false, messageError: false, 
-      subjectErrorText: '', messageErrorText: '',
-  })
     //sweetAlert success message
     swal("Success!", "Your Message Was Sent!", "success");
     this.props.handleClose();
     this.props.dispatch({ type: 'ADD_MESSAGE', payload: this.state.messageObj })
     this.setState({
       messageObj: {
-        sent_to_user_id: '',
-        sent_from_user_id: '',
-        forum_id: '',
+        // sent_to_user_id: '',
+        // sent_from_user_id: '',
+        // forum_id: '',
         subject: '',
         message: '',
-        mail_sent: true, 
+        // mail_sent: true, 
       },
     })
   }
+
 
   }
 
