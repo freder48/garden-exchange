@@ -49,7 +49,7 @@ function Nav(props) {
   
   if (props.store.user.administrator){
     loginLinkData.path = '/admin';
-    loginLinkData.text = 'Admin';
+    loginLinkData.text = `Welcome ${props.store.user.first_name}`;
   }
 
   return (
