@@ -43,6 +43,13 @@ const styles = {
   icon: {
     paddingRight: '5px',
   },
+  pagination: {
+    width: '100%',
+  },
+  paginationContainer: {
+    width: '100%',
+    
+  },
   search: {
     width: '50%',
     justifyContent: 'center',
@@ -60,6 +67,7 @@ class ForumPage extends Component {
     search: null,
     //for pop-up dialog form
     show: false,
+    //messageObj for pop-up modal post
     messageObj: {
       sent_to_user_id: '',
       sent_from_user_id: '',
@@ -68,6 +76,7 @@ class ForumPage extends Component {
       message: '',
       mail_sent: true,
     },
+    //pagination
     page: 0,
     rowsPerPage: 10,
   }//end local state
@@ -99,10 +108,11 @@ class ForumPage extends Component {
 
   };
 
+  //changes page number
   handleChangePage = (event, page) => {
     this.setState({ page });
   };
-
+//changes rows per page based on drop down menu
   handleChangeRowsPerPage = event => {
     this.setState({ rowsPerPage: event.target.value });
   };
@@ -178,9 +188,11 @@ class ForumPage extends Component {
 
           </tbody>
         </table>
-        <TablePagination
+      
+        <div className={classes.paginationContainer}><TablePagination
+                    className={classes.pagination}
                     rowsPerPageOptions={[10, 25, 50, 100]}
-                    // component=“div”
+                    component="div"
                     count={this.props.store.forum.length}
                     rowsPerPage={rowsPerPage}
                     page={page}
@@ -193,6 +205,7 @@ class ForumPage extends Component {
                     onChangePage={this.handleChangePage}
                     onChangeRowsPerPage={this.handleChangeRowsPerPage}
                   />
+         </div>
 
         <Modal show={this.state.show} handleClose={this.hideModal} showModal={this.showModal} messageObj={this.state.messageObj} />
 
