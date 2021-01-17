@@ -67,9 +67,9 @@ class DummyPagination extends Component {
       subject: '',
       message: '',
       mail_sent: true,
-    }, 
+    },
     page: 0,
-    rowsPerPage: 5,
+    rowsPerPage: 10,
   }//end local state
 
   //cancel button on search input
@@ -90,7 +90,7 @@ class DummyPagination extends Component {
   //search bar
   searchSpace = (event) => {
     let keyword = event.target.value;
-    this.setState({ search: keyword })
+    this.setState({ search: keyword, page: 0})
   }
 
   //displays message form if show in local state is set to true
@@ -103,13 +103,14 @@ class DummyPagination extends Component {
     this.setState({ page });
   };
 
-    handleChangeRowsPerPage = event => {
+  handleChangeRowsPerPage = event => {
     this.setState({ rowsPerPage: event.target.value });
   };
 
 
   render() {
     const { classes } = this.props;
+    const { rowsPerPage, page } = this.state;
     return (
       <>
         <section className={classes.headerContainer}>
@@ -154,21 +155,22 @@ class DummyPagination extends Component {
                 || post.location.toLowerCase().includes(this.state.search.toLowerCase())) {
                 return post
               }
-            }).map(post => {
+            }).slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage).map(post => {
               return (
                 <>
-                <tr key={post.id}>
-                  <td>{post.have}</td>
-                  <td>{post.want}</td>
-                  <td>{post.location}</td>
-                  <td><Moment format='MM/DD/YYYY'>{post.date}</Moment></td>
-                  <td onClick={() => this.showModal(post.id, post.user_id)}>
-                    <Button>
-                    <MailOutlineIcon className={classes.icon} />
+                  <tr key={post.id}>
+                    <td>{post.have}</td>
+                    <td>{post.want}</td>
+                    <td>{post.location}</td>
+                    <td><Moment format='MM/DD/YYYY'>{post.date}</Moment></td>
+                    <td onClick={() => this.showModal(post.id, post.user_id)}>
+                      <Button>
+                        <MailOutlineIcon className={classes.icon} />
                     Message
                     </Button>
                     </td>
-                </tr>
+                  </tr>
+
                 </>
               )
             })
@@ -176,6 +178,21 @@ class DummyPagination extends Component {
 
           </tbody>
         </table>
+        <TablePagination
+                    rowsPerPageOptions={[10, 25, 50, 100]}
+                    // component=“div”
+                    count={this.props.store.forum.length}
+                    rowsPerPage={rowsPerPage}
+                    page={page}
+                    backIconButtonProps={{
+                      'aria-label': 'Previous Page',
+                    }}
+                    nextIconButtonProps={{
+                      'aria-label': 'Next Page',
+                    }}
+                    onChangePage={this.handleChangePage}
+                    onChangeRowsPerPage={this.handleChangeRowsPerPage}
+                  />
 
         <Modal show={this.state.show} handleClose={this.hideModal} showModal={this.showModal} messageObj={this.state.messageObj} />
 

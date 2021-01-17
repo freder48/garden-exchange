@@ -26,6 +26,7 @@ import Messages from '../Messages/Messages';
 import UserProfile from '../UserProfile/UserProfileList';
 import SupportForm from '../SupportForm/SupportForm';
 import Admin from '../Admin/Admin';
+import DummyPagination from '../DummyPagination/DummyPagination';
 import './App.css';
 
 class App extends Component {
@@ -44,11 +45,18 @@ class App extends Component {
             <Redirect exact from="/" to="/home" />
 
             {/* Visiting localhost:3000/about will show the about page. */}
-            <Route
+            {/* <Route
               // shows AboutPage at all times (logged in or not)
               exact
               path="/about"
               component={AboutPage}
+            /> */}
+
+            <Route
+              // shows AboutPage at all times (logged in or not)
+              exact
+              path="/about"
+              component={DummyPagination}
             />
 
             {/* For protected routes, the view could show one of several things on the same route.
