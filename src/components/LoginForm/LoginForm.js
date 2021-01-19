@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import mapStoreToProps from '../../redux/mapStoreToProps';
 import { withStyles } from '@material-ui/core/styles';
-import { TextField, Button, Card, Input} from '@material-ui/core';
+import { TextField, Button, Card,} from '@material-ui/core';
 import InputAdornment from '@material-ui/core/InputAdornment';
 import IconButton from '@material-ui/core/IconButton';
 import Visibility from '@material-ui/icons/Visibility';
@@ -69,7 +69,6 @@ class LoginForm extends Component {
 
   login = (event) => {
     event.preventDefault();
-
     if (this.state.username && this.state.password) {
       this.props.dispatch({
         type: 'LOGIN',

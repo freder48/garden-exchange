@@ -58,6 +58,7 @@ class Messages extends Component {
             subject: '',
             message: '',
             mail_sent: true,
+            sent_to_user_email: this.props.store.email.email,
         },
         search: '',
     }//end local state
@@ -97,12 +98,10 @@ class Messages extends Component {
 
     //displays message form if show in local state is set to true
     showModal = (id, user_id) => {
+        
         this.setState({ show: true, messageObj: { forum_id: id, sent_to_user_id: user_id, mail_sent: true, } });
     };
 
-    // {this.state.sent_to_user_id !== undefined &&
-    
-    // }
     render() {
         const { classes } = this.props;
         return (
@@ -148,35 +147,7 @@ class Messages extends Component {
                     </tbody>
                 </table>
 
-                <Modal show={this.state.show} handleClose={this.hideModal} messageObj={this.state.messageObj}>
-                    {/* <Card className={classes.card}>
-                        <Typography gutterBottom variant="h5" component="h2" className={classes.header}>
-                            Reply:
-                        </Typography>
-
-
-                        <form className={classes.form}>
-                            <TextField
-                                label="Subject"
-                                type="text"
-                                onChange={(event) => this.handleModalChange('subject', event)}
-                                className={classes.textField}
-                            />
-                            <br></br><br></br>
-                            <TextField
-                                label="Message"
-                                type="text"
-                                multiline
-                                className={classes.textField}
-                                onChange={(event) => this.handleModalChange('message', event)}
-                            />
-                            <br></br>
-                            <br></br>
-                            <Button
-                                onClick={this.addMessage}>Save</Button>
-                        </form>
-                    </Card> */}
-                </Modal>
+                <Modal show={this.state.show} handleClose={this.hideModal} messageObj={this.state.messageObj} />
             </div>
         )
     }

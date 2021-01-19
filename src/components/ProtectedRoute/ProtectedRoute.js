@@ -3,7 +3,7 @@ import { Route, Redirect } from 'react-router-dom';
 import { connect } from 'react-redux';
 import LoginPage from '../LoginPage/LoginPage';
 import mapStoreToProps from '../../redux/mapStoreToProps';
-import Admin from '../Admin/Admin';
+
 // A Custom Wrapper Component -- This will keep our code DRY.
 // Responsible for watching redux state, and returning an appropriate component
 // API for this component is the same as a regular route

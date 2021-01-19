@@ -28,10 +28,30 @@ router.get('/', rejectUnauthenticated, (req, res) => {
   });
 });//end GET
 
+  //Get email for specific user
+  router.get('/:id', rejectUnauthenticated, (req, res) => {
+    let id = req.params.id;
+    const sqlText = `SELECT email FROM "user"
+                    JOIN message ON message.sent_to_user_id = "user".id
+                    WHERE "user".id = $1;`;
+    //pool is the database, here we are sending the query to the database, running a query similar to a command in Postico
+    pool.query(sqlText, [id])
+      .then((result) => {
+        res.send(result.rows[0]);
+      })
+      .catch((error) => {
+        console.log(`Error making database query in GET ${sqlText}`, error);
+        res.sendStatus(500);
+      });
+  }); // END GET Route
+
+
+
 //POST message from logged in user
 router.post('/', rejectUnauthenticated, (req, res) => {
   console.log('email', req.body);
   const data = req.body;
+
   const sent_from_username = req.user.username
   let queryText;
 if (data.forum_id == 'null'){
@@ -48,7 +68,6 @@ if (data.forum_id == 'null'){
             res.sendStatus(500);
           });
 }
-
 
   if (req.user.email_messages){
 

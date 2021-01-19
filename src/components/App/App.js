@@ -14,7 +14,7 @@ import Footer from '../Footer/Footer';
 import ProtectedRoute from '../ProtectedRoute/ProtectedRoute';
 import mapStoreToProps from '../../redux/mapStoreToProps';
 
-import AboutPage from '../AboutPage/AboutPage';
+
 // import UserPage from '../UserPage/UserPage';
 import InfoPage from '../InfoPage/InfoPage';
 import LandingPage from '../LandingPage/LandingPage';
@@ -26,7 +26,7 @@ import Messages from '../Messages/Messages';
 import UserProfile from '../UserProfile/UserProfileList';
 import SupportForm from '../SupportForm/SupportForm';
 import Admin from '../Admin/Admin';
-import DummyPagination from '../DummyPagination/DummyPagination';
+
 import './App.css';
 
 class App extends Component {

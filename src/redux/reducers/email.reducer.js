@@ -1,8 +1,8 @@
 
 // store user message information 
-const support = (state = [], action) => {
+const email = (state = [], action) => {
     switch (action.type) {
-        case 'SET_SUPPORT':
+        case 'SET_EMAIL':
             return action.payload;
         default:
             return state;
@@ -10,4 +10,6 @@ const support = (state = [], action) => {
 }
 
 
-export default support;
+
+export default email;
+

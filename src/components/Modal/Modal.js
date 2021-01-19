@@ -62,6 +62,7 @@ class Modal extends Component {
       subject: '',
       message: '',
       mail_sent: true,
+      
     },
     show: false,
     subjectError: false, 
@@ -70,9 +71,38 @@ class Modal extends Component {
     messageErrorText: '',
   }
 
+//   componentDidUpdate(prevProps) {
+//     if (this.props.store.email.email !== prevProps.email.email && this.state.messageObj.sent_to_user_email == null)
+//  {
+//         this.setState({
+//             messageObj: {
+//                 sent_to_user_email: this.props.store.email.email
+
+//             }
+//         })
+//     }
+// }
+
+  // getEmail = () => {
+  //   this.props.dispatch({ type: 'GET_EMAIL', payload: this.state.messageObj.sent_to_user_id })
+
+  //   // if (this.props.store.email.email != null) {
+  //   //   console.log('email in state', this.props.store.email.email)
+  //   // } else {
+  //   //   console.log('value is still null')
+  //   // }
+  //   this.setState({
+  //     messageObj: {
+  //       sent_to_user_email: this.props.store.email?.email
+  //     }
+  //   })
+  //   // console.log('email in state', this.state.messageObj)
+  //   this.addMessage()
+  // }
+
   //dispatches messageObj to saga for post route
   addMessage = (event) => {
-    event.preventDefault();
+    // event.preventDefault();
     if (this.state.messageObj.subject === '') {
       this.setState({ subjectError: true, subjectErrorText: 'This field is required' })
   } if (this.state.messageObj.message === '') {
@@ -81,24 +111,26 @@ class Modal extends Component {
     //sweetAlert success message
     swal("Success!", "Your Message Was Sent!", "success");
     this.props.handleClose();
+
+    // this.componentDidUpdate();
+
     this.props.dispatch({ type: 'ADD_MESSAGE', payload: this.state.messageObj })
     this.setState({
       messageObj: {
-        // sent_to_user_id: '',
-        // sent_from_user_id: '',
-        // forum_id: '',
+        sent_to_user_id: '',
+        sent_from_user_id: '',
+        forum_id: '',
         subject: '',
         message: '',
-        // mail_sent: true, 
+        mail_sent: true, 
       },
     })
   }
-
-
   }
 
   //gets input values on pop-up modal and sets local state
   handleModalChange = (inputValue, event) => {
+    // this.props.dispatch({ type: 'GET_EMAIL', payload: this.state.messageObj.sent_to_user_id })
     this.setState({
       messageObj: {
         ...this.state.messageObj,
@@ -106,12 +138,12 @@ class Modal extends Component {
         sent_from_user_id: `${this.props.store.user.id}`,
         sent_to_user_id: `${this.props.messageObj.sent_to_user_id}`,
         forum_id: `${this.props.messageObj.forum_id}`,
-
+        // sent_to_user_email: `${this.props.store.email.email}`
       },
-
+      
     })
+    
   }//end handleModalChange
-
 
 
   render() {

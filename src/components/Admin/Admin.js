@@ -1,7 +1,7 @@
 //imports //imports JUST the component from react not ALL of react 
 import React, { Component } from 'react';
 import mapStoreToProps from '../../redux/mapStoreToProps';
-import { Button, Typography, TextField, Card } from '@material-ui/core'
+import { Button} from '@material-ui/core'
 import DeleteOutlinedIcon from '@material-ui/icons/DeleteOutlined';
 import Modal from '../Modal/Modal';
 import { withStyles } from '@material-ui/core/styles';
