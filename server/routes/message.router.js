@@ -31,7 +31,7 @@ router.get('/', rejectUnauthenticated, (req, res) => {
   //Get email for specific user
   router.get('/:id', rejectUnauthenticated, (req, res) => {
     let id = req.params.id;
-    const sqlText = `SELECT email FROM "user"
+    const sqlText = `SELECT email, email_messages FROM "user"
                     JOIN message ON message.sent_to_user_id = "user".id
                     WHERE "user".id = $1;`;
     //pool is the database, here we are sending the query to the database, running a query similar to a command in Postico
@@ -46,18 +46,26 @@ router.get('/', rejectUnauthenticated, (req, res) => {
   }); // END GET Route
 
 
-
 //POST message from logged in user
 router.post('/', rejectUnauthenticated, (req, res) => {
   console.log('email', req.body);
   const data = req.body;
-
+  const sent_to_user_email = req.body.sent_to_user_email.email
+  const wantsEmail = req.body.sent_to_user_email.email_messages
+  console.log('hazels email', wantsEmail)
   const sent_from_username = req.user.username
+
+
   let queryText;
 if (data.forum_id == 'null'){
    queryText = `INSERT INTO "message" (sent_to_user_id, sent_from_user_id, subject, message, mail_sent, sent_from_username)
    VALUES ($1, $2, $3, $4, $5, $6);`;
    pool.query(queryText, [data.sent_to_user_id, data.sent_from_user_id, data.subject, data.message, data.mail_sent, sent_from_username])
+   .then(() => { res.sendStatus(201); })
+   .catch((err) => {
+       console.log('Error completing POST server query', err);
+       res.sendStatus(500);
+   });
 } else {
  queryText = `INSERT INTO "message" (sent_to_user_id, sent_from_user_id, forum_id, subject, message, mail_sent, sent_from_username)
           VALUES ($1, $2, $3, $4, $5, $6, $7);`;
@@ -69,7 +77,7 @@ if (data.forum_id == 'null'){
           });
 }
 
-  if (req.user.email_messages){
+  if (wantsEmail === true ){
 
   let password = process.env.password;
   const smtpTransport = nodemailer.createTransport({
@@ -93,7 +101,7 @@ if (data.forum_id == 'null'){
   });
   const mailOptions = {
       from: `${data.email_address}`,
-      to: 'jfredericksen12@gmail.com',
+      to: sent_to_user_email,
       subject: `${data.subject}`,
       html: `<p>${data.message}</p>
               <p>Thank you, ${req.user.first_name}</p>`
@@ -110,11 +118,11 @@ if (data.forum_id == 'null'){
           // const queryText = `INSERT INTO "message" (sent_to_user_id, sent_from_user_id, forum_id, subject, message, mail_sent, sent_from_username)
           // VALUES ($1, $2, $3, $4, $5, $6, $7);`;
           // pool.query(queryText, [data.sent_to_user_id, data.sent_from_user_id, data.forum_id, data.subject, data.message, data.mail_sent, sent_from_username])
-              .then(() => { res.sendStatus(201); })
-              .catch((err) => {
-                  console.log('Error completing POST server query', err);
-                  res.sendStatus(500);
-              });
+              // .then(() => { res.sendStatus(201); })
+              // .catch((err) => {
+              //     console.log('Error completing POST server query', err);
+              //     res.sendStatus(500);
+              // });
       });
   } else {
     // const queryText = `INSERT INTO "message" (sent_to_user_id, sent_from_user_id, forum_id, subject, message, mail_sent, sent_from_username)
@@ -131,14 +139,4 @@ if (data.forum_id == 'null'){
 
 module.exports = router;
 
-// console.log('req.user', req.user.email_messages)
-// const message = req.body;
-// console.log('req.body', message)
-// const queryText = `INSERT INTO "message" (sent_to_user_id, sent_from_user_id, forum_id, message)
-//                    VALUES ($1, $2, $3, $4);`;
-// pool.query(queryText, [message.sent_to_user_id, message.sent_from_user_id, message.forum_id, message.message])
-//   .then(() => { res.sendStatus(201); })
-//   .catch((err) => {
-//     console.log('Error completing POST in forum server', err);
-//     res.sendStatus(500);
-//   });
+
