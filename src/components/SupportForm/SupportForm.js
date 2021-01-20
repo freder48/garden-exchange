@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import { Card, CardActionArea, CardContent, Typography, TextField, Button} from '@material-ui/core';
+import { Card, CardActionArea, CardContent, Typography, TextField, Button } from '@material-ui/core';
 import { withStyles } from '@material-ui/core/styles';
 import mapStoreToProps from '../../redux/mapStoreToProps';
 import swal from 'sweetalert';
@@ -12,10 +12,10 @@ const styles = {
         marginTop: '15px',
         justifyContent: 'center',
         '&:hover': {
-          backgroundColor: 'rgb(69, 109, 109);',
-          color: '#fff9e6'
+            backgroundColor: 'rgb(69, 109, 109);',
+            color: '#fff9e6'
         }
-      },
+    },
     card: {
         margin: 'auto',
         width: '60%',
@@ -47,7 +47,7 @@ const styles = {
 };
 
 class SupportForm extends Component {
-//local state
+    //local state
     state = {
         supportMessage: {
             sent_to_user_id: 1,
@@ -58,20 +58,20 @@ class SupportForm extends Component {
             mail_sent: true,
         },
     }
-//addMessage
-   addMessage = (event) => {
+    //addMessage for support form
+    addMessage = (event) => {
         event.preventDefault();
         this.setState({
             supportMessage: {
                 subject: '',
-                message: '', 
+                message: '',
                 forum_id: null,
-                sent_from_user_id: this.props.store.user.id, 
-                sent_to_user_id: 1,     
-                 }
+                sent_from_user_id: this.props.store.user.id,
+                sent_to_user_id: 1,
+            }
         })
         this.props.dispatch({ type: 'ADD_MESSAGE', payload: this.state.supportMessage })
-
+        //sweetAlert success message
         swal('Success, your feedback was sent!', {
             icon: "success",
             buttons: {
@@ -95,10 +95,10 @@ class SupportForm extends Component {
                 })
             }
         })
-    
+
 
     }
-
+    //handle input change
     handleChange = (inputValue, event) => {
         event.preventDefault();
         this.setState({
@@ -107,9 +107,6 @@ class SupportForm extends Component {
                 [inputValue]: event.target.value
             }
         })//end setState
-        console.log(event.target.value);
-
-
     }//end handleChange
 
     render() {
@@ -117,40 +114,40 @@ class SupportForm extends Component {
         const { classes } = this.props;
 
         return (
-         
+
             <div>
                 <Card className={classes.card}>
-                        <CardContent>
-                            <Typography gutterBottom variant="h5" component="h2" className={classes.header}>
-                                How can I support you?
+                    <CardContent>
+                        <Typography gutterBottom variant="h5" component="h2" className={classes.header}>
+                            How can I support you?
                            </Typography>
-                            <form className={classes.form}>
+                        <form className={classes.form}>
                             <TextField
-                              label="Subject"
-                              type="text"
-                              value={this.state.supportMessage.subject}
-                              onChange={(event) => this.handleChange('subject', event)}
-                              className={classes.textField}
+                                label="Subject"
+                                type="text"
+                                value={this.state.supportMessage.subject}
+                                onChange={(event) => this.handleChange('subject', event)}
+                                className={classes.textField}
                             />
                             <br></br><br></br>
                             <TextField
-                              label="Message"
-                              type="text"
-                              multiline
-                              rows={5}
-                              value={this.state.supportMessage.message}
-                              className={classes.textField}
-                              onChange={(event) => this.handleChange('message', event)}
+                                label="Message"
+                                type="text"
+                                multiline
+                                rows={5}
+                                value={this.state.supportMessage.message}
+                                className={classes.textField}
+                                onChange={(event) => this.handleChange('message', event)}
                             />
                             <br></br>
                             <CardActionArea>
-                           <Button className={classes.button}
-                           onClick={this.addMessage}>
-                           Send
+                                <Button className={classes.button}
+                                    onClick={this.addMessage}>
+                                    Send
                            </Button>
-                           </CardActionArea>
-                          </form>
-                        </CardContent>
+                            </CardActionArea>
+                        </form>
+                    </CardContent>
                 </Card>
             </div>
         )

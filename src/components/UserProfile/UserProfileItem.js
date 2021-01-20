@@ -4,21 +4,14 @@ import mapStoreToProps from '../../redux/mapStoreToProps';
 import Moment from 'react-moment';
 import DeleteOutlinedIcon from '@material-ui/icons/DeleteOutlined';
 import EditIcon from '@material-ui/icons/Edit';
-import { TextField, Button} from '@material-ui/core';
+import { TextField, Button } from '@material-ui/core';
 import swal from 'sweetalert';
 import { withStyles } from '@material-ui/core/styles';
 
 const styles = {
-    btnContainer: {
-        // display: 'in-line block',
-        // margin: '0',
-        marginRight: '0px',
-        // width: '18%'
-    },
     button: {
         backgroundColor: '#fff9e6',
         minWidth: '60px',
-        // float: 'right',
         width: '25%',
         marginLeft: '0',
         border: '2px solid #c78b50',
@@ -28,7 +21,6 @@ const styles = {
         },
         cancelButton: {
             width: '20%',
-            // float: 'left',
             marginLeft: '1%',
         }
     },
@@ -46,8 +38,10 @@ class UserProfileItem extends Component {
             location: null,
             id: null,
         },
+        //if this is flipped to true input boxes render to edit
         isEditable: false,
     }
+    //cancels edits sets back to original values
     cancelButton = () => {
         this.setState({ isEditable: false, });
         this.props.dispatch({ type: 'GET_USER_LISTING' })
@@ -58,6 +52,7 @@ class UserProfileItem extends Component {
         this.props.dispatch({ type: 'GET_USER_LISTING' })
     }
 
+    //compares what is in the redux store to local state to render values
     componentDidUpdate(prevProps) {
         if (this.props.store.details.have !== prevProps.have && this.state.editListing.have === null
             || this.props.store.details.want !== prevProps.want && this.state.editListing.want === null
@@ -73,7 +68,8 @@ class UserProfileItem extends Component {
             })
         }
     }
-    //start deleteListing
+
+    //deletes item by id
     deleteListing(id) {
         swal({
             title: "Are you sure?",
@@ -113,16 +109,10 @@ class UserProfileItem extends Component {
 
     //dispatches to saga to start put route
     saveEditedListing = (id) => {
-        console.log('updated listing', this.state.editListing)
         this.props.dispatch({ type: 'UPDATE_LISTING', payload: this.state.editListing })
         this.setState({
-            // editListing: {
-            //     have: '',
-            //     want: '',
-            //     location: '',
-            // },
-             isEditable: false,
-         })
+            isEditable: false,
+        })
     }
 
     render() {
@@ -158,18 +148,18 @@ class UserProfileItem extends Component {
                         <td><Moment format='MM/DD/YYYY'>{this.props.listing.date}</Moment></td>
                         <td className={classes.btnContainer}>
                             <center>
-                            <Button
-                                onClick={this.cancelButton}
-                                variant="outlined"
-                                color="secondary"
-                                className={classes.cancelButton}
-                            >Cancel
+                                <Button
+                                    onClick={this.cancelButton}
+                                    variant="outlined"
+                                    color="secondary"
+                                    className={classes.cancelButton}
+                                >Cancel
                              </Button>
-                            <Button
-                                onClick={() => this.saveEditedListing(this.props.listing.id)}
-                                variant="outlined"
-                                className={classes.button}
-                            > Save
+                                <Button
+                                    onClick={() => this.saveEditedListing(this.props.listing.id)}
+                                    variant="outlined"
+                                    className={classes.button}
+                                > Save
                             </Button>
                             </center>
                         </td>
@@ -187,10 +177,10 @@ class UserProfileItem extends Component {
                         <td>{this.props.listing.want}</td>
                         <td>{this.props.listing.location}</td>
                         <td><Moment format='MM/DD/YYYY'>{this.props.listing.date}</Moment></td>
-                        
+
                         <td><Button
                             onClick={() => this.editListing(this.props.listing.id)}>
-                            <EditIcon className={classes.icon}/>
+                            <EditIcon className={classes.icon} />
                             Edit
                             </Button>
                         </td>

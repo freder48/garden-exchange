@@ -22,6 +22,7 @@ const styles = {
 }
 
 class UserProfileList extends Component {
+    
     //get all messages for specific user upon page load
     componentDidMount() {
         this.props.dispatch({ type: 'GET_USER_LISTING' })

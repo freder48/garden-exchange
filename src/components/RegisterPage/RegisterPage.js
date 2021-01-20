@@ -34,7 +34,6 @@ class RegisterPage extends Component {
     return (
       <div>
         <RegisterForm />
-
         <center>
         <h5 className={classes.question}>Already a member?</h5>
           <Button

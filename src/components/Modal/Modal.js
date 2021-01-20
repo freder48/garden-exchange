@@ -64,6 +64,7 @@ class Modal extends Component {
       mail_sent: true,
       
     },
+    //if inputs are empty the booleans will flip to true, error & helperText on inputs
     show: false,
     subjectError: false, 
     subjectErrorText: '',
@@ -71,36 +72,7 @@ class Modal extends Component {
     messageErrorText: '',
   }
 
-//   componentDidUpdate(prevProps) {
-//     if (this.props.store.email.email !== prevProps.email.email && this.state.messageObj.sent_to_user_email == null)
-//  {
-//         this.setState({
-//             messageObj: {
-//                 sent_to_user_email: this.props.store.email.email
-
-//             }
-//         })
-//     }
-// }
-
-  // getEmail = () => {
-  //   this.props.dispatch({ type: 'GET_EMAIL', payload: this.state.messageObj.sent_to_user_id })
-
-  //   // if (this.props.store.email.email != null) {
-  //   //   console.log('email in state', this.props.store.email.email)
-  //   // } else {
-  //   //   console.log('value is still null')
-  //   // }
-  //   this.setState({
-  //     messageObj: {
-  //       sent_to_user_email: this.props.store.email?.email
-  //     }
-  //   })
-  //   // console.log('email in state', this.state.messageObj)
-  //   this.addMessage()
-  // }
-
-  //dispatches messageObj to saga for post route
+  //dispatches messageObj to saga for post route + sweetAlert success message
   addMessage = (event) => {
     // event.preventDefault();
     if (this.state.messageObj.subject === '') {
@@ -111,10 +83,9 @@ class Modal extends Component {
     //sweetAlert success message
     swal("Success!", "Your Message Was Sent!", "success");
     this.props.handleClose();
-
     // this.componentDidUpdate();
-
     this.props.dispatch({ type: 'ADD_MESSAGE', payload: this.state.messageObj })
+    //clear state
     this.setState({
       messageObj: {
         sent_to_user_id: '',
@@ -140,18 +111,14 @@ class Modal extends Component {
         forum_id: `${this.props.messageObj.forum_id}`,
         // sent_to_user_email: `${this.props.store.email.email}`
       },
-      
     })
-    
   }//end handleModalChange
-
 
   render() {
     const showHideClassName = this.props.show ? "modal display-block" : "modal display-none";
     const { classes } = this.props;
 
     return (
-
       <div className={showHideClassName}>
       <Grid container>
         <Card className={classes.card} item={12}>
@@ -160,7 +127,6 @@ class Modal extends Component {
            </Typography>
 
           <CardContent>
-
             <form className={classes.form}>
               <TextField
                 required
@@ -187,7 +153,6 @@ class Modal extends Component {
               />
               <br></br>
               <br></br>
-
               <Button 
               type="button" 
               onClick={this.props.handleClose}
@@ -199,7 +164,6 @@ class Modal extends Component {
              Save
              </Button>
             </form>
-
           </CardContent>
         </Card>
         </Grid>

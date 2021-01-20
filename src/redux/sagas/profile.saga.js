@@ -11,7 +11,6 @@ function* profileSaga() {
 
 //DELETE posts for logged in user
 function* deleteListing(action){
-    console.log('delete listing', action.payload);
     try{
         yield axios.delete(`/api/profile/${action.payload}`)
         yield put({type: 'GET_USER_LISTING'})
@@ -21,7 +20,6 @@ function* deleteListing(action){
 }//end deleteListing
 
 function* getDetails(action) {
-    console.log('EDIT PAYLOAD', action.payload);
     try {
         const response = yield axios.get(`/api/profile/${action.payload}`)
         yield put({ type: 'SET_DETAILS', payload: response.data });
@@ -35,7 +33,6 @@ function* getUserListing() {
     try {
         const response = yield axios.get(`api/profile` )
         yield put({ type: 'SET_FORUM', payload: response.data });
-        console.log(response.data);
     } catch (error) {
         console.log('error with forum get request in profile.saga.js', error);
     }

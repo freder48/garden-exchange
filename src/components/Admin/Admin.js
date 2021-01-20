@@ -38,16 +38,12 @@ class Admin extends Component {
             message: '',
             mail_sent: true,
         },
-        search: '',
     }//end local state
+    
+    //Get all forum listings and support form messages on page load
     componentDidMount() {
         this.props.dispatch({ type: 'GET_FORUM' })
         this.props.dispatch({ type: 'GET_MESSAGES' })
-    }
-
-    deleteItem(id) {
-        console.log('id', id)
-        this.props.dispatch({ type: 'DELETE_LISTING_ADMIN', payload: id })
     }
 
     //deletes message based upon id 
@@ -77,7 +73,7 @@ class Admin extends Component {
         this.setState({ show: false });
     };
 
-    //displays message form if show in local state is set to true
+    //displays message form if show boolean in local state is set to true
     showModal = (id, user_id) => {
         this.setState({ show: true, messageObj: { forum_id: id, sent_to_user_id: user_id, mail_sent: true, } });
     };

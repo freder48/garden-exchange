@@ -67,6 +67,7 @@ class LoginForm extends Component {
     showPassword: false, 
   };
 
+  //handle login
   login = (event) => {
     event.preventDefault();
     if (this.state.username && this.state.password) {

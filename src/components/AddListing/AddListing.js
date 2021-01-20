@@ -63,6 +63,7 @@ class AddListing extends Component {
             location: '',
             user_id: `${this.props.store.user.id}`,
         },
+        //show if inputs are empty-this is error box and helperText
         haveError: false,
         haveErrorText: '',
         wantError: false,
@@ -71,7 +72,7 @@ class AddListing extends Component {
         locationErrorText: '',
     }
 
-
+    //handle input changes
     handleChange = (inputValue, event) => {
         event.preventDefault();
         this.setState({
@@ -82,6 +83,7 @@ class AddListing extends Component {
         })//end setState
     }//end handleChange
 
+    //submit new listing if all inputs are filled, sweetalert success will pop up if so
     handleSubmit = (event) => {
         event.preventDefault();
         if (this.state.newListing.have === '') {

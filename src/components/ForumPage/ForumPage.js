@@ -48,7 +48,7 @@ const styles = {
   },
   paginationContainer: {
     width: '100%',
-    
+
   },
   search: {
     width: '50%',
@@ -91,15 +91,25 @@ class ForumPage extends Component {
     this.props.dispatch({ type: 'GET_FORUM' })
   }
 
+  //changes page number
+  handleChangePage = (event, page) => {
+    this.setState({ page });
+  };
+
+  //changes rows per page based on drop down menu
+  handleChangeRowsPerPage = event => {
+    this.setState({ rowsPerPage: event.target.value });
+  };
+
   //hides pop-up modal by setting local state show to false
   hideModal = () => {
     this.setState({ show: false });
   };
 
-  //search bar
+  //search bar input
   searchSpace = (event) => {
     let keyword = event.target.value;
-    this.setState({ search: keyword, page: 0})
+    this.setState({ search: keyword, page: 0 })
   }
 
   //displays message form if show in local state is set to true
@@ -107,16 +117,6 @@ class ForumPage extends Component {
     this.setState({ show: true, messageObj: { forum_id: id, sent_to_user_id: user_id, mail_sent: true, } });
 
   };
-
-  //changes page number
-  handleChangePage = (event, page) => {
-    this.setState({ page });
-  };
-//changes rows per page based on drop down menu
-  handleChangeRowsPerPage = event => {
-    this.setState({ rowsPerPage: event.target.value });
-  };
-
 
   render() {
     const { classes } = this.props;
@@ -188,24 +188,24 @@ class ForumPage extends Component {
 
           </tbody>
         </table>
-      
+
         <div className={classes.paginationContainer}><TablePagination
-                    className={classes.pagination}
-                    rowsPerPageOptions={[10, 25, 50, 100]}
-                    component="div"
-                    count={this.props.store.forum.length}
-                    rowsPerPage={rowsPerPage}
-                    page={page}
-                    backIconButtonProps={{
-                      'aria-label': 'Previous Page',
-                    }}
-                    nextIconButtonProps={{
-                      'aria-label': 'Next Page',
-                    }}
-                    onChangePage={this.handleChangePage}
-                    onChangeRowsPerPage={this.handleChangeRowsPerPage}
-                  />
-         </div>
+          className={classes.pagination}
+          rowsPerPageOptions={[10, 25, 50, 100]}
+          component="div"
+          count={this.props.store.forum.length}
+          rowsPerPage={rowsPerPage}
+          page={page}
+          backIconButtonProps={{
+            'aria-label': 'Previous Page',
+          }}
+          nextIconButtonProps={{
+            'aria-label': 'Next Page',
+          }}
+          onChangePage={this.handleChangePage}
+          onChangeRowsPerPage={this.handleChangeRowsPerPage}
+        />
+        </div>
 
         <Modal show={this.state.show} handleClose={this.hideModal} showModal={this.showModal} messageObj={this.state.messageObj} />
 

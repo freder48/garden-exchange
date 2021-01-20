@@ -46,7 +46,6 @@ function* getMessage() {
 function* addMessage(action) {
     try {
         const response = yield axios.get(`/api/message/${action.payload.sent_to_user_id}` )
-
         yield axios.post('/api/message', {...action.payload, sent_to_user_email: response.data})
         yield put({ type: 'GET_MESSAGES' })
     } catch (error) {

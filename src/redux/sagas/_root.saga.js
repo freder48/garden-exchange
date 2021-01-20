@@ -5,7 +5,7 @@ import userSaga from './user.saga';
 import forumSaga from './forum.saga';
 import messageSaga from './message.saga';
 import profileSaga from './profile.saga';
-import supportSaga from './support.saga';
+
 // rootSaga is the primary saga.
 // It bundles up all of the other sagas so our project can use them.
 // This is imported in index.js as rootSaga
@@ -21,6 +21,6 @@ export default function* rootSaga() {
     forumSaga(),
     messageSaga(),
     profileSaga(),
-    supportSaga(),
+    
   ]);
 }

@@ -85,7 +85,7 @@ class RegisterForm extends Component {
       email_messages: !this.state.email_messages
     })
   }
-
+//handle registration
   registerUser = (event) => {
     event.preventDefault();
     this.props.dispatch({

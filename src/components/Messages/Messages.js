@@ -68,7 +68,6 @@ class Messages extends Component {
         this.props.dispatch({ type: 'GET_MESSAGES' })
     }
 
-
     //deletes message based upon id 
     deleteMessage(id) {
         swal({
@@ -98,7 +97,6 @@ class Messages extends Component {
 
     //displays message form if show in local state is set to true
     showModal = (id, user_id) => {
-        
         this.setState({ show: true, messageObj: { forum_id: id, sent_to_user_id: user_id, mail_sent: true, } });
     };
 
@@ -120,7 +118,6 @@ class Messages extends Component {
                     </thead>
 
                     <tbody>
-
                         {this.props.store.message.map((message) =>
 
                             <tr key={message.id}>
@@ -141,12 +138,9 @@ class Messages extends Component {
                                     >
                                 </DeleteOutlinedIcon>Delete</Button></td>
                             </tr>
-
                         )}
-
                     </tbody>
                 </table>
-
                 <Modal show={this.state.show} handleClose={this.hideModal} messageObj={this.state.messageObj} />
             </div>
         )

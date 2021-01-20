@@ -55,7 +55,6 @@ function Nav(props) {
   return (
     
     <div className="nav">
-     
       <div className="navbar">
         <Link to="#" className="menu-bars">
           <MenuIcon className={classes.menuBars} onClick={showSidebar} />
@@ -64,10 +63,6 @@ function Nav(props) {
           <h1 className="title">Garden <br></br>Exchange</h1>
         </section>
       </div>
-
-      {/* <Link to="/home">
-        <h2 className="nav-title">Prime Solo Project</h2>
-      </Link> */}
 
       <nav className={sidebar ? 'nav-menu active' : 'nav-menu'}>
         <ul className="nav-menu-items" onClick={showSidebar}>
