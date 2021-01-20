@@ -58,6 +58,26 @@ router.put('/:id', rejectUnauthenticated, (req, res) => {
     })
 })//end PUT route
 
+//PUT ROUTE - change email notifcation preference
+router.put('/', rejectUnauthenticated, (req, res) => {
+  console.log('put route', req.body)
+  let id = req.body.id
+  let sqlText;
+  if(req.body.email_messages){
+    sqlText=`UPDATE "user" SET email_messages=false WHERE id=$1`;
+  } else {
+    sqlText=`UPDATE "user" SET email_messages=true WHERE id=$1`;
+  }
+  pool.query(sqlText, [id])
+    .then((result) => {
+      res.sendStatus(200);
+    })
+    .catch((error) => {
+      console.log('Error from db...', error);
+      res.sendStatus(500);
+    })
+})//end PUT route
+
 
 
 

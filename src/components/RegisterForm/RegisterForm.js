@@ -116,7 +116,6 @@ class RegisterForm extends Component {
               </h3>
             )}
             <div>
-
               <label htmlFor="username">
                 <TextField
                   type="text"

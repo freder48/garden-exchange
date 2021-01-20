@@ -22,10 +22,16 @@ const styles = {
 }
 
 class UserProfileList extends Component {
-    
+
     //get all messages for specific user upon page load
     componentDidMount() {
         this.props.dispatch({ type: 'GET_USER_LISTING' })
+    }
+
+    //put route for email notification
+    emailUpdate = () => {
+        console.log('clicked')
+        this.props.dispatch({type: 'UPDATE_USER_EMAIL_NOTIFICATIONS' , payload: this.props.store.user })
     }
 
 
@@ -64,6 +70,12 @@ class UserProfileList extends Component {
                          <li>First Name: {this.props.store.user.first_name}</li>
                          <li>Last Name: {this.props.store.user.last_name}</li>
                          <li>Email: {this.props.store.user.email}</li>
+
+                         {this.props.store.user.email_messages === true ?
+
+                         <button onClick={this.emailUpdate}>Unsubscribe from message notifications</button>
+                        :
+                        <button onClick={this.emailUpdate}>Get message notifications</button>}
                     </ul>
                 </Card>
             </div>
