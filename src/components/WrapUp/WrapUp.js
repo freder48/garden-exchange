@@ -6,6 +6,11 @@ import { withStyles } from '@material-ui/core/styles';
 
 
 const styles = {
+container: {
+  marginLeft: '30px',
+  marginRight: '30px',
+  width: '95%',
+},
   header: {
     backgroundColor: "#c78b50",
     width: "100%",
@@ -16,9 +21,11 @@ const styles = {
     letterSpacing: '5px',
     fontFamily: 'Copperplate',
   },
+
   title: {
     paddingLeft: '20px',
   }
+
 }
 class WrapUp extends Component {
 
@@ -26,11 +33,11 @@ class WrapUp extends Component {
     const { classes } = this.props;
     return (
       <div>
-        <Grid container>
+        <Grid container className={classes.container}>
 
           <h1 className={classes.header}>Summary</h1>
 
-          <Grid item>
+          <Grid item xs={12} sm={3} className={classes.leftMargin}>
             <h3 className={classes.title}>Technologies Used</h3>
             <ul>
               <li>React</li>
@@ -49,17 +56,33 @@ class WrapUp extends Component {
             </ul>
           </Grid>
 
-          <Grid item>
+          <Grid item xs={12} sm={3}>
             <h3 className={classes.title}>Challenges</h3>
+            <ul>
+              <li>Responsiveness</li>
+              <li>Redux iming</li>
+            </ul>
           </Grid>
 
-          <section>
+          <Grid item xs={12} sm={3}>
             <h3 className={classes.title}>Moving Forward</h3>
-          </section>
+            <ul>
+              <li>Build out Gallery Page for likes/comments</li>
+              <br></br>
+              <li>Work with Google Map API for location data</li>
+            </ul>
+          </Grid>
 
-          <section>
+          <Grid item xs={12} sm={3}>
             <h3 className={classes.title}>Thank You</h3>
-          </section>
+            <ul>
+              <li>To all of the PHENOMENAL Vattians and the whole Prime community</li>
+              <br></br>
+              <li>To Mary Mosman for her incredible guidance and kindness</li>
+              <br></br>
+              <li>To the amazing friends and family in my life who supported me through this journey</li>
+            </ul>
+          </Grid>
 
         </Grid>
       </div>
