@@ -5,6 +5,7 @@ import forum from './forum.reducer';
 import message from './message.reducer';
 import details from './details.reducer';
 import email from './email.reducer';
+import gallery from './gallery.reducer';
 // rootReducer is the primary reducer for our entire project
 // It bundles up all of the other reducers so our project can use them.
 // This is imported in index.js as rootSaga
@@ -18,6 +19,7 @@ const rootReducer = combineReducers({
   message, //will contain the messages sent between users
   details, 
   email, 
+  gallery, 
 });
 
 export default rootReducer;

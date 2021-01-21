@@ -27,7 +27,7 @@ router.get("/", (req, res) => {
  */
 router.post("/", rejectUnauthenticated, (req, res) => {
   console.log("req.user", req.user);
-  let sqlText = `INSERT INTO "gallery" ("description", "image_url", "user_id")
+  let sqlText = `INSERT INTO "gallery" ("description", "url", "user_id")
     VALUES ($1, $2, $3);`;
   pool
     .query(sqlText, [req.body.description, req.body.url, req.user.id])

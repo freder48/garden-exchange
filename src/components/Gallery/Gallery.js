@@ -20,18 +20,23 @@ class Gallery extends Component {
     imageUpload: false,
   };
 
+  componentDidMount = () => {
+    this.props.dispatch({type: "GET_GALLERY"})
+  }
+
   handleChangeFor = (event, inputProperty) => {
     this.setState({
       newItem: {
         ...this.state.newItem,
         [inputProperty]: event.target.value,
       }
+      
     });
   };
 
   handleSubmit = (event) => {
     event.preventDefault();
-    this.props.dispatch({ type: "ADD_ITEM", payload: this.state.newItem });
+    this.props.dispatch({ type: "ADD_GALLERY", payload: this.state.newItem });
     this.setState({
       newItem: {
         description: '',
@@ -55,7 +60,6 @@ class Gallery extends Component {
 
   upload = () => {
     this.setState({
-
       imageUpload: !this.state.imageUpload
     })
   }
@@ -71,7 +75,7 @@ class Gallery extends Component {
     
     return (
       <div>
-        <form onSubmit={(event) => this.handleSubmit(event)}>
+        <form >
           <TextField
             id="outlined-basic"
             label="description"
@@ -99,7 +103,7 @@ class Gallery extends Component {
 
         }
 
-          <Button variant="contained" color="primary" type="submit">
+          <Button onClick={(event) => this.handleSubmit(event)} variant="contained" color="primary" type="submit">
             Add Item
           </Button>
         </form>
