@@ -25,6 +25,7 @@ import UserProfile from '../UserProfile/UserProfileList';
 import SupportForm from '../SupportForm/SupportForm';
 import Admin from '../Admin/Admin';
 import Gallery from '../Gallery/Gallery';
+import WrapUp from '../WrapUp/WrapUp';
 
 import './App.css';
 
@@ -100,6 +101,12 @@ class App extends Component {
               exact
               path="/gallery"
               component={Gallery}
+            />
+
+            <ProtectedRoute
+              exact
+              path="/wrapup"
+              component={WrapUp}
             />
 
 

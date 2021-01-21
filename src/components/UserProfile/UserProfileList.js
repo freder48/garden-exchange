@@ -11,6 +11,7 @@ const styles = {
         justifyContent: 'center',
         border: '2px solid black',
         marginBottom: '1%',
+        marginLeft: '20px',
         marginTop: '1%',
         '&:hover': {
           backgroundColor: 'rgb(69, 109, 109);',
@@ -29,6 +30,7 @@ const styles = {
     },
     yourListings: {
         paddingLeft: '20px',
+        marginTop: '3%',
     }
 }
 
@@ -79,14 +81,14 @@ class UserProfileList extends Component {
                     </tbody>
                 </table>
 
-                <h4 className={classes.yourListings}>Your Personal Information</h4>
-                <Card>
-                    <ul>
+                <h4 className={classes.yourListings}>User Preferences</h4>
+                
+                    {/* <ul>
                         <p>Username: {this.props.store.user.username}</p>
                         <p>First Name: {this.props.store.user.first_name}</p>
                         <button>Edit</button>
                         <p>Last Name: {this.props.store.user.last_name}</p>
-                        <p>Email: {this.props.store.user.email}</p>
+                        <p>Email: {this.props.store.user.email}</p> */}
 
                         {this.props.store.user.email_messages === true ?
 
@@ -101,8 +103,8 @@ class UserProfileList extends Component {
                                 className={classes.button}>
                                 Get message notifications
                             </Button>}
-                    </ul>
-                </Card>
+                    {/* </ul> */}
+                
             </div>
         );
     }

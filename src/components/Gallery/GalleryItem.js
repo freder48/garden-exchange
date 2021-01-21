@@ -6,16 +6,38 @@ import { withStyles } from '@material-ui/core/styles';
 import gallerySaga from '../../redux/sagas/gallery.saga';
 
 const styles = {
-    card: {
-        margin: 'auto',
-        width: '80%',
-        marginTop: '15%',
+    link: {
+        backgroundColor: '#fff9e6',
+        border: '2px solid #c78b50',
+        margin: '2%',
+        padding: '1%',
         justifyContent: 'center',
-        backgroundColor: '#c78b50',
+        '&:hover': {
+            backgroundColor: 'rgb(69, 109, 109);',
+            color: '#fff9e6'
+        }
+    },
+    card: {
+        marginTop: '15%',
+        margin: '5%',
+        justifyContent: 'center',
+        backgroundColor: '#7e9a9a',
         border: '20px solid white',
         padding: '2%',
         textAlign: 'center',
+
       }, 
+      descriptionContainer: {
+        backgroundColor: '#fff9e6', 
+        padding: '1%',
+        paddingBottom: '20px',
+
+      },
+    //   itemDescription: {
+    //       backgroundColor: '#fff9e6', 
+
+    //   }
+
 }
 
 class GalleryItem extends Component {
@@ -24,19 +46,23 @@ class GalleryItem extends Component {
     const { classes } = this.props;
     return (
       <>
-      <Grid container>
+   
+      
       <Grid item xs={12} sm={6}>
-       <Card
+       <Card 
         className={classes.card}>
             <img src={this.props.gallery.url} alt={this.props.gallery.description}></img>
-            <p>{this.props.gallery.description}</p>
+            <section className={classes.descriptionContainer}>
+            <p className={classes.itemDescription}>{this.props.gallery.description}</p>
             <a href={this.props.gallery.url} 
             target="_blank" 
             rel="noopener noreferrer" 
-            >Link to Image
+            className={classes.link}
+            >Image Link
             </a>
+            </section>
        </Card>
-       </Grid>
+       
        </Grid>
       </>
     );

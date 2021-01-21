@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
-import TextField from "@material-ui/core/TextField";
-import Button from "@material-ui/core/Button";
+import { Button, TextField, Grid } from '@material-ui/core';
+import { withStyles } from '@material-ui/core/styles';
 import GalleryItem from './GalleryItem';
 
 // Filestack
@@ -11,7 +11,46 @@ import mapStoreToProps from "../../redux/mapStoreToProps";
 // dotenv
 const filestackApiKey = process.env.REACT_APP_FILESTACK_API_KEY
 
+const styles = {
+  addSomethingTitle: {
+    paddingLeft: '20px',
+  },
+  button: {
+    backgroundColor: '#fff9e6',
+    border: '2px solid #c78b50',
+    marginTop: '15px',
+    marginRight: '2%',
+    justifyContent: 'center',
+    '&:hover': {
+      backgroundColor: 'rgb(69, 109, 109);',
+      color: '#fff9e6'
+    }
+  },
+  description: {
+    fontFamily: 'default',
+  },
+  header: {
+    backgroundColor: "#c78b50",
+    width: "100%",
+    textAlign: "left",
+    padding: "1rem",
+    paddingLeft: '20px',
+    border: '3px solid #fff9e6',
+    letterSpacing: '5px',
+    fontFamily: 'Copperplate',
+  },
+  form: {
+    textAlign: 'center'
+  },
+  textField: {
+    marginTop: '1%',
+    marginBottom: '1%',
+    width: '80%',
+    backgroundColor: 'white',
 
+  },
+
+}
 
 class Gallery extends Component {
   state = {
@@ -40,10 +79,11 @@ class Gallery extends Component {
     event.preventDefault();
     this.props.dispatch({ type: "ADD_GALLERY", payload: this.state.newItem });
     this.setState({
+      imageUpload: !this.state.imageUpload,
       newItem: {
-        description: '',
+        description: ' ',
       },
-      imageUpload: !this.state.imageUpload
+
     })
   };
 
@@ -74,20 +114,24 @@ class Gallery extends Component {
       maxSize: 1024 * 1024,
       maxFiles: 1,
     }
-
+    const { classes } = this.props;
     return (
       <div>
-        <form >
+        <section className={classes.header}>
+          <h2>Community Gallery</h2>
+          <p className={classes.description}>Welcome to the community gallery! A place to peruse and share photos, recipes, and wisdom.</p>
+        </section>
+
+        <h4 className={classes.addSomethingTitle}>Add something to the gallery: </h4>
+
+        <form className={classes.form}>
           <TextField
             id="outlined-basic"
+            className={classes.textField}
             label="description"
             variant="outlined"
             onChange={(event) => this.handleChangeFor(event, `description`)}
-            style={{
-              marginBottom: "10px",
-              marginTop: "10px",
-              backgroundColor: "white",
-            }}
+
           />
           <br />
 
@@ -101,21 +145,26 @@ class Gallery extends Component {
               onSuccess={(event) => this.onSuccess(event, 'url')}
               onError={this.onError}
             /> :
-            <Button variant="contained" color="primary" onClick={this.upload}>Choose File</Button>
+            <>
+              <Button className={classes.button} variant="contained" onClick={this.upload}>Upload Image</Button>
 
+            </>
           }
 
-          <Button onClick={(event) => this.handleSubmit(event)} variant="contained" color="primary" type="submit">
+          <Button className={classes.button} onClick={(event) => this.handleSubmit(event)} variant="contained" type="submit">
             Add Item
           </Button>
 
+
           <section>
+            <Grid container spacing={1}>
             {this.props.store.gallery.map((gallery) =>
-              <>
-                <GalleryItem gallery={gallery}/>
-              </>
+
+              <GalleryItem gallery={gallery} />
+
 
             )}
+            </Grid>
           </section>
 
 
@@ -126,4 +175,4 @@ class Gallery extends Component {
   }
 }
 
-export default connect(mapStoreToProps)(Gallery);
+export default connect(mapStoreToProps)(withStyles(styles)(Gallery));

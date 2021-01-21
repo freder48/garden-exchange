@@ -12,6 +12,7 @@ import AddIcon from '@material-ui/icons/Add';
 import MessageIcon from '@material-ui/icons/Message';
 import PersonOutlineIcon from '@material-ui/icons/PersonOutline';
 import HelpOutlineIcon from '@material-ui/icons/HelpOutline';
+import MonochromePhotosIcon from '@material-ui/icons/MonochromePhotos';
 
 const styles = {
   menuBars: {
@@ -109,21 +110,32 @@ function Nav(props) {
                   </Link>
               </li>
               <li className="nav-text">
+                <Link className="nav-link" to="/gallery">
+                  <MonochromePhotosIcon className="icon" />
+                  Gallery
+                  </Link>
+              </li>
+              <li className="nav-text">
                 <Link className="nav-link" to="/support">
                   <HelpOutlineIcon className="icon" />
                   Support
                   </Link>
               </li>
+
               <li className="nav-text">
                 <LogOutButton className="nav-link" />
+              </li>
+
+              <li className="nav-text">
+                <Link className="nav-link" to="/wrapup">
+                  
+
+                  </Link>
               </li>
 
             </>
           )}
           {/* Always show this link since the about page is not protected */}
-          {/* <Link className="nav-link" to="/about">
-          About
-        </Link> */}
 
         </ul>
       </nav>
