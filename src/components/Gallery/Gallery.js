@@ -2,9 +2,11 @@ import React, { Component } from "react";
 import { connect } from "react-redux";
 import TextField from "@material-ui/core/TextField";
 import Button from "@material-ui/core/Button";
+import GalleryItem from './GalleryItem';
 
 // Filestack
 import { PickerOverlay } from 'filestack-react';
+import mapStoreToProps from "../../redux/mapStoreToProps";
 
 // dotenv
 const filestackApiKey = process.env.REACT_APP_FILESTACK_API_KEY
@@ -21,7 +23,7 @@ class Gallery extends Component {
   };
 
   componentDidMount = () => {
-    this.props.dispatch({type: "GET_GALLERY"})
+    this.props.dispatch({ type: "GET_GALLERY" })
   }
 
   handleChangeFor = (event, inputProperty) => {
@@ -30,7 +32,7 @@ class Gallery extends Component {
         ...this.state.newItem,
         [inputProperty]: event.target.value,
       }
-      
+
     });
   };
 
@@ -63,7 +65,7 @@ class Gallery extends Component {
       imageUpload: !this.state.imageUpload
     })
   }
-  
+
 
   render() {
     const basicOptions = {
@@ -72,7 +74,7 @@ class Gallery extends Component {
       maxSize: 1024 * 1024,
       maxFiles: 1,
     }
-    
+
     return (
       <div>
         <form >
@@ -90,26 +92,38 @@ class Gallery extends Component {
           <br />
 
 
-          {this.state.imageUpload ? 
-              <PickerOverlay
-                apikey={filestackApiKey}
-                buttonText="Upload Photo"
-                buttonClass="ui medium button gray"
-                options={basicOptions}
-                onSuccess={(event) => this.onSuccess(event, 'url')}
-                onError={this.onError}
-              />   :
-              <Button variant="contained" color="primary" onClick={this.upload}>Choose File</Button>
+          {this.state.imageUpload ?
+            <PickerOverlay
+              apikey={filestackApiKey}
+              buttonText="Upload Photo"
+              buttonClass="ui medium button gray"
+              options={basicOptions}
+              onSuccess={(event) => this.onSuccess(event, 'url')}
+              onError={this.onError}
+            /> :
+            <Button variant="contained" color="primary" onClick={this.upload}>Choose File</Button>
 
-        }
+          }
 
           <Button onClick={(event) => this.handleSubmit(event)} variant="contained" color="primary" type="submit">
             Add Item
           </Button>
+
+          <section>
+            {this.props.store.gallery.map((gallery) =>
+              <>
+                <GalleryItem gallery={gallery}/>
+              </>
+
+            )}
+          </section>
+
+
+
         </form>
       </div>
     );
   }
 }
 
-export default connect()(Gallery);
+export default connect(mapStoreToProps)(Gallery);
