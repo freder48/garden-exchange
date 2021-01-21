@@ -44,7 +44,7 @@ function* updateEmailNotifications(action) {
     console.log('action.payload', action.payload)
     try {
         yield axios.put(`/api/profile`, action.payload)
-        // yield put({ type: 'GET_USER_LISTING'});
+        yield put({ type: 'FETCH_USER'});
     } catch (error) {
         console.log('error with emailNotification put in profile.saga.js request', error);
     }

@@ -24,6 +24,7 @@ import Messages from '../Messages/Messages';
 import UserProfile from '../UserProfile/UserProfileList';
 import SupportForm from '../SupportForm/SupportForm';
 import Admin from '../Admin/Admin';
+import Gallery from '../Gallery/Gallery';
 
 import './App.css';
 
@@ -93,6 +94,14 @@ class App extends Component {
               path="/support"
               component={SupportForm}
             />
+
+
+            <ProtectedRoute
+              exact
+              path="/gallery"
+              component={Gallery}
+            />
+
 
             {(this.props.store.user.administrator) &&
               <ProtectedRoute

@@ -3,9 +3,20 @@ import { connect } from 'react-redux';
 import mapStoreToProps from '../../redux/mapStoreToProps';
 import UserProfileItem from './UserProfileItem';
 import { withStyles } from '@material-ui/core/styles';
-import {Card} from '@material-ui/core';
+import { Card, Button } from '@material-ui/core';
 
 const styles = {
+    button: {
+        backgroundColor: '#fff9e6',
+        justifyContent: 'center',
+        border: '2px solid black',
+        marginBottom: '1%',
+        marginTop: '1%',
+        '&:hover': {
+          backgroundColor: 'rgb(69, 109, 109);',
+          color: '#fff9e6'
+        }
+      },
     header: {
         backgroundColor: "#c78b50",
         width: "100%",
@@ -30,8 +41,13 @@ class UserProfileList extends Component {
 
     //put route for email notification
     emailUpdate = () => {
-        console.log('clicked')
-        this.props.dispatch({type: 'UPDATE_USER_EMAIL_NOTIFICATIONS' , payload: this.props.store.user })
+        if (this.props.store.user.email_messages){
+            alert('You are now unsubscribed')
+        } else {
+            alert('You are now subscribed')
+        }
+        this.props.dispatch({ type: 'UPDATE_USER_EMAIL_NOTIFICATIONS', payload: this.props.store.user })
+
     }
 
 
@@ -54,11 +70,11 @@ class UserProfileList extends Component {
                     </thead>
 
                     <tbody>
-                         {this.props.store.forum.map((listing) =>
-                         <tr>
-                            <UserProfileItem listing={listing}/>
-                        </tr>
-                        )} 
+                        {this.props.store.forum.map((listing) =>
+                            <tr>
+                                <UserProfileItem listing={listing} />
+                            </tr>
+                        )}
 
                     </tbody>
                 </table>
@@ -66,16 +82,25 @@ class UserProfileList extends Component {
                 <h4 className={classes.yourListings}>Your Personal Information</h4>
                 <Card>
                     <ul>
-                        <li>Username: {this.props.store.user.username}</li>
-                         <li>First Name: {this.props.store.user.first_name}</li>
-                         <li>Last Name: {this.props.store.user.last_name}</li>
-                         <li>Email: {this.props.store.user.email}</li>
+                        <p>Username: {this.props.store.user.username}</p>
+                        <p>First Name: {this.props.store.user.first_name}</p>
+                        <button>Edit</button>
+                        <p>Last Name: {this.props.store.user.last_name}</p>
+                        <p>Email: {this.props.store.user.email}</p>
 
-                         {this.props.store.user.email_messages === true ?
+                        {this.props.store.user.email_messages === true ?
 
-                         <button onClick={this.emailUpdate}>Unsubscribe from message notifications</button>
-                        :
-                        <button onClick={this.emailUpdate}>Get message notifications</button>}
+                            <Button
+                                onClick={this.emailUpdate}
+                                className={classes.button}>
+                                Unsubscribe from message notifications
+                             </Button>
+                            :
+                            <Button
+                                onClick={this.emailUpdate}
+                                className={classes.button}>
+                                Get message notifications
+                            </Button>}
                     </ul>
                 </Card>
             </div>
