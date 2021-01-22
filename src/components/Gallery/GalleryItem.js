@@ -10,7 +10,8 @@ const styles = {
         backgroundColor: '#fff9e6',
         border: '2px solid #c78b50',
         margin: '2%',
-        padding: '1%',
+        padding: '2%',
+        textDecoration: 'none',
         justifyContent: 'center',
         '&:hover': {
             backgroundColor: 'rgb(69, 109, 109);',
@@ -33,10 +34,7 @@ const styles = {
         paddingBottom: '20px',
 
       },
-    //   itemDescription: {
-    //       backgroundColor: '#fff9e6', 
 
-    //   }
 
 }
 
@@ -46,7 +44,6 @@ class GalleryItem extends Component {
     const { classes } = this.props;
     return (
       <>
-   
       
       <Grid item xs={12} sm={6}>
        <Card 

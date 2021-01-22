@@ -3,8 +3,8 @@ import { connect } from 'react-redux';
 import mapStoreToProps from '../../redux/mapStoreToProps';
 import UserProfileItem from './UserProfileItem';
 import { withStyles } from '@material-ui/core/styles';
-import { Card, Button } from '@material-ui/core';
-
+import { Card, Button, Grid } from '@material-ui/core';
+import UserGallery from './UserGallery'
 const styles = {
     button: {
         backgroundColor: '#fff9e6',
@@ -14,10 +14,10 @@ const styles = {
         marginLeft: '20px',
         marginTop: '1%',
         '&:hover': {
-          backgroundColor: 'rgb(69, 109, 109);',
-          color: '#fff9e6'
+            backgroundColor: 'rgb(69, 109, 109);',
+            color: '#fff9e6'
         }
-      },
+    },
     header: {
         backgroundColor: "#c78b50",
         width: "100%",
@@ -38,12 +38,13 @@ class UserProfileList extends Component {
 
     //get all messages for specific user upon page load
     componentDidMount() {
-        this.props.dispatch({ type: 'GET_USER_LISTING' })
+        this.props.dispatch({ type: 'GET_USER_LISTING' });
+        this.props.dispatch({ type: 'GET_USER_GALLERY' });
     }
 
     //put route for email notification
     emailUpdate = () => {
-        if (this.props.store.user.email_messages){
+        if (this.props.store.user.email_messages) {
             alert('You are now unsubscribed')
         } else {
             alert('You are now subscribed')
@@ -81,30 +82,36 @@ class UserProfileList extends Component {
                     </tbody>
                 </table>
 
-                <h4 className={classes.yourListings}>User Preferences</h4>
-                
-                    {/* <ul>
-                        <p>Username: {this.props.store.user.username}</p>
-                        <p>First Name: {this.props.store.user.first_name}</p>
-                        <button>Edit</button>
-                        <p>Last Name: {this.props.store.user.last_name}</p>
-                        <p>Email: {this.props.store.user.email}</p> */}
+                <section>
+                    <h4 className={classes.yourListings}>Your Gallery Listings</h4>
+                    <Grid container>
+                    {this.props.store.gallery.map((gallery) =>
 
-                        {this.props.store.user.email_messages === true ?
+                        <UserGallery gallery={gallery} />
 
-                            <Button
-                                onClick={this.emailUpdate}
-                                className={classes.button}>
-                                Unsubscribe from message notifications
+                    )}
+                    </Grid>
+
+
+                </section>
+
+                <section>
+                    <h4 className={classes.yourListings}>User Preferences</h4>
+                    {this.props.store.user.email_messages === true ?
+
+                        <Button
+                            onClick={this.emailUpdate}
+                            className={classes.button}>
+                            Unsubscribe from message notifications
                              </Button>
-                            :
-                            <Button
-                                onClick={this.emailUpdate}
-                                className={classes.button}>
-                                Get message notifications
+                        :
+                        <Button
+                            onClick={this.emailUpdate}
+                            className={classes.button}>
+                            Get message notifications
                             </Button>}
-                    {/* </ul> */}
-                
+                </section>
+
             </div>
         );
     }

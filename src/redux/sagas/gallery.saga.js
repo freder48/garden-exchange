@@ -4,7 +4,7 @@ import axios from 'axios';
 function* gallerySaga() {
   yield takeLatest('GET_GALLERY', getGallery);
   yield takeLatest('ADD_GALLERY', addGallery);
-  yield takeLatest('DELETE_LISTING_ADMIN', deleteListing);
+  yield takeLatest('DELETE_GALLERY', deleteGallery);
 }
 
 //POST saga for new gallery item
@@ -30,13 +30,13 @@ function* getGallery() {
 }//end getForum
 
 //admin delete route
-function* deleteListing(action){
+function* deleteGallery(action){
     console.log('delete listing', action.payload);
     try{
-        yield axios.delete(`/api/profile/${action.payload}`)
-        yield put({type: 'GET_FORUM'})
+        yield axios.delete(`/api/gallery/${action.payload}`)
+        yield put({type: 'GET_GALLERY'})
     } catch (error) {
-        console.log('error with delete request in forum.saga.js', error)
+        console.log('error with delete request in gallery.saga.js', error)
     }
 }//end deleteListing
 

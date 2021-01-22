@@ -1,7 +1,7 @@
 //imports //imports JUST the component from react not ALL of react 
 import React, { Component } from 'react';
 import mapStoreToProps from '../../redux/mapStoreToProps';
-import { Button} from '@material-ui/core'
+import { Button, Grid, Card } from '@material-ui/core'
 import DeleteOutlinedIcon from '@material-ui/icons/DeleteOutlined';
 import Modal from '../Modal/Modal';
 import { withStyles } from '@material-ui/core/styles';
@@ -39,11 +39,12 @@ class Admin extends Component {
             mail_sent: true,
         },
     }//end local state
-    
+
     //Get all forum listings and support form messages on page load
     componentDidMount() {
-        this.props.dispatch({ type: 'GET_FORUM' })
-        this.props.dispatch({ type: 'GET_MESSAGES' })
+        this.props.dispatch({ type: 'GET_FORUM' });
+        this.props.dispatch({ type: 'GET_MESSAGES' });
+        this.props.dispatch({ type: "GET_GALLERY" });
     }
 
     //deletes message based upon id 
@@ -162,11 +163,38 @@ class Admin extends Component {
                     </tbody>
                 </table>
 
+                <h2 className={classes.header}>Manage Gallery</h2>
+
                 <Modal
                     show={this.state.show}
                     handleClose={this.hideModal}
                     messageObj={this.state.messageObj}>
                 </Modal>
+                
+                <Grid item xs={12} sm={6}>
+                    {this.props.store.gallery.map((gallery) =>
+
+                        
+                            <Card
+                                className={classes.card}>
+                                <img src={gallery.url} alt={gallery.description}></img>
+                                <section className={classes.descriptionContainer}>
+                                    <p className={classes.itemDescription}>{this.props.store.gallery.description}</p>
+                                    <a href={this.props.store.gallery.url}
+                                        target="_blank"
+                                        rel="noopener noreferrer"
+                                        className={classes.link}
+                                    >Image Link
+                                     </a>
+                                </section>
+                            </Card>
+
+                    
+
+
+                    )}
+
+                </Grid>
 
             </>
         ) //end return 
