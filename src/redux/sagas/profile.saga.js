@@ -6,6 +6,8 @@ function* profileSaga() {
   yield takeLatest('DELETE_LISTING', deleteListing);
   yield takeLatest('GET_DETAILS', getDetails);
   yield takeLatest('UPDATE_LISTING', updateListing);
+  yield takeLatest('UPDATE_USER_EMAIL_NOTIFICATIONS', updateEmailNotifications);
+  yield takeLatest('GET_USER_GALLERY', getUserGallery);
 
 }
 
@@ -29,6 +31,16 @@ function* getDetails(action) {
 }//end getDetails
 
 //GET all of the posts from specific user
+function* getUserGallery() {
+    try {
+        const response = yield axios.get(`api/gallery/user` )
+        yield put({ type: 'SET_GALLERY', payload: response.data });
+    } catch (error) {
+        console.log('error with user gallery get request in profile.saga.js', error);
+    }
+}//end getUserListing
+
+//GET all of the posts from specific user
 function* getUserListing() {
     try {
         const response = yield axios.get(`api/profile` )
@@ -38,9 +50,19 @@ function* getUserListing() {
     }
 }//end getUserListing
 
+//PUT ROUTE to update
+function* updateEmailNotifications(action) { 
+    console.log('action.payload', action.payload)
+    try {
+        yield axios.put(`/api/profile`, action.payload)
+        yield put({ type: 'FETCH_USER'});
+    } catch (error) {
+        console.log('error with emailNotification put in profile.saga.js request', error);
+    }
+}//end updateEmailNotifications
+
 //PUT ROUTE 
 function* updateListing(action) { 
-    console.log('Action Payload', action.payload);
     try {
         yield axios.put(`/api/profile/${action.payload.id}`, action.payload)
         yield put({ type: 'GET_USER_LISTING'});

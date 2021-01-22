@@ -15,8 +15,6 @@ import ProtectedRoute from '../ProtectedRoute/ProtectedRoute';
 import mapStoreToProps from '../../redux/mapStoreToProps';
 
 
-// import UserPage from '../UserPage/UserPage';
-import InfoPage from '../InfoPage/InfoPage';
 import LandingPage from '../LandingPage/LandingPage';
 import LoginPage from '../LoginPage/LoginPage';
 import RegisterPage from '../RegisterPage/RegisterPage';
@@ -26,6 +24,8 @@ import Messages from '../Messages/Messages';
 import UserProfile from '../UserProfile/UserProfileList';
 import SupportForm from '../SupportForm/SupportForm';
 import Admin from '../Admin/Admin';
+import Gallery from '../Gallery/Gallery';
+import WrapUp from '../WrapUp/WrapUp';
 
 import './App.css';
 
@@ -64,13 +64,6 @@ class App extends Component {
             />
 
             <ProtectedRoute
-              // logged in shows InfoPage else shows LoginPage
-              exact
-              path="/info"
-              component={InfoPage}
-            />
-
-            <ProtectedRoute
               // with authRedirect:
               // - if logged in, redirects to "/user"
               // - else shows LandingPage at "/home"
@@ -102,6 +95,20 @@ class App extends Component {
               path="/support"
               component={SupportForm}
             />
+
+
+            <ProtectedRoute
+              exact
+              path="/gallery"
+              component={Gallery}
+            />
+
+            <ProtectedRoute
+              exact
+              path="/wrapup"
+              component={WrapUp}
+            />
+
 
             {(this.props.store.user.administrator) &&
               <ProtectedRoute
