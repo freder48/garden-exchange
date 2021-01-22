@@ -19,10 +19,10 @@ const styles = {
             backgroundColor: 'rgb(69, 109, 109);',
             color: '#fff9e6'
         },
-        cancelButton: {
-            width: '20%',
-            marginLeft: '1%',
-        }
+    },
+    cancelButton: {
+        width: '20%',
+        marginLeft: '1%',
     },
     icon: {
         paddingRight: '5px',

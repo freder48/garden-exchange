@@ -9,8 +9,19 @@ import { connect } from 'react-redux';
 import Moment from 'react-moment';
 import ReplyIcon from '@material-ui/icons/Reply';
 import swal from 'sweetalert';
+import TablePagination from '@material-ui/core/TablePagination';
 
 const styles = {
+    card: {
+        marginTop: '15%',
+        margin: '5%',
+        justifyContent: 'center',
+        backgroundColor: '#7e9a9a',
+        border: '20px solid white',
+        padding: '20px',
+        textAlign: 'center',
+
+    },
     header: {
         backgroundColor: "#c78b50",
         width: "100%",
@@ -24,7 +35,21 @@ const styles = {
     icon: {
         paddingRight: '5px',
     },
+    link: {
+        backgroundColor: '#fff9e6',
+        border: '2px solid #c78b50',
+        margin: '2%',
+        padding: '10px',
+        fontFamily: 'Copperplate',
+        textDecoration: 'none',
+        justifyContent: 'center',
+        '&:hover': {
+            backgroundColor: 'rgb(69, 109, 109);',
+            color: '#fff9e6'
+        }
+    },
 }
+
 //class
 class Admin extends Component {
     state = {
@@ -38,6 +63,9 @@ class Admin extends Component {
             message: '',
             mail_sent: true,
         },
+            //pagination
+        page: 0,
+        rowsPerPage: 10,
     }//end local state
 
     //Get all forum listings and support form messages on page load
@@ -46,6 +74,25 @@ class Admin extends Component {
         this.props.dispatch({ type: 'GET_MESSAGES' });
         this.props.dispatch({ type: "GET_GALLERY" });
     }
+
+    //deletes item by id
+    deleteGalleryItem(id) {
+        swal({
+            title: "Are you sure?",
+            text: "Once deleted, you will not be able to recover this post!",
+            icon: "warning",
+            buttons: true,
+            dangerMode: true,
+        })
+            .then((willDelete) => {
+                if (willDelete) {
+                    swal("Poof! Your post has been deleted!", {
+                        icon: "success",
+                    });
+                    this.props.dispatch({ type: 'DELETE_GALLERY', payload: id })
+                }
+            });
+    }//end deleteListing
 
     //deletes message based upon id 
     deleteMessage(id) {
@@ -69,6 +116,16 @@ class Admin extends Component {
 
     }//end deleteMessage
 
+  //changes page number
+  handleChangePage = (event, page) => {
+    this.setState({ page });
+  };
+
+  //changes rows per page based on drop down menu
+  handleChangeRowsPerPage = event => {
+    this.setState({ rowsPerPage: event.target.value });
+  };
+
     //hides pop-up modal by setting local state show to false
     hideModal = () => {
         this.setState({ show: false });
@@ -81,6 +138,7 @@ class Admin extends Component {
 
     render() {
         const { classes } = this.props;
+        const { rowsPerPage, page } = this.state;
         return (
             <>
                 <h2 className={classes.header}>Manage All Listings</h2>
@@ -96,7 +154,7 @@ class Admin extends Component {
                     </thead>
 
                     <tbody>
-                        {this.props.store.forum.map(post => {
+                        {this.props.store.forum.slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage).map(post => {
                             return (
                                 <tr key={post.id}>
                                     <td>{post.have}</td>
@@ -118,6 +176,23 @@ class Admin extends Component {
 
                     </tbody>
                 </table>
+=               <div className={classes.paginationContainer}><TablePagination
+                    className={classes.pagination}
+                    rowsPerPageOptions={[10, 25, 50, 100]}
+                    component="div"
+                    count={this.props.store.forum.length}
+                    rowsPerPage={rowsPerPage}
+                    page={page}
+                    backIconButtonProps={{
+                        'aria-label': 'Previous Page',
+                    }}
+                    nextIconButtonProps={{
+                        'aria-label': 'Next Page',
+                    }}
+                    onChangePage={this.handleChangePage}
+                    onChangeRowsPerPage={this.handleChangeRowsPerPage}
+                />
+                </div>
 
                 <h2 className={classes.header}>Support Messages</h2>
                 <table>
@@ -163,37 +238,43 @@ class Admin extends Component {
                     </tbody>
                 </table>
 
-                <h2 className={classes.header}>Manage Gallery</h2>
-
                 <Modal
                     show={this.state.show}
                     handleClose={this.hideModal}
                     messageObj={this.state.messageObj}>
                 </Modal>
-                
-                <Grid item xs={12} sm={6}>
+
+                <h2 className={classes.header}>Manage Gallery</h2>
+                <Grid container>
+
                     {this.props.store.gallery.map((gallery) =>
 
-                        
+
+
+
+                        <Grid item xs={12} sm={4} lg={6}>
                             <Card
                                 className={classes.card}>
                                 <img src={gallery.url} alt={gallery.description}></img>
                                 <section className={classes.descriptionContainer}>
-                                    <p className={classes.itemDescription}>{this.props.store.gallery.description}</p>
-                                    <a href={this.props.store.gallery.url}
+                                    <p className={classes.itemDescription}>{gallery.description}</p>
+                                    <a href={gallery.url}
                                         target="_blank"
                                         rel="noopener noreferrer"
                                         className={classes.link}
                                     >Image Link
-                                     </a>
+                                 </a>
+                                    <Button
+                                        onClick={() => { this.deleteGalleryItem(gallery.id) }}>
+                                        <DeleteOutlinedIcon className={classes.icon} />
+                            Delete
+                            </Button>
                                 </section>
                             </Card>
 
-                    
-
+                        </Grid>
 
                     )}
-
                 </Grid>
 
             </>

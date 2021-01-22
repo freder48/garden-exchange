@@ -129,6 +129,7 @@ class Gallery extends Component {
             id="outlined-basic"
             className={classes.textField}
             label="description"
+            value={this.state.newItem.description}
             variant="outlined"
             onChange={(event) => this.handleChangeFor(event, `description`)}
 

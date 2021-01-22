@@ -18,7 +18,7 @@ function* addGallery(action) {
     }
 }//end addGallery
 
-//GETting all of the postings for ForumPage and Admin
+//GETting all of the gallery for Admin and Gallery Page
 function* getGallery() {
     try {
         const response = yield axios.get(`api/gallery` )

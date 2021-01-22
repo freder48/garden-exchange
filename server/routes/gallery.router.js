@@ -9,7 +9,6 @@ const {
  * Get all of the gallerys 
  */
 router.get("/", (req, res) => {
-
   let queryString = `SELECT * FROM "gallery";`;
   pool
     .query(queryString)
@@ -22,7 +21,7 @@ router.get("/", (req, res) => {
 });
 
 //get specific user's gallery
-router.get('/', rejectUnauthenticated, (req, res) => {
+router.get('/user', rejectUnauthenticated, (req, res) => {
   let queryText = `SELECT * FROM "gallery" WHERE "user_id" = $1 ORDER BY id;`;
   pool.query(queryText, [req.user.id]).then((result) => {
     res.send(result.rows);

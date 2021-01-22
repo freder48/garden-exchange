@@ -33,7 +33,7 @@ function* getDetails(action) {
 //GET all of the posts from specific user
 function* getUserGallery() {
     try {
-        const response = yield axios.get(`api/gallery` )
+        const response = yield axios.get(`api/gallery/user` )
         yield put({ type: 'SET_GALLERY', payload: response.data });
     } catch (error) {
         console.log('error with user gallery get request in profile.saga.js', error);
