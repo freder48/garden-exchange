@@ -19,7 +19,7 @@ router.delete('/:id', rejectUnauthenticated, (req, res) => {
 
 // GET messages for logged in user
 router.get('/', rejectUnauthenticated, (req, res) => {
-  let queryText = `SELECT * FROM "message" WHERE "sent_to_user_id" = $1 ORDER BY "time_sent";`;
+  let queryText = `SELECT * FROM "message" WHERE "sent_to_user_id" = $1 ORDER BY "time_sent" DESC;`;
   pool.query(queryText, [req.user.id]).then((result) => {
     res.send(result.rows);
   }).catch((error) => {

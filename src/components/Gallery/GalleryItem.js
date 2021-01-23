@@ -1,14 +1,14 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import mapStoreToProps from '../../redux/mapStoreToProps';
-import { Button, Card, Grid } from '@material-ui/core';
+import { Card, Grid } from '@material-ui/core';
 import { withStyles } from '@material-ui/core/styles';
-import gallerySaga from '../../redux/sagas/gallery.saga';
 
 const styles = {
     link: {
-        backgroundColor: '#fff9e6',
-        border: '2px solid #c78b50',
+        backgroundColor: '#c78b50',
+        color: 'black',
+        border: '2px solid black',
         margin: '2%',
         padding: '2%',
         textDecoration: 'none',
@@ -34,6 +34,9 @@ const styles = {
         paddingBottom: '20px',
 
       },
+      itemDescription: {
+        marginBottom: '35px',
+      }
 
 
 }
@@ -45,7 +48,7 @@ class GalleryItem extends Component {
     return (
       <>
       
-      <Grid item xs={12} sm={6}>
+      <Grid item xs={12} sm={6} lg={4}>
        <Card 
         className={classes.card}>
             <img src={this.props.gallery.url} alt={this.props.gallery.description}></img>

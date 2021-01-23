@@ -23,6 +23,7 @@ const styles = {
     cancelButton: {
         width: '20%',
         marginLeft: '1%',
+        marginRight: '10px',
     },
     icon: {
         paddingRight: '5px',

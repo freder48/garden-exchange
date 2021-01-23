@@ -27,7 +27,7 @@ const styles = {
     }
   },
   description: {
-    fontFamily: 'default',
+    fontFamily: 'Segoe UI', 
   },
   header: {
     backgroundColor: "#c78b50",
@@ -38,6 +38,7 @@ const styles = {
     border: '3px solid #fff9e6',
     letterSpacing: '5px',
     fontFamily: 'Copperplate',
+    
   },
   form: {
     textAlign: 'center'
@@ -49,6 +50,9 @@ const styles = {
     backgroundColor: 'white',
 
   },
+  title: {
+    fontSize: '30px',
+  }
 
 }
 
@@ -118,11 +122,11 @@ class Gallery extends Component {
     return (
       <div>
         <section className={classes.header}>
-          <h2>Community Gallery</h2>
+          <h2 className={classes.title}>Community Gallery</h2>
           <p className={classes.description}>Welcome to the community gallery! A place to peruse and share photos, recipes, and wisdom.</p>
         </section>
 
-        <h4 className={classes.addSomethingTitle}>Add something to the gallery: </h4>
+        <h3 className={classes.addSomethingTitle}>Add something to the gallery: </h3>
 
         <form className={classes.form}>
           <TextField

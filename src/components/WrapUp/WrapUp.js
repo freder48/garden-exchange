@@ -1,13 +1,13 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import mapStoreToProps from '../../redux/mapStoreToProps';
-import { Button, Card, Grid } from '@material-ui/core';
+import { Grid } from '@material-ui/core';
 import { withStyles } from '@material-ui/core/styles';
 
 
 const styles = {
 container: {
-  marginLeft: '30px',
+  marginLeft: '50px',
   marginRight: '30px',
   width: '95%',
 },
@@ -21,7 +21,9 @@ container: {
     letterSpacing: '5px',
     fontFamily: 'Copperplate',
   },
-
+  forward: {
+    marginRight: '40px'
+  },
   title: {
     paddingLeft: '20px',
   }
@@ -37,7 +39,7 @@ class WrapUp extends Component {
 
           <h1 className={classes.header}>Summary</h1>
 
-          <Grid item xs={12} sm={3} className={classes.leftMargin}>
+          <Grid item xs={12} sm={2} lg={3} className={classes.leftMargin}>
             <h3 className={classes.title}>Technologies Used</h3>
             <ul>
               <li>React</li>
@@ -56,15 +58,14 @@ class WrapUp extends Component {
             </ul>
           </Grid>
 
-          <Grid item xs={12} sm={3}>
+          <Grid item xs={12} sm={2}>
             <h3 className={classes.title}>Challenges</h3>
             <ul>
               <li>Responsiveness</li>
-              <li>Redux iming</li>
             </ul>
           </Grid>
 
-          <Grid item xs={12} sm={3}>
+          <Grid item xs={12} sm={3} className={classes.forward}>
             <h3 className={classes.title}>Moving Forward</h3>
             <ul>
               <li>Build out Gallery Page for likes/comments</li>
