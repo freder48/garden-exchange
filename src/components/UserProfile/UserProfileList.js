@@ -3,11 +3,13 @@ import { connect } from 'react-redux';
 import mapStoreToProps from '../../redux/mapStoreToProps';
 import UserProfileItem from './UserProfileItem';
 import { withStyles } from '@material-ui/core/styles';
-import { Card, Button, Grid } from '@material-ui/core';
-import UserGallery from './UserGallery'
+import { Button, Grid } from '@material-ui/core';
+import UserGallery from './UserGallery';
+import swal from 'sweetalert';
+
 const styles = {
     button: {
-        backgroundColor: '#fff9e6',
+        backgroundColor: "#c78b50",
         justifyContent: 'center',
         border: '2px solid black',
         marginBottom: '1%',
@@ -45,14 +47,19 @@ class UserProfileList extends Component {
     //put route for email notification
     emailUpdate = () => {
         if (this.props.store.user.email_messages) {
-            alert('You are now unsubscribed')
+            swal({
+                title: "You are now unsubscribed!",
+                icon: "success",
+              });
         } else {
-            alert('You are now subscribed')
+            swal({
+                title: "You are now subscribed!",
+                icon: "success",
+              });
         }
         this.props.dispatch({ type: 'UPDATE_USER_EMAIL_NOTIFICATIONS', payload: this.props.store.user })
 
     }
-
 
     render() {
         const { classes } = this.props;
@@ -83,7 +90,7 @@ class UserProfileList extends Component {
                 </table>
 
                 <section>
-                    <h4 className={classes.yourListings}>Your Gallery Listings</h4>
+                    <h4 className={classes.yourListings}>Your Gallery Posts</h4>
                     <Grid container>
                     {this.props.store.gallery.map((gallery) =>
 

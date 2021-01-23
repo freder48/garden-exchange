@@ -22,7 +22,7 @@ const styles = {
   },
   card: {
     margin: 'auto',
-    width: '60%',
+    width: '40%',
     height: '100%',
     marginTop: '6em',
     justifyContent: 'center',

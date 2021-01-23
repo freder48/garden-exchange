@@ -68,7 +68,7 @@ class UserGallery extends Component {
         return (
             <>
 
-                <Grid item xs={12} sm={4} lg={6}>
+                <Grid item xs={12} sm={4} lg={3}>
                     <Card
                         className={classes.card}>
                         <img src={this.props.gallery.url} alt={this.props.gallery.description}></img>

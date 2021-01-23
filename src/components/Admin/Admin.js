@@ -207,7 +207,6 @@ class Admin extends Component {
                     </thead>
 
                     <tbody>
-
                         {this.props.store.message.map((message) =>
 
                             <tr key={message.id}>
@@ -227,7 +226,7 @@ class Admin extends Component {
                                 <td>
                                     <Button onClick={() => { this.deleteMessage(message.id) }}>
                                         <DeleteOutlinedIcon
-                                            className={classes.icon} />
+                                        className={classes.icon} />
                                   Delete
                                   </Button>
                                 </td>
@@ -252,7 +251,7 @@ class Admin extends Component {
 
 
 
-                        <Grid item xs={12} sm={4} lg={6}>
+                        <Grid item xs={12} sm={4} lg={3}>
                             <Card
                                 className={classes.card}>
                                 <img src={gallery.url} alt={gallery.description}></img>

@@ -12,7 +12,7 @@ const styles = {
   card: {
     margin: 'auto',
     width: '80%',
-    marginTop: '15%',
+    marginTop: '14%',
     justifyContent: 'center',
     backgroundColor: '#c78b50',
     border: '20px solid white',
