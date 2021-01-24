@@ -11,8 +11,8 @@ import RegisterForm from '../RegisterForm/RegisterForm';
 const styles = {
   card: {
     margin: 'auto',
-    width: '80%',
-    marginTop: '14%',
+    width: '60%',
+    marginTop: '9%',
     justifyContent: 'center',
     backgroundColor: '#c78b50',
     border: '20px solid white',

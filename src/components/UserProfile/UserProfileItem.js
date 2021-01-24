@@ -91,11 +91,11 @@ class UserProfileItem extends Component {
 
     //changes isEditable to true and gets the details for specific row clicked on
     editListing = (id) => {
+        this.props.dispatch({ type: 'GET_DETAILS', payload: id })
         this.setState({
             isEditable: true,
         });
         this.props.dispatch({ type: 'GET_DETAILS', payload: id })
-        console.log('id is', id)
     }
 
     //handles input values
@@ -111,9 +111,10 @@ class UserProfileItem extends Component {
     //dispatches to saga to start put route
     saveEditedListing = (id) => {
         this.props.dispatch({ type: 'UPDATE_LISTING', payload: this.state.editListing })
+        this.props.dispatch({ type: 'GET_DETAILS', payload: id })
         this.setState({
             isEditable: false,
-        })
+        }) 
     }
 
     render() {

@@ -87,8 +87,8 @@ router.post('/', rejectUnauthenticated, (req, res) => {
       port: 587,
       secure: false,
       auth: {
-        user: 'jfredericksen12@gmail.com',
-        pass: password
+        user: 'jfredericksen12@gmail.com', //change this line to your email
+        pass: password //change this password in the .env file to reflect your password
       },
       tls: {
         rejectUnauthorized: false

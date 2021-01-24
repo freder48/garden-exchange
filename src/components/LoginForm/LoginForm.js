@@ -13,8 +13,8 @@ const styles = {
     backgroundColor: '#fff9e6',
     justifyContent: 'center',
     border: '2px solid black',
-    marginBottom: '1%',
-    marginTop: '1%',
+    marginBottom: '2%',
+    marginTop: '2%',
     '&:hover': {
       backgroundColor: 'rgb(69, 109, 109);',
       color: '#fff9e6'
@@ -22,7 +22,7 @@ const styles = {
   },
   card: {
     margin: 'auto',
-    width: '40%',
+    width: '35%',
     height: '100%',
     marginTop: '6em',
     justifyContent: 'center',
@@ -43,7 +43,7 @@ const styles = {
     fontFamily: 'Copperplate'
   },
   input: {
-    marginTop: '1rem',
+    marginTop: '2rem',
     width: '90%',
     backgroundColor: '#fff9e6',
   },
