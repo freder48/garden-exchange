@@ -1,7 +1,7 @@
-![MIT LICENSE](https://img.shields.io/github/license/freder48/movie-sagas.svg?style=flat-square)
-![REPO SIZE](https://img.shields.io/github/repo-size/freder48/movie-sagas.svg?style=flat-square)
-![TOP_LANGUAGE](https://img.shields.io/github/languages/top/freder48/movie-sagas.svg?style=flat-square)
-![FORKS](https://img.shields.io/github/forks/freder48/movie-sagas?style=social)
+![MIT LICENSE](https://img.shields.io/github/license/freder48/garden-exchange.svg?style=flat-square)
+![REPO SIZE](https://img.shields.io/github/repo-size/freder48/garden-exchange.svg?style=flat-square)
+![TOP_LANGUAGE](https://img.shields.io/github/languages/top/freder48/garden-exchange.svg?style=flat-square)
+![FORKS](https://img.shields.io/github/forks/freder48/garden-exchange?style=social)
 
 # Garden Exchange
 
@@ -79,7 +79,7 @@ of choice. In message.router.js your will need to modify the lines below to refl
 
 
 ## License
-![MIT LICENSE](https://img.shields.io/github/license/freder48/movie-sagas.svg?style=flat-square)
+![MIT LICENSE](https://img.shields.io/github/license/freder48/garden-exchange.svg?style=flat-square)
 
 
 ## Acknowledgement
