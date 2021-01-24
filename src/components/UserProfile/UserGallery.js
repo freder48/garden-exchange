@@ -67,7 +67,6 @@ class UserGallery extends Component {
         const { classes } = this.props;
         return (
             <>
-
                 <Grid item xs={12} sm={4} lg={3}>
                     <Card
                         className={classes.card}>
@@ -86,9 +85,7 @@ class UserGallery extends Component {
                             </Button>
                         </section>
                     </Card>
-
                 </Grid>
-
             </>
         );
     }

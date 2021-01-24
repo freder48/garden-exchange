@@ -24,7 +24,6 @@ const styles = {
     fontFamily: 'Copperplate',
     fontSize: '26px',
     letterSpacing: '5px',
-
   },
   quote: {
     textAlign: 'center',
@@ -45,8 +44,6 @@ class LandingPage extends Component {
     return (
       // <div className="container">
       <Grid container>
-        
-       
           {/* <div className="grid-col grid-col_5"> */}
           <Grid item xs={12} sm={6}>
             <Card className={classes.card}>
@@ -55,23 +52,19 @@ class LandingPage extends Component {
           <p className={classes.quote}>"You don't have a garden just for yourself.  You have it to share."
           -  Augusta Carter</p>
             </p>
-
             <p>
               Welcome to Garden Exchange, an open forum dedicated to preventing food waste while cultivating
               community connections. 
             </p>
-
             <p>
               As a member, you will have the ability to browse, message, and exchange surplus garden and 
               artisinal products with fellow users located within your area. 
             </p>
             </Card>
             </Grid>
-
             <Grid item xs={12} sm={6}>
           {/* <div className="grid-col grid-col_5"> */}
             <RegisterForm /> 
-
             <center>
               <h4>Already a Member?</h4>
               <button className="btn btn_sizeSm" onClick={this.onLogin}>

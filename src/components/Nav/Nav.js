@@ -18,17 +18,16 @@ const styles = {
   menuBars: {
     fontSize: '46px',
     color: '#fff9e6',
-   
     '&:hover': {
       color: '#c78b50'
-  },
+    },
   },
   x: {
     fontSize: '46px',
     color: '#fff9e6',
     '&:hover': {
       color: '#c78b50'
-  },
+    },
   },
 };
 
@@ -46,15 +45,15 @@ function Nav(props) {
   if (props.store.user.id != null) {
     loginLinkData.path = '/forum';
     loginLinkData.text = `Welcome ${props.store.user.first_name}!`;
-  } 
-  
-  if (props.store.user.administrator){
+  }
+
+  if (props.store.user.administrator) {
     loginLinkData.path = '/admin';
     loginLinkData.text = `Welcome ${props.store.user.first_name}`;
   }
 
   return (
-    
+
     <div className="nav">
       <div className="navbar">
         <Link to="#" className="menu-bars">
@@ -70,7 +69,7 @@ function Nav(props) {
           <li className="navbar-toggle">
 
             <Link to="#" className="menu-bars">
-              <CloseIcon className="bars" className={classes.x}/>
+              <CloseIcon className="bars" className={classes.x} />
             </Link>
           </li>
 
@@ -128,9 +127,7 @@ function Nav(props) {
 
               <li className="nav-text">
                 <Link className="nav-link" to="/wrapup">
-                  
-
-                  </Link>
+                </Link>
               </li>
 
             </>

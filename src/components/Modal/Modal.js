@@ -1,6 +1,6 @@
 import './Modal.css';
 import React, { Component } from 'react';
-import { Card, Button, Typography, TextField, CardContent, Grid} from '@material-ui/core';
+import { Card, Button, Typography, TextField, CardContent, Grid } from '@material-ui/core';
 import { withStyles } from '@material-ui/core/styles';
 import swal from 'sweetalert';
 import mapStoreToProps from '../../redux/mapStoreToProps';
@@ -18,10 +18,10 @@ const styles = {
     }
   },
   card: {
-    position: 'fixed', 
+    position: 'fixed',
     width: '60%',
-    top:'50%',
-    left:'48%',
+    top: '50%',
+    left: '48%',
     height: '50%',
     justifyContent: 'center',
     textAlign: 'center',
@@ -62,13 +62,13 @@ class Modal extends Component {
       subject: '',
       message: '',
       mail_sent: true,
-      
+
     },
     //if inputs are empty the booleans will flip to true, error & helperText on inputs
     show: false,
-    subjectError: false, 
+    subjectError: false,
     subjectErrorText: '',
-    messageError: false, 
+    messageError: false,
     messageErrorText: '',
   }
 
@@ -77,26 +77,26 @@ class Modal extends Component {
     // event.preventDefault();
     if (this.state.messageObj.subject === '') {
       this.setState({ subjectError: true, subjectErrorText: 'This field is required' })
-  } if (this.state.messageObj.message === '') {
+    } if (this.state.messageObj.message === '') {
       this.setState({ messageError: true, messageErrorText: 'This field is required' })
-  } else {
-    //sweetAlert success message
-    swal("Success!", "Your Message Was Sent!", "success");
-    this.props.handleClose();
-    // this.componentDidUpdate();
-    this.props.dispatch({ type: 'ADD_MESSAGE', payload: this.state.messageObj })
-    //clear state
-    this.setState({
-      messageObj: {
-        sent_to_user_id: '',
-        sent_from_user_id: '',
-        forum_id: '',
-        subject: '',
-        message: '',
-        mail_sent: true, 
-      },
-    })
-  }
+    } else {
+      //sweetAlert success message
+      swal("Success!", "Your Message Was Sent!", "success");
+      this.props.handleClose();
+      // this.componentDidUpdate();
+      this.props.dispatch({ type: 'ADD_MESSAGE', payload: this.state.messageObj })
+      //clear state
+      this.setState({
+        messageObj: {
+          sent_to_user_id: '',
+          sent_from_user_id: '',
+          forum_id: '',
+          subject: '',
+          message: '',
+          mail_sent: true,
+        },
+      })
+    }
   }
 
   //gets input values on pop-up modal and sets local state
@@ -120,52 +120,52 @@ class Modal extends Component {
 
     return (
       <div className={showHideClassName}>
-      <Grid container>
-        <Card className={classes.card} item={12}>
-          <Typography gutterBottom variant="h5" component="h2" className={classes.header}>
-            Send Message:
+        <Grid container>
+          <Card className={classes.card} item={12}>
+            <Typography gutterBottom variant="h5" component="h2" className={classes.header}>
+              Send Message:
            </Typography>
 
-          <CardContent>
-            <form className={classes.form}>
-              <TextField
-                required
-                error={this.state.subjectError}
-                helperText={this.state.subjectErrorText}
-                label="Subject"
-                type="text"
-                value={this.state.messageObj.subject}
-                onChange={(event) => this.handleModalChange('subject', event)}
-                className={classes.textField}
-              />
-              <br></br><br></br>
-              <TextField
-              required
-              error={this.state.messageError}
-              helperText={this.state.messageErrorText}
-                label="Message"
-                type="text"
-                value={this.state.messageObj.message}
-                multiline
-                rows="5"
-                className={classes.textField}
-                onChange={(event) => this.handleModalChange('message', event)}
-              />
-              <br></br>
-              <br></br>
-              <Button 
-              type="button" 
-              onClick={this.props.handleClose}
-              className={classes.button}>
-                Close
+            <CardContent>
+              <form className={classes.form}>
+                <TextField
+                  required
+                  error={this.state.subjectError}
+                  helperText={this.state.subjectErrorText}
+                  label="Subject"
+                  type="text"
+                  value={this.state.messageObj.subject}
+                  onChange={(event) => this.handleModalChange('subject', event)}
+                  className={classes.textField}
+                />
+                <br></br><br></br>
+                <TextField
+                  required
+                  error={this.state.messageError}
+                  helperText={this.state.messageErrorText}
+                  label="Message"
+                  type="text"
+                  value={this.state.messageObj.message}
+                  multiline
+                  rows="5"
+                  className={classes.textField}
+                  onChange={(event) => this.handleModalChange('message', event)}
+                />
+                <br></br>
+                <br></br>
+                <Button
+                  type="button"
+                  onClick={this.props.handleClose}
+                  className={classes.button}>
+                  Close
              </Button>
-             <Button className={classes.button}
-             onClick={this.addMessage}>
-             Save
+                <Button className={classes.button}
+                  onClick={this.addMessage}>
+                  Save
              </Button>
-            </form>
-          </CardContent>
-        </Card>
+              </form>
+            </CardContent>
+          </Card>
         </Grid>
       </div>
     );

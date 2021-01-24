@@ -134,9 +134,9 @@ class Messages extends Component {
 
                                 <td><Button onClick={() => { this.deleteMessage(message.id) }}>
                                     <DeleteOutlinedIcon
-                                    className={classes.icon}
+                                        className={classes.icon}
                                     >
-                                </DeleteOutlinedIcon>Delete</Button></td>
+                                    </DeleteOutlinedIcon>Delete</Button></td>
                             </tr>
                         )}
                     </tbody>

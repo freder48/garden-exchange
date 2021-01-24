@@ -28,7 +28,6 @@ class LoginPage extends Component {
     return (
       <div>
         <LoginForm />
-
         <center>
           <h5 className={classes.question}>Not a member yet?</h5>
           <Button

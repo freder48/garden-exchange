@@ -27,7 +27,7 @@ const styles = {
     }
   },
   description: {
-    fontFamily: 'Segoe UI', 
+    fontFamily: 'Segoe UI',
   },
   header: {
     backgroundColor: "#c78b50",
@@ -38,7 +38,6 @@ const styles = {
     border: '3px solid #fff9e6',
     letterSpacing: '5px',
     fontFamily: 'Copperplate',
-    
   },
   form: {
     textAlign: 'center'
@@ -53,32 +52,35 @@ const styles = {
   title: {
     fontSize: '30px',
   }
-
 }
 
 class Gallery extends Component {
   state = {
+    //for post route
     newItem: {
       description: "",
       url: "",
     },
+    //for filestack image upload pop-up
     imageUpload: false,
   };
 
+  //get all gallery listings
   componentDidMount = () => {
     this.props.dispatch({ type: "GET_GALLERY" })
   }
 
+  //handle inputs
   handleChangeFor = (event, inputProperty) => {
     this.setState({
       newItem: {
         ...this.state.newItem,
         [inputProperty]: event.target.value,
       }
-
     });
   };
 
+  //add new item to the gallery then retoggle boolean for imageUpload
   handleSubmit = (event) => {
     event.preventDefault();
     this.props.dispatch({ type: "ADD_GALLERY", payload: this.state.newItem });
@@ -87,10 +89,9 @@ class Gallery extends Component {
       newItem: {
         description: ' ',
       },
-
     })
   };
-
+  //upload after new image has been succesfully uploaded
   onSuccess = (result) => {
     this.setState({
       newItem: {
@@ -99,17 +100,16 @@ class Gallery extends Component {
       }
     })
   }
-
+  //runs on error for image upload
   onError = (error) => {
     console.error('error', error);
   }
-
+  //toggle imageUpload state to opposite
   upload = () => {
     this.setState({
       imageUpload: !this.state.imageUpload
     })
   }
-
 
   render() {
     const basicOptions = {
@@ -140,7 +140,6 @@ class Gallery extends Component {
           />
           <br />
 
-
           {this.state.imageUpload ?
             <PickerOverlay
               apikey={filestackApiKey}
@@ -152,28 +151,19 @@ class Gallery extends Component {
             /> :
             <>
               <Button className={classes.button} variant="contained" onClick={this.upload}>Upload Image</Button>
-
             </>
           }
-
           <Button className={classes.button} onClick={(event) => this.handleSubmit(event)} variant="contained" type="submit">
             Add Item
           </Button>
 
-
           <section>
             <Grid container spacing={1}>
-            {this.props.store.gallery.map((gallery) =>
-
-              <GalleryItem gallery={gallery} />
-
-
-            )}
+              {this.props.store.gallery.map((gallery) =>
+                <GalleryItem gallery={gallery} />
+              )}
             </Grid>
           </section>
-
-
-
         </form>
       </div>
     );

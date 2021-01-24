@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import mapStoreToProps from '../../redux/mapStoreToProps';
-import { Button} from '@material-ui/core';
+import { Button } from '@material-ui/core';
 import { withStyles } from '@material-ui/core/styles';
 // CUSTOM COMPONENTS
 import RegisterForm from '../RegisterForm/RegisterForm';
@@ -9,7 +9,7 @@ import RegisterForm from '../RegisterForm/RegisterForm';
 const styles = {
   button: {
     backgroundColor: '#c78b50',
-    border: '2px solid white', 
+    border: '2px solid white',
     justifyContent: 'center',
     marginTop: '0',
     marginBottom: '1%',
@@ -35,7 +35,7 @@ class RegisterPage extends Component {
       <div>
         <RegisterForm />
         <center>
-        <h5 className={classes.question}>Already a member?</h5>
+          <h5 className={classes.question}>Already a member?</h5>
           <Button
             type="button"
             className={classes.button}

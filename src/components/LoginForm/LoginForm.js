@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import mapStoreToProps from '../../redux/mapStoreToProps';
 import { withStyles } from '@material-ui/core/styles';
-import { TextField, Button, Card,} from '@material-ui/core';
+import { TextField, Button, Card, } from '@material-ui/core';
 import InputAdornment from '@material-ui/core/InputAdornment';
 import IconButton from '@material-ui/core/IconButton';
 import Visibility from '@material-ui/icons/Visibility';
@@ -55,16 +55,15 @@ const styles = {
   icon: {
     paddingBottom: '25px',
   }
-
 };
 
 class LoginForm extends Component {
 
-//local state
+  //local state
   state = {
     username: '',
     password: '',
-    showPassword: false, 
+    showPassword: false,
   };
 
   //handle login
@@ -100,60 +99,59 @@ class LoginForm extends Component {
     const { classes } = this.props;
     return (
       <Card className={classes.card}>
-      <form className={classes.form} onSubmit={this.login}>
-        <h2 className={classes.header}>Login</h2>
-        {this.props.store.errors.loginMessage && (
-          <h3 className="alert" role="alert">
-            {this.props.store.errors.loginMessage}
-          </h3>
-        )},
+        <form className={classes.form} onSubmit={this.login}>
+          <h2 className={classes.header}>Login</h2>
+          {this.props.store.errors.loginMessage && (
+            <h3 className="alert" role="alert">
+              {this.props.store.errors.loginMessage}
+            </h3>
+          )},
         <div>
-          <label htmlFor="username">
-           
-            <TextField
-              className={classes.textField}
-              label="Username"
-              type="text"
-              name="username"
-              required
-              value={this.state.username}
-              onChange={this.handleInputChangeFor('username')}
-            />
-          </label>
-        </div>
-        <div>
-          <label htmlFor="password">
-            
-            <TextField
-              required
-              className={classes.input}
-              label="Password"
-              type={this.state.showPassword ? 'text' : 'password'}
-              // name="password"
-              value={this.state.password}
-              onChange={this.handleInputChangeFor('password')}
-              InputProps={{
-                endAdornment: <InputAdornment position="end">
-                <IconButton
-                  className={classes.icon}
-                  aria-label="Toggle password visibility"
-                  onClick={this.handleClickShowPassword}>
-                  {this.state.showPassword ? <Visibility /> : <VisibilityOff />}
-                  </IconButton>
-                </InputAdornment>,
-              }}
+            <label htmlFor="username">
 
-            />
-          </label>
-        </div>
-        <div>
-          <Button 
-          className={classes.button}
-          type="submit" 
-          name="submit" 
-          value="Log In" >Log In</Button>
-        </div>
-      </form>
+              <TextField
+                className={classes.textField}
+                label="Username"
+                type="text"
+                name="username"
+                required
+                value={this.state.username}
+                onChange={this.handleInputChangeFor('username')}
+              />
+            </label>
+          </div>
+          <div>
+            <label htmlFor="password">
+
+              <TextField
+                required
+                className={classes.input}
+                label="Password"
+                type={this.state.showPassword ? 'text' : 'password'}
+                // name="password"
+                value={this.state.password}
+                onChange={this.handleInputChangeFor('password')}
+                InputProps={{
+                  endAdornment: <InputAdornment position="end">
+                    <IconButton
+                      className={classes.icon}
+                      aria-label="Toggle password visibility"
+                      onClick={this.handleClickShowPassword}>
+                      {this.state.showPassword ? <Visibility /> : <VisibilityOff />}
+                    </IconButton>
+                  </InputAdornment>,
+                }}
+              />
+            </label>
+          </div>
+          <div>
+            <Button
+              className={classes.button}
+              type="submit"
+              name="submit"
+              value="Log In" >Log In</Button>
+          </div>
+        </form>
       </Card>
     );
   }

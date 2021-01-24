@@ -6,11 +6,11 @@ import { withStyles } from '@material-ui/core/styles';
 
 
 const styles = {
-container: {
-  marginLeft: '50px',
-  marginRight: '30px',
-  width: '95%',
-},
+  container: {
+    marginLeft: '50px',
+    marginRight: '30px',
+    width: '95%',
+  },
   header: {
     backgroundColor: "#c78b50",
     width: "100%",

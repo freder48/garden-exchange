@@ -42,7 +42,7 @@ const styles = {
     padding: "3%",
     border: '3px solid #fff9e6',
     letterSpacing: '5px',
-    fontFamily: 'Copperplate', 
+    fontFamily: 'Copperplate',
     fontSize: '26px',
   },
   textField: {
@@ -50,7 +50,6 @@ const styles = {
     width: '90%',
     backgroundColor: '#fff9e6',
   },
-
 };
 
 class RegisterForm extends Component {
@@ -61,9 +60,8 @@ class RegisterForm extends Component {
     last_name: '',
     email: '',
     email_messages: false,
-    showPassword: false, 
+    showPassword: false,
   };
-
 
   //toggles the password from visible to hidden
   handleClickShowPassword = () => {
@@ -85,7 +83,7 @@ class RegisterForm extends Component {
       email_messages: !this.state.email_messages
     })
   }
-//handle registration
+  //handle registration
   registerUser = (event) => {
     event.preventDefault();
     this.props.dispatch({
@@ -133,7 +131,7 @@ class RegisterForm extends Component {
             <div>
               <label htmlFor="password">
                 <TextField
-                   type={this.state.showPassword ? 'text' : 'password'}
+                  type={this.state.showPassword ? 'text' : 'password'}
                   name="password"
                   id="filled-required"
                   label="Password"
@@ -144,11 +142,11 @@ class RegisterForm extends Component {
                   onChange={this.handleInputChangeFor('password')}
                   InputProps={{
                     endAdornment: <InputAdornment position="end">
-                    <IconButton
-                      className={classes.icon}
-                      aria-label="Toggle password visibility"
-                      onClick={this.handleClickShowPassword}>
-                      {this.state.showPassword ? <Visibility /> : <VisibilityOff />}
+                      <IconButton
+                        className={classes.icon}
+                        aria-label="Toggle password visibility"
+                        onClick={this.handleClickShowPassword}>
+                        {this.state.showPassword ? <Visibility /> : <VisibilityOff />}
                       </IconButton>
                     </InputAdornment>,
                   }}
@@ -196,18 +194,16 @@ class RegisterForm extends Component {
               <FormControlLabel
                 className={classes.checkbox}
                 control={<Checkbox
-                  
                   checked={this.state.email_messages}
                   onClick={this.handleCheck}
                   name="checked" />}
                 label="Get Email Updates"
-                
               />
             </div>
             <div>
               <Button className={classes.button}
                 type="submit"
-                name="submit" 
+                name="submit"
                 alue="Register"
                 variant="outlined">
                 Register

@@ -50,12 +50,12 @@ class UserProfileList extends Component {
             swal({
                 title: "You are now unsubscribed!",
                 icon: "success",
-              });
+            });
         } else {
             swal({
                 title: "You are now subscribed!",
                 icon: "success",
-              });
+            });
         }
         this.props.dispatch({ type: 'UPDATE_USER_EMAIL_NOTIFICATIONS', payload: this.props.store.user })
 
@@ -92,14 +92,12 @@ class UserProfileList extends Component {
                 <section>
                     <h4 className={classes.yourListings}>Your Gallery Posts</h4>
                     <Grid container>
-                    {this.props.store.gallery.map((gallery) =>
+                        {this.props.store.gallery.map((gallery) =>
 
-                        <UserGallery gallery={gallery} />
+                            <UserGallery gallery={gallery} />
 
-                    )}
+                        )}
                     </Grid>
-
-
                 </section>
 
                 <section>

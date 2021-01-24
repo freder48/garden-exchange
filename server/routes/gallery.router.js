@@ -6,7 +6,7 @@ const {
 } = require("../modules/authentication-middleware");
 
 /**
- * Get all of the gallerys 
+ * Get all of the gallery items to display on Gallery & Admin
  */
 router.get("/", (req, res) => {
   let queryString = `SELECT * FROM "gallery";`;
@@ -20,7 +20,7 @@ router.get("/", (req, res) => {
     });
 });
 
-//get specific user's gallery
+//get specific user's gallery to display on profile page
 router.get('/user', rejectUnauthenticated, (req, res) => {
   let queryText = `SELECT * FROM "gallery" WHERE "user_id" = $1 ORDER BY id;`;
   pool.query(queryText, [req.user.id]).then((result) => {
@@ -31,9 +31,7 @@ router.get('/user', rejectUnauthenticated, (req, res) => {
   });
 });//end GET
 
-/**
- * Add an gallery for the logged in user to the shelf
- */
+//Post a new gallery item to display on Gallery Page
 router.post("/", rejectUnauthenticated, (req, res) => {
   console.log("req.user", req.user);
   let sqlText = `INSERT INTO "gallery" ("description", "url", "user_id")
@@ -49,7 +47,7 @@ router.post("/", rejectUnauthenticated, (req, res) => {
     });
 });
 
-//DELETE gallery for logged in user
+//DELETE gallery for logged in user on profile page
 router.delete('/:id', rejectUnauthenticated, (req, res) => {
   let id = req.params.id
   const sqlText = 'DELETE FROM gallery WHERE id=$1';

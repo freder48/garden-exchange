@@ -3,7 +3,7 @@ const pool = require('../modules/pool');
 const router = express.Router();
 const { rejectUnauthenticated } = require('../modules/authentication-middleware');
 
-//DELETE logged in usesr's listing on profile page 
+//DELETE logged in user's listing on profile page 
 router.delete('/:id', rejectUnauthenticated, (req, res) => {
   let id = req.params.id
   const sqlText = 'DELETE FROM forum WHERE id=$1';
@@ -15,7 +15,7 @@ router.delete('/:id', rejectUnauthenticated, (req, res) => {
     });
 });
 
-// This route will return logged in users listings
+// This route will return logged in users listings for profile page
 router.get('/', rejectUnauthenticated, (req, res) => {
   let queryText = `SELECT * FROM "forum" WHERE "user_id" = $1 ORDER BY date DESC;`;
   pool.query(queryText, [req.user.id]).then((result) => {
@@ -26,7 +26,7 @@ router.get('/', rejectUnauthenticated, (req, res) => {
   });
 });//end GET
 
-//Get post details for specific user listing
+//Get post details for specific user listing so we can update
 router.get('/:id', rejectUnauthenticated, (req, res) => {
   let id = req.params.id;
   const sqlText = `SELECT * FROM forum WHERE id=$1`;

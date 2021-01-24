@@ -180,7 +180,6 @@ class ForumPage extends Component {
                     </Button>
                     </td>
                   </tr>
-
                 </>
               )
             })
@@ -208,7 +207,6 @@ class ForumPage extends Component {
         </div>
 
         <Modal show={this.state.show} handleClose={this.hideModal} showModal={this.showModal} messageObj={this.state.messageObj} />
-
 
       </>
     )

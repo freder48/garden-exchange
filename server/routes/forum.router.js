@@ -5,7 +5,7 @@ const { rejectUnauthenticated } = require('../modules/authentication-middleware'
 
 //GET forum
 router.get('/', rejectUnauthenticated, (req, res) => {
-// get all of listings from forum table in database
+// get all of listings from forum table in database and display on Admin & ForumPage
 pool.query('SELECT * FROM "forum" ORDER BY date DESC;').then((result) => {
     res.send(result.rows);
 }).catch((error) => {
@@ -14,7 +14,7 @@ pool.query('SELECT * FROM "forum" ORDER BY date DESC;').then((result) => {
     });
 });//end GET
 
-//POST forum
+//POST new forum listing
 router.post('/', rejectUnauthenticated, (req, res) => {
   const listing = req.body;
   const queryText = `INSERT INTO "forum" ("have", "want", "location", "user_id")

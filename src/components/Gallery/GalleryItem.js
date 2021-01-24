@@ -26,7 +26,6 @@ const styles = {
         border: '20px solid white',
         padding: '2%',
         textAlign: 'center',
-
       }, 
       descriptionContainer: {
         backgroundColor: '#fff9e6', 
@@ -37,17 +36,13 @@ const styles = {
       itemDescription: {
         marginBottom: '35px',
       }
-
-
 }
 
 class GalleryItem extends Component {
-
   render() {
     const { classes } = this.props;
     return (
-      <>
-      
+      <>  
       <Grid item xs={12} sm={6} lg={4}>
        <Card 
         className={classes.card}>
@@ -61,8 +56,7 @@ class GalleryItem extends Component {
             >Image Link
             </a>
             </section>
-       </Card>
-       
+       </Card>    
        </Grid>
       </>
     );

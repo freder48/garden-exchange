@@ -30,7 +30,6 @@ const styles = {
     },
 }
 
-
 class UserProfileItem extends Component {
     state = {
         editListing: {
@@ -114,36 +113,28 @@ class UserProfileItem extends Component {
         this.props.dispatch({ type: 'GET_DETAILS', payload: id })
         this.setState({
             isEditable: false,
-        }) 
+        })
     }
 
     render() {
         const { classes } = this.props;
-
         return (
             <>
                 {this.state.isEditable ?
                     <>
                         <td> <TextField
                             variant="filled"
-                            // className={classes.textField}
-                            // value={this.state.editListing.have}
                             placeholder={this.props.store.details.have}
                             onChange={(event) => this.handleChange('have', event)}
                         /></td>
 
                         <td> <TextField
-                            variant="filled"
-                            // className={classes.textField}
-                            // value={this.state.editListing.want}
                             placeholder={this.props.store.details.want}
                             onChange={(event) => this.handleChange('want', event)}
                         /></td>
 
                         <td> <TextField
                             variant="filled"
-                            // className={classes.textField}
-                            // value={this.state.editListing.location}
                             placeholder={this.props.store.details.location}
                             onChange={(event) => this.handleChange('location', event)}
                         /></td>
@@ -171,7 +162,6 @@ class UserProfileItem extends Component {
                             Delete
                             </Button>
                         </td>
-
                     </>
                     :
                     <>

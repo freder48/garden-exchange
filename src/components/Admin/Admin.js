@@ -63,7 +63,7 @@ class Admin extends Component {
             message: '',
             mail_sent: true,
         },
-            //pagination
+        //pagination
         page: 0,
         rowsPerPage: 10,
     }//end local state
@@ -116,15 +116,15 @@ class Admin extends Component {
 
     }//end deleteMessage
 
-  //changes page number
-  handleChangePage = (event, page) => {
-    this.setState({ page });
-  };
+    //changes page number
+    handleChangePage = (event, page) => {
+        this.setState({ page });
+    };
 
-  //changes rows per page based on drop down menu
-  handleChangeRowsPerPage = event => {
-    this.setState({ rowsPerPage: event.target.value });
-  };
+    //changes rows per page based on drop down menu
+    handleChangeRowsPerPage = event => {
+        this.setState({ rowsPerPage: event.target.value });
+    };
 
     //hides pop-up modal by setting local state show to false
     hideModal = () => {
@@ -226,7 +226,7 @@ class Admin extends Component {
                                 <td>
                                     <Button onClick={() => { this.deleteMessage(message.id) }}>
                                         <DeleteOutlinedIcon
-                                        className={classes.icon} />
+                                            className={classes.icon} />
                                   Delete
                                   </Button>
                                 </td>

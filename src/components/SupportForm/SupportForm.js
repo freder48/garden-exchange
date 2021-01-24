@@ -34,7 +34,6 @@ const styles = {
         border: '3px solid #fff9e6',
         letterSpacing: '5px',
         fontFamily: 'Copperplate',
-
     },
     textField: {
         marginTop: '1rem',
@@ -95,8 +94,6 @@ class SupportForm extends Component {
                 })
             }
         })
-
-
     }
     //handle input change
     handleChange = (inputValue, event) => {
@@ -110,11 +107,8 @@ class SupportForm extends Component {
     }//end handleChange
 
     render() {
-
         const { classes } = this.props;
-
         return (
-
             <div>
                 <Card className={classes.card}>
                     <CardContent>
