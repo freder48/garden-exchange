@@ -34,7 +34,7 @@ function* deleteGallery(action){
     console.log('delete listing', action.payload);
     try{
         yield axios.delete(`/api/gallery/${action.payload}`)
-        yield put({type: 'GET_GALLERY'})
+        yield put({type: 'GET_USER_GALLERY'})
     } catch (error) {
         console.log('error with delete request in gallery.saga.js', error)
     }

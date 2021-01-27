@@ -18,7 +18,7 @@ const styles = {
     },
     card: {
         margin: 'auto',
-        width: '40%',
+        width: '70%',
         height: '100%',
         marginTop: '4em',
         justifyContent: 'center',

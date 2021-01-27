@@ -129,6 +129,7 @@ class UserProfileItem extends Component {
                         /></td>
 
                         <td> <TextField
+                            variant="filled"
                             placeholder={this.props.store.details.want}
                             onChange={(event) => this.handleChange('want', event)}
                         /></td>
