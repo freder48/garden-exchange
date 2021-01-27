@@ -16,7 +16,8 @@ and message other participants if they are interested in trading.
 See the deployed app on [Heroku]()
 
 ## Screen Shot
-
+![image](./public/img/screenshot1.png)
+![image](./public/img/screenshot2.png)
 
 ### Prerequisites
 
